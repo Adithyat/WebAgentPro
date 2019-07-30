@@ -1,0 +1,33 @@
+<div class="col-12">
+  <!-- Sets up template variable #widgetForm, submission method onSubmit(),
+      and only displays if there is a widget to add/edit. -->
+  <form #quoteForm="ngForm" (ngSubmit)="onSubmit()"     >
+      <div class="card">
+          <div class="card-header">
+              <h5 class="card-title">Quote {{ quoteEdit.quoteId }} Info</h5>
+          </div>
+          <div class="card-body">
+              <!-- Text box for Name property with validation. -->
+              <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input id="firstName" name="name" #firstName="ngModel" [(ngModel)]="quoteEdit.firstName" type="text" class="form-control" required />
+              </div>
+
+              <!-- Text box for Description property with validation. -->
+              <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input id="lastName" name="lastName" #lastName="ngModel" [(ngModel)]="quoteEdit.lastName" type="text" class="form-control" required />
+              </div>
+
+              
+          </div>
+          <div class="card-footer">
+              <!-- Cancel and Submit buttons. Can't submit unless for is passing validation. -->
+              <div class="form-group">
+                  <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-success">Save</button>
+              </div>
+          </div>
+      </div>
+  </form>
+</div>
