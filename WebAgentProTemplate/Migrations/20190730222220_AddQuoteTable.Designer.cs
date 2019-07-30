@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAgentPro.Data;
 
 namespace WebAgentProTemplate.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    partial class WapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190730222220_AddQuoteTable")]
+    partial class AddQuoteTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,17 +204,17 @@ namespace WebAgentProTemplate.Migrations
                     b.Property<string>("City")
                         .HasMaxLength(50);
 
-                    b.Property<bool?>("ClaimInLastFiveYears");
+                    b.Property<bool>("ClaimInLastFiveYears");
 
-                    b.Property<decimal?>("ClaimInLastFiveYearsValue");
+                    b.Property<decimal>("ClaimInLastFiveYearsValue");
 
-                    b.Property<DateTime?>("CreatedAt");
+                    b.Property<DateTime>("CreatedAt");
 
-                    b.Property<bool?>("CreatedOnMobile");
+                    b.Property<bool>("CreatedOnMobile");
 
-                    b.Property<DateTime?>("DateOfBirth");
+                    b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<decimal?>("DriverSubmittedSubTotal");
+                    b.Property<decimal>("DriverSubmittedSubTotal");
 
                     b.Property<string>("Email")
                         .HasMaxLength(50);
@@ -220,29 +222,29 @@ namespace WebAgentProTemplate.Migrations
                     b.Property<string>("FirstName")
                         .HasMaxLength(50);
 
-                    b.Property<bool?>("ForceMultiCarDiscount");
+                    b.Property<bool>("ForceMultiCarDiscount");
 
-                    b.Property<decimal?>("ForceMultiCarDiscoutValue");
+                    b.Property<decimal>("ForceMultiCarDiscoutValue");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50);
 
-                    b.Property<bool?>("LessThanThreeYearsDriving");
+                    b.Property<bool>("LessThanThreeYearsDriving");
 
-                    b.Property<decimal?>("LessThanThreeYearsDrivingValue");
+                    b.Property<decimal>("LessThanThreeYearsDrivingValue");
 
-                    b.Property<bool?>("MovingViolationInLastFiveYears");
+                    b.Property<bool>("MovingViolationInLastFiveYears");
 
-                    b.Property<decimal?>("MovingViolationInLastFiveYearsValue");
+                    b.Property<decimal>("MovingViolationInLastFiveYearsValue");
 
                     b.Property<string>("PostalCode")
                         .HasMaxLength(15);
 
-                    b.Property<int?>("PreviousCarrier");
+                    b.Property<int>("PreviousCarrier");
 
-                    b.Property<decimal?>("PreviousCarrierValue");
+                    b.Property<decimal>("PreviousCarrierValue");
 
-                    b.Property<int?>("QuoteStatus");
+                    b.Property<int>("QuoteStatus");
 
                     b.Property<string>("SSN")
                         .HasMaxLength(11);
@@ -250,13 +252,13 @@ namespace WebAgentProTemplate.Migrations
                     b.Property<string>("StateCode")
                         .HasMaxLength(2);
 
-                    b.Property<DateTime?>("SubmittedAt");
+                    b.Property<DateTime>("SubmittedAt");
 
-                    b.Property<bool?>("SubmittedOnMobile");
+                    b.Property<bool>("SubmittedOnMobile");
 
-                    b.Property<decimal?>("TotalSubmittedCost");
+                    b.Property<decimal>("TotalSubmittedCost");
 
-                    b.Property<decimal?>("VehicleSubmittedSubTotal");
+                    b.Property<decimal>("VehicleSubmittedSubTotal");
 
                     b.HasKey("QuoteId");
 
