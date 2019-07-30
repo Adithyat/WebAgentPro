@@ -1,0 +1,40 @@
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# specific branch build
+trigger:
+  branches:
+    include:
+    - master
+
+pool:
+   vmImage: "vs2017-win2016"
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '.\WebAgentProTemplate\'
+
+- task: Npm@1
+  displayName: 'Build Angular'
+  inputs:
+    command: custom
+    customCommand: run build -- --prod
+    workingDir: '.\WebAgentProTemplate\'
+
+
+- script: dotnet restore
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release' # Update this to match your need
+
