@@ -4,46 +4,35 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAgentPro.Api.Models;
 
 namespace WebAgentProTemplate.Api.Models
 {
-    public enum PreviousCarrier
-    {
-        None = 0,
-        Lizard = 1,
-        Pervasive = 2
-    }
-    
-    public enum QuoteStatus
-    {
-        Created = 0,
-        Submitted = 1
-    }
     public class Quote
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 QuoteId { get; set; }
         [MaxLength(50)]
-        public string Email { get; set; }
+        public string Q_Email { get; set; }
         public QuoteStatus? QuoteStatus { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? SubmittedAt { get; set; }
         [MaxLength(50)]
-        public string FirstName { get; set; }
+        public string Q_FirstName { get; set; }
         [MaxLength(50)]
-        public string LastName { get; set; }
+        public string Q_LastName { get; set; }
         [MaxLength(50)]
         public string Address { get; set; }
         [MaxLength(50)]
         public string City { get; set; }
         [MaxLength(2)]
-        public string StateCode { get; set; }
+        public string Q_StateCode { get; set; }
         [MaxLength(15)]
         public string PostalCode { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime? Q_DateOfBirth { get; set; }
         [MaxLength(11)]
-        public string SSN { get; set; }
+        public string Q_SSN { get; set; }
         public bool? ForceMultiCarDiscount { get; set; }
         public decimal? ForceMultiCarDiscoutValue { get; set; }
         public bool? ClaimInLastFiveYears { get; set; }
@@ -59,5 +48,22 @@ namespace WebAgentProTemplate.Api.Models
         public decimal? VehicleSubmittedSubTotal { get; set; }
         public bool? CreatedOnMobile { get; set; }
         public bool? SubmittedOnMobile { get; set; }
+
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+        public string UserId { get; set; }
+    }
+
+    public enum PreviousCarrier
+    {
+        None = 0,
+        Lizard = 1,
+        Pervasive = 2
+    }
+
+    public enum QuoteStatus
+    {
+        Created = 0,
+        Submitted = 1
     }
 }

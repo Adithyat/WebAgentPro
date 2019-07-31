@@ -27,14 +27,14 @@ namespace WebAgentPro.Controllers
     public class AccountsController : ControllerBase
     {
         private WapDbContext _context;
-        private UserManager<WapUser> _userManager;
-        private SignInManager<WapUser> _signInManager;
+        private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
 
         public AccountsController(WapDbContext context,
-            UserManager<WapUser> userManager,
-            SignInManager<WapUser> signInManager,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
             IConfiguration configuration, 
             ILogger<AccountsController> logger)
         {
@@ -57,7 +57,7 @@ namespace WebAgentPro.Controllers
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
-            WapUser newUser = Mapper.Map<WapUser>(userRegistration);
+            User newUser = Mapper.Map<User>(userRegistration);
 
             try
             {
@@ -116,7 +116,7 @@ namespace WebAgentPro.Controllers
             }
         }
 
-        private string CreateToken(WapUser authenticatedUser, IList<string> roles)
+        private string CreateToken(User authenticatedUser, IList<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]);

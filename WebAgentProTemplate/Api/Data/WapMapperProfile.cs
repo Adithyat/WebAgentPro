@@ -1,6 +1,6 @@
 using AutoMapper;
 using WebAgentPro.ViewModels;
-using WebAgentPro.Models;
+using WebAgentProTemplate.Api;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -10,8 +10,8 @@ namespace WebAgentPro.Data
   {
     public WapMapperProfile()
     {
-      CreateMap<UserRegistration, WapUser>();
-      CreateMap<WapUser, User>();
+      CreateMap<UserRegistration, User>();
+      CreateMap<Api.Models.User, ViewModels.User>();
     }
   }
 }

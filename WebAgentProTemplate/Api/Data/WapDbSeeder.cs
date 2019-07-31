@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
+using WebAgentPro.Api.Models;
 using WebAgentPro.Models;
 using WebAgentProTemplate.Api.Models;
 
@@ -9,10 +10,10 @@ namespace WebAgentPro.Data
     public class WapDbSeeder
     {
         private readonly WapDbContext _context;
-        private readonly UserManager<WapUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public WapDbSeeder(WapDbContext context, UserManager<WapUser> userManager, RoleManager<IdentityRole> roleManager)
+        public WapDbSeeder(WapDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -282,55 +283,51 @@ namespace WebAgentPro.Data
 
         private void InitializeUsers()
         {
-            if (_userManager.Users.Count<WapUser>().Equals(0))
+            if (_userManager.Users.Count<User>().Equals(0))
             {
-                var manager = new WapUser()
+                var manager = new User()
                 {
                     UserName = "manager@aia.com",
                     Email = "manager@aia.com",
                     EmailConfirmed = true,
-                    FirstName = "Jacob",
-                    LastName = "Jones",
-                    IsActive = true
+                    U_FirstName = "Jacob",
+                    U_LastName = "Jones"
                 };
 
                 _userManager.CreateAsync(manager, "Asdfjkl!1").Wait();
                 _userManager.AddToRoleAsync(manager, "Manager").Wait();
 
-                var agent = new WapUser()
+                var agent = new User()
                 {
                     UserName = "agent@aia.com",
                     Email = "agent@aia.com",
                     EmailConfirmed = true,
-                    FirstName = "Janet",
-                    LastName = "Roberts",
-                    IsActive = true
+                    U_FirstName = "Janet",
+                    U_LastName = "Roberts"
                 };
 
                 _userManager.CreateAsync(agent, "Asdfjkl!1").Wait();
                 _userManager.AddToRoleAsync(agent, "Agent").Wait();
 
-                var manager2= new WapUser()
+                var manager2= new User()
                 {
                     UserName = "manager2@aia.com",
                     Email = "manager2@aia.com",
                     EmailConfirmed = true,
-                    FirstName = "Jacob",
-                    LastName = "Johnson",
-                    IsActive = true
+                    U_FirstName = "Jacob",
+                    U_LastName = "Johnson"
                 };
 
                 _userManager.CreateAsync(manager2, "Asdfjkl!1").Wait();
                 _userManager.AddToRoleAsync(manager2, "Manager").Wait();
 
-                var agent2 = new WapUser()
+                var agent2 = new User()
                 {
                     UserName = "agent2@aia.com",
                     Email = "agent2@aia.com",
                     EmailConfirmed = true,
-                    FirstName = "Janet",
-                    LastName = "Robertson",
-                    IsActive = true
+                    U_FirstName = "Janet",
+                    U_LastName = "Robertson",
                 };
 
                 _userManager.CreateAsync(agent2, "Asdfjkl!1").Wait();

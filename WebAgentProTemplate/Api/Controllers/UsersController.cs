@@ -24,11 +24,11 @@ namespace WebAgentPro.Controllers
 
     public class UsersController : ControllerBase
     {
-        private readonly UserManager<WapUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
 
-        public UsersController(UserManager<WapUser> userManager, IConfiguration configuration, ILogger<AccountsController> logger)
+        public UsersController(UserManager<User> userManager, IConfiguration configuration, ILogger<AccountsController> logger)
         {
             _userManager = userManager;
             _configuration = configuration;
