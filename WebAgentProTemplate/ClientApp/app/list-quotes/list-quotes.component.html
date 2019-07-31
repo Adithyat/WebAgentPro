@@ -3,8 +3,20 @@
     <h1>Quotes</h1>
   </div>
   <div class='card-body'>
+      <div class="container">
+          <div class='row'>
+              <div class='col-md-2'>Filter by:</div>
+              <div class='col-md-4'>
+                <input type='text'
+                [(ngModel)]='listFilter'/>
+              </div>
+            </div>
+      </div>
+      <div class="container" style="text-align: center">
+          <div style="display: inline-block"><h3 >Open ({{quotes.length}})</h3></div>
+          <div style="display: inline-block"><h3 >Submitted ({{quotes.length}})</h3></div>
+      </div>
     <div class='table-responsive'>
-      <h3>Open ({{quotes.length}})</h3>
       <table class='table'
              *ngIf='quotes && quotes.length'>
         <thead>
@@ -12,10 +24,11 @@
             <th>Customer</th>
             <th>Creation Date</th>
             <th>Quote Number</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let quote of quotes'>
+          <tr *ngFor='let quote of filteredQuotes'>
             <td>{{ quote.firstName }}</td>
             <td>{{ quote.lastName }}</td>
             <td>{{ quote.quoteId }}</td>
