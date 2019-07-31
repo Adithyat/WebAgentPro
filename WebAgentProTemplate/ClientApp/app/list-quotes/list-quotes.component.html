@@ -12,7 +12,6 @@
             <th>Customer</th>
             <th>Creation Date</th>
             <th>Quote Number</th>
-
           </tr>
         </thead>
         <tbody>
@@ -20,6 +19,7 @@
             <td>{{ quote.firstName }}</td>
             <td>{{ quote.lastName }}</td>
             <td>{{ quote.quoteId }}</td>
+            <td><button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button></td>
           </tr>
         </tbody>
       </table>

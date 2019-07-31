@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" routerLink="/search-quotes">Search Quotes</a>
-        <a class="nav-item nav-link" routerLink="/new-quotes">New Quote</a>
+        <a class="nav-item nav-link" routerLink="/all-quotes">All Quotes</a>
+        <a class="nav-item nav-link" routerLink="/add-quotes">Add Quote</a>
         <a class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Users</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>

@@ -20,7 +20,7 @@ export class QuotesService {
     return this.http.post<Quote>(`${this.apiUrl}/Quotes`, quote);
   }
 
-  getQuote(id: number) {
-    return this.http.get<Quote>(`${this.apiUrl}/Quotes/${id}`);
+  deleteQuote(id: number) {
+    return this.http.delete(`${this.apiUrl}/Quotes/${id}`);
   }
 }

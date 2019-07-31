@@ -16,8 +16,8 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
-import { SearchQuotesComponent } from './search-quotes/search-quotes.component';
-import { NewQuotesComponent } from './new-quotes/new-quotes.component';
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 
 @NgModule({
     imports: [
@@ -37,8 +37,8 @@ import { NewQuotesComponent } from './new-quotes/new-quotes.component';
         RegisterComponent,
         WidgetsComponent,
         WidgetPartsComponent,
-        SearchQuotesComponent,
-        NewQuotesComponent
+        ListQuotesComponent,
+        FormQuotesComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
