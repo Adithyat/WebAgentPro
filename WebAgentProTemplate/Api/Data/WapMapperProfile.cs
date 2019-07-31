@@ -10,8 +10,8 @@ namespace WebAgentPro.Data
   {
     public WapMapperProfile()
     {
-      CreateMap<UserRegistration, User>();
-      CreateMap<Api.Models.User, ViewModels.User>();
+      CreateMap<UserRegistration, UserViewModel>();
+      CreateMap<Api.Models.User, ViewModels.UserViewModel>();
     }
   }
 }
