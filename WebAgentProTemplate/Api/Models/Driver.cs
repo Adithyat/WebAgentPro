@@ -19,6 +19,7 @@ namespace WebAgentProTemplate.Api.Models
         [MaxLength(11)]
         public string D_SSN { get; set; }
         public DateTime D_DateOfBirth { get; set; }
+        public decimal UnderAgeOf23DiscountValue { get; set; }
         [MaxLength(50)]
         public string DriverLicenseNumber { get; set; }
         [MaxLength(2)]
