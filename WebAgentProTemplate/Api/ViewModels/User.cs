@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace WebAgentPro.ViewModels
 {
-    public class User
+    public class UserViewModel
     {
         public string UserName { get; set; }
         public string FirstName { get; set; }
