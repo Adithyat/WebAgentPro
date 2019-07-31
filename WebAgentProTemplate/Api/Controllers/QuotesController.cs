@@ -42,6 +42,12 @@ namespace WebAgentProTemplate.Api.Controllers
             return quote;
         }
 
+        [HttpGet("Caluculate/{id}")]
+        public async Task<ActionResult<decimal>> CalculateQuote(long id)
+        {
+            return 0.0m;
+        }
+
         // PUT: api/Quotes/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuote(long id, Quote quote)
