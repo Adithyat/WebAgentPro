@@ -4,11 +4,11 @@ export class Quote {
     q_LastName: string;
     address: string;
     city: string;
-    stateCode: string;
+    q_StateCode: string;
     postalCode: string;
-    ssn: string;
-    dateOfBirth: string;
-    email: string;
+    q_ssn: string; 
+    q_DateOfBirth: string;
+    q_Email: string; //
     previousCarrier: number;
     //lessThanThreeYearsDriving: ;
     //claimInLastFiveYears: ;

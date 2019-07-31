@@ -11,14 +11,17 @@ import { AlertService } from '@app/_services';
 })
 export class ListQuotesComponent implements OnInit {
   pageTitle: 'Quotes';
-  quotes: Quote[] = [];
+    quotes: Quote[] = [];
+    
 
 
   constructor(private service: QuotesService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.getQuotes();
-  }
+    }
+
+    
 
   getQuotes() {
       
