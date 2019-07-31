@@ -18,7 +18,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
-import { FilterQuotesComponent } from './filter-quotes/filter-quotes.component';
+import { FormDriverComponent } from './form-driver/form-driver.component';
 
 @NgModule({
     imports: [
@@ -40,7 +40,7 @@ import { FilterQuotesComponent } from './filter-quotes/filter-quotes.component';
         WidgetPartsComponent,
         ListQuotesComponent,
         FormQuotesComponent,
-        FilterQuotesComponent
+        FormDriverComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

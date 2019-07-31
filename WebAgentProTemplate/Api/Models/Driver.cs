@@ -30,6 +30,7 @@ namespace WebAgentProTemplate.Api.Models
 
         [ForeignKey("QuoteId")]
         public Quote Quote { get; set; }
+        [Required]
         public Int64 QuoteId { get; set; }
     }
 }

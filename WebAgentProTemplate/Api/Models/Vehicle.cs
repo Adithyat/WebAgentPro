@@ -42,7 +42,7 @@ namespace WebAgentProTemplate.Api.Models
         public bool ReducedUsedDiscount { get; set; }
         public decimal ReducedUsedDiscountValue { get; set; }
         [Range(0, int.MaxValue)]
-        public int CurrentValue { get; set; }
+        public decimal CurrentValue { get; set; }
         public decimal VehicleSubmittedCost { get; set; }
 
         [ForeignKey("DriverId")]

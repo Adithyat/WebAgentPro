@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using WebAgentPro.Data;
 using WebAgentPro.Models;
 using WebAgentPro.ViewModels;
+using WebAgentPro.Api.Models;
 
 namespace WebAgentPro.Controllers
 {
@@ -27,14 +28,14 @@ namespace WebAgentPro.Controllers
     public class AccountsController : ControllerBase
     {
         private WapDbContext _context;
-        private UserManager<UserViewModel> _userManager;
-        private SignInManager<UserViewModel> _signInManager;
+        private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
 
         public AccountsController(WapDbContext context,
-            UserManager<UserViewModel> userManager,
-            SignInManager<UserViewModel> signInManager,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
             IConfiguration configuration, 
             ILogger<AccountsController> logger)
         {
@@ -57,7 +58,7 @@ namespace WebAgentPro.Controllers
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
-            UserViewModel newUser = Mapper.Map<UserViewModel>(userRegistration);
+            User newUser = Mapper.Map<User>(userRegistration);
 
             try
             {
@@ -84,7 +85,7 @@ namespace WebAgentPro.Controllers
         /// <param name="credentials">The username and password to be authenticated.</param>
         /// <returns>A user object including First Name, Last Name, User Name, Roles, and JWT Token.</returns>
         [HttpPost("authenticate", Name = "Authenticate")]
-        [ProducesResponseType(typeof(UserViewModel), 200)]
+        [ProducesResponseType(typeof(User), 200)]
         [ProducesResponseType(typeof(ModelStateDictionary), 400)]
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Authenticate(UserCredentials credentials)
@@ -116,7 +117,7 @@ namespace WebAgentPro.Controllers
             }
         }
 
-        private string CreateToken(UserViewModel authenticatedUser, IList<string> roles)
+        private string CreateToken(User authenticatedUser, IList<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]);
