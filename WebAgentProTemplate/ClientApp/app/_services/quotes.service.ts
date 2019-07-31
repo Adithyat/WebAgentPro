@@ -12,11 +12,12 @@ export class QuotesService {
 
   apiUrl: string = environment.apiUrl;
 
-  getQuotes() {
+    getQuotes() {
       return this.http.get<Quote[]>(`${this.apiUrl}/Quotes`);
   }
 
-  postQuote(quote: Quote) {
+    postQuote(quote: Quote) {
+    console.log(quote);
     return this.http.post<Quote>(`${this.apiUrl}/Quotes`, quote);
   }
 

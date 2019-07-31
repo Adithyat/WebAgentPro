@@ -8,19 +8,19 @@
       <table class='table'
              *ngIf='quotes && quotes.length'>
         <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Creation Date</th>
-            <th>Quote Number</th>
-          </tr>
+            <tr>
+                <th>Customer</th>
+                <th>Creation Date</th>
+                <th>Quote Number</th>
+            </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let quote of quotes'>
-            <td>{{ quote.firstName }}</td>
-            <td>{{ quote.lastName }}</td>
-            <td>{{ quote.quoteId }}</td>
-            <td><button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button></td>
-          </tr>
+            <tr *ngFor='let quote of quotes'>
+                <td>{{ quote.q_FirstName }}</td>
+                <td>{{ quote.q_LastName }}</td>
+                <td>{{ quote.quoteId }}</td>
+                <td><button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button></td>
+            </tr>
         </tbody>
       </table>
     </div>

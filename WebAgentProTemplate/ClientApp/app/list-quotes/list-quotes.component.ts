@@ -21,10 +21,13 @@ export class ListQuotesComponent implements OnInit {
   }
 
   getQuotes() {
-    this.service.getQuotes().subscribe(returnedQuotes => { this.quotes = returnedQuotes; });
+      
+      this.service.getQuotes().subscribe(returnedQuotes => { this.quotes = returnedQuotes; });
+      
   }
 
-  deleteQuote(id: number) {
+    deleteQuote(id: number) {
+    
     this.service.deleteQuote(id).subscribe(
         success => {
             this.alertService.success('Quote deleted successfully.');
