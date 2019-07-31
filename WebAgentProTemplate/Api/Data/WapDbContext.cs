@@ -15,5 +15,6 @@ namespace WebAgentPro.Data
     public DbSet<Widget> Widgets { get; set; }
     public DbSet<WidgetPart> WidgetParts { get; set; }
     public DbSet<Quote> Quotes { get; set; }
-  }
+    public DbSet<Discount> Discounts { get; set; }
+    }
 }
