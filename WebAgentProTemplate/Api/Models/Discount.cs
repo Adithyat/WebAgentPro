@@ -16,6 +16,7 @@ namespace WebAgentProTemplate.Api.Models
         public decimal DayTimeRunningLights { get; set; }
         public decimal AntiLockBrakes { get; set; }
         public decimal AnnualMileage { get; set; }
+        public decimal PassiveRestraints { get; set; }
         public decimal AntiTheftInstalled { get; set; }
         public decimal DaysDrivenPerWeek { get; set; }
         public decimal MilesDrivenToWork { get; set; }

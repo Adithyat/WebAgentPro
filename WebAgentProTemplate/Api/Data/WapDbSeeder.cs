@@ -26,6 +26,7 @@ namespace WebAgentPro.Data
 
             //Initialize your data
             InitializeWidgets();
+            //InitializeDiscounts();
         }
 
         private void InitializeWidgets()
