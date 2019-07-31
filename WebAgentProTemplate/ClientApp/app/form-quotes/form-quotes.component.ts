@@ -25,16 +25,20 @@ export class FormQuotesComponent implements OnInit {
   cancelCreate() {
     this.alertService.success('Quote creation cancelled.');
     this.resetEdit();
-  }
+    }
 
   onSubmit() {
-    if (this.quoteEdit.firstName != null && this.quoteEdit.lastName != null) {
+      if (this.quoteEdit.q_FirstName != null && this.quoteEdit.q_LastName != null
+          && this.quoteEdit.address != null && this.quoteEdit.city != null
+          && this.quoteEdit.stateCode != null && this.quoteEdit.postalCode != null
+          && this.quoteEdit.ssn != null && this.quoteEdit.dateOfBirth != null
+          && this.quoteEdit.email != null && this.quoteEdit.previousCarrier != null) {
       this.saveCreate();
     }
   }
 
-  saveCreate() {
-    this.service.postQuote(this.quoteEdit).pipe(first()).subscribe(
+    saveCreate() {
+    this.service.postQuote(this.quoteEdit).subscribe(
         returnedQuote => {
             this.resetEdit();
             this.alertService.success('Quote Created.', false);

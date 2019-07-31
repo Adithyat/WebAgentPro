@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAgentPro.Data;
 
 namespace WebAgentProTemplate.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    partial class WapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190731160235_Added_Passive_Restraints_to_Discounts")]
+    partial class Added_Passive_Restraints_to_Discounts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,12 +131,16 @@ namespace WebAgentProTemplate.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebAgentPro.Api.Models.User", b =>
+            modelBuilder.Entity("WebAgentPro.Models.WapUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<int?>("BirthDayOfMonth");
+
+                    b.Property<int?>("BirthMonth");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -143,6 +149,12 @@ namespace WebAgentProTemplate.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -160,28 +172,12 @@ namespace WebAgentProTemplate.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<int>("Role");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<DateTime>("U_DateOfBirth");
-
-                    b.Property<string>("U_Email")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("U_FirstName");
-
-                    b.Property<string>("U_LastName");
-
-                    b.Property<string>("U_StateCode")
-                        .HasMaxLength(2);
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<int>("UserStatus");
 
                     b.HasKey("Id");
 
@@ -240,46 +236,6 @@ namespace WebAgentProTemplate.Migrations
                     b.ToTable("Discounts");
                 });
 
-            modelBuilder.Entity("WebAgentProTemplate.Api.Models.Driver", b =>
-                {
-                    b.Property<long>("DriverId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("D_DateOfBirth");
-
-                    b.Property<string>("D_FirstName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("D_LastName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("D_SSN")
-                        .HasMaxLength(11);
-
-                    b.Property<string>("DriverLicenseNumber")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("DriverLicenseStateCode")
-                        .HasMaxLength(2);
-
-                    b.Property<decimal>("DriverSubmittedCost");
-
-                    b.Property<long>("QuoteId");
-
-                    b.Property<bool>("SafeDrivingSchoolAttended");
-
-                    b.Property<decimal>("SafeDrivingSchoolAttendedValue");
-
-                    b.Property<decimal>("UnderAgeOf23DiscountValue");
-
-                    b.HasKey("DriverId");
-
-                    b.HasIndex("QuoteId");
-
-                    b.ToTable("Drivers");
-                });
-
             modelBuilder.Entity("WebAgentProTemplate.Api.Models.Quote", b =>
                 {
                     b.Property<long>("QuoteId")
@@ -300,11 +256,22 @@ namespace WebAgentProTemplate.Migrations
 
                     b.Property<bool?>("CreatedOnMobile");
 
+                    b.Property<DateTime?>("DateOfBirth");
+
                     b.Property<decimal?>("DriverSubmittedSubTotal");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50);
 
                     b.Property<bool?>("ForceMultiCarDiscount");
 
                     b.Property<decimal?>("ForceMultiCarDiscoutValue");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50);
 
                     b.Property<bool?>("LessThanThreeYearsDriving");
 
@@ -321,24 +288,13 @@ namespace WebAgentProTemplate.Migrations
 
                     b.Property<decimal?>("PreviousCarrierValue");
 
-                    b.Property<DateTime?>("Q_DateOfBirth");
+                    b.Property<int?>("QuoteStatus");
 
-                    b.Property<string>("Q_Email")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Q_FirstName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Q_LastName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Q_SSN")
+                    b.Property<string>("SSN")
                         .HasMaxLength(11);
 
-                    b.Property<string>("Q_StateCode")
+                    b.Property<string>("StateCode")
                         .HasMaxLength(2);
-
-                    b.Property<int?>("QuoteStatus");
 
                     b.Property<DateTime?>("SubmittedAt");
 
@@ -346,86 +302,11 @@ namespace WebAgentProTemplate.Migrations
 
                     b.Property<decimal?>("TotalSubmittedCost");
 
-                    b.Property<string>("UserId");
-
                     b.Property<decimal?>("VehicleSubmittedSubTotal");
 
                     b.HasKey("QuoteId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Quotes");
-                });
-
-            modelBuilder.Entity("WebAgentProTemplate.Api.Models.Vehicle", b =>
-                {
-                    b.Property<long>("VehicleId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AnnualMileage");
-
-                    b.Property<decimal>("AnnualMileageDiscountValue");
-
-                    b.Property<bool>("AntiLockBrakes");
-
-                    b.Property<decimal>("AntiLockBrakesValue");
-
-                    b.Property<bool>("AntiTheft");
-
-                    b.Property<decimal>("AntiTheftValue");
-
-                    b.Property<int>("CurrentValue");
-
-                    b.Property<bool>("DayTimeRunningLights");
-
-                    b.Property<int>("DaysDrivenPerWeek");
-
-                    b.Property<decimal>("DaysDrivenPerWeekDiscountValue");
-
-                    b.Property<decimal>("DaytTimeRunningLightsValue");
-
-                    b.Property<long?>("DriverId");
-
-                    b.Property<bool>("GarageDifferentAddressThanResidence");
-
-                    b.Property<decimal>("GarageDifferentAddressThanResidenceValue");
-
-                    b.Property<string>("Make")
-                        .HasMaxLength(50);
-
-                    b.Property<decimal>("MileDrivenToWorkDiscountValue");
-
-                    b.Property<int>("MilesDrivenToWork");
-
-                    b.Property<string>("Model")
-                        .HasMaxLength(50);
-
-                    b.Property<bool>("PassiveRestraints");
-
-                    b.Property<decimal>("PassiveRestraintsValue");
-
-                    b.Property<long>("QuoteId");
-
-                    b.Property<bool>("ReducedUsedDiscount");
-
-                    b.Property<decimal>("ReducedUsedDiscountValue");
-
-                    b.Property<decimal>("VehicleSubmittedCost");
-
-                    b.Property<string>("Vin")
-                        .HasMaxLength(17);
-
-                    b.Property<string>("Year")
-                        .HasMaxLength(4);
-
-                    b.HasKey("VehicleId");
-
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("QuoteId");
-
-                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("WebAgentProTemplate.Api.Models.Widget", b =>
@@ -474,7 +355,7 @@ namespace WebAgentProTemplate.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WebAgentPro.Api.Models.User")
+                    b.HasOne("WebAgentPro.Models.WapUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -482,7 +363,7 @@ namespace WebAgentProTemplate.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WebAgentPro.Api.Models.User")
+                    b.HasOne("WebAgentPro.Models.WapUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -495,7 +376,7 @@ namespace WebAgentProTemplate.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WebAgentPro.Api.Models.User")
+                    b.HasOne("WebAgentPro.Models.WapUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -503,36 +384,9 @@ namespace WebAgentProTemplate.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WebAgentPro.Api.Models.User")
+                    b.HasOne("WebAgentPro.Models.WapUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebAgentProTemplate.Api.Models.Driver", b =>
-                {
-                    b.HasOne("WebAgentProTemplate.Api.Models.Quote", "Quote")
-                        .WithMany()
-                        .HasForeignKey("QuoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebAgentProTemplate.Api.Models.Quote", b =>
-                {
-                    b.HasOne("WebAgentPro.Api.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebAgentProTemplate.Api.Models.Vehicle", b =>
-                {
-                    b.HasOne("WebAgentProTemplate.Api.Models.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId");
-
-                    b.HasOne("WebAgentProTemplate.Api.Models.Quote", "Quote")
-                        .WithMany()
-                        .HasForeignKey("QuoteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

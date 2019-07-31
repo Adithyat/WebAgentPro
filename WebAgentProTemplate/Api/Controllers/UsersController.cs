@@ -24,11 +24,11 @@ namespace WebAgentPro.Controllers
 
     public class UsersController : ControllerBase
     {
-        private readonly UserManager<WapUser> _userManager;
+        private readonly UserManager<UserViewModel> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
 
-        public UsersController(UserManager<WapUser> userManager, IConfiguration configuration, ILogger<AccountsController> logger)
+        public UsersController(UserManager<UserViewModel> userManager, IConfiguration configuration, ILogger<AccountsController> logger)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -40,13 +40,13 @@ namespace WebAgentPro.Controllers
         /// </summary>
         /// <returns>List of User objects.</returns>
         [HttpGet(Name = "Get All Users")]
-        [ProducesResponseType(typeof(IList<User>), 200)]
+        [ProducesResponseType(typeof(IList<UserViewModel>), 200)]
         public async Task<IActionResult> GetAllUsers()
         {
-            var userViews = new List<User>();
+            var userViews = new List<UserViewModel>();
             await _userManager.Users.ForEachAsync(wapUser =>
            {
-               var user = Mapper.Map<User>(wapUser);
+               var user = Mapper.Map<UserViewModel>(wapUser);
                user.Roles = _userManager.GetRolesAsync(wapUser).Result;
                userViews.Add(user);
            });
@@ -58,18 +58,18 @@ namespace WebAgentPro.Controllers
         /// </summary>
         /// <returns>List of User objects.</returns>
         [HttpGet("getFilteredUsers", Name = "Get Filtered Users")]
-        [ProducesResponseType(typeof(IList<User>), 200)]
+        [ProducesResponseType(typeof(IList<UserViewModel>), 200)]
         public async Task<IActionResult> GetFilteredUsers([FromQuery] string userStatusRole)
         {
             userStatusRole = userStatusRole.Trim();
-            var userViews = new List<User>();
+            var userViews = new List<UserViewModel>();
             if (userStatusRole == "All Users")
             {
                 await _userManager
                     .Users
                     .ForEachAsync(wapUser =>
                     {
-                        var user = Mapper.Map<User>(wapUser);
+                        var user = Mapper.Map<UserViewModel>(wapUser);
                         if (user.IsActive)
                         {
                             var userRole = _userManager.GetRolesAsync(wapUser).Result.FirstOrDefault();
@@ -91,7 +91,7 @@ namespace WebAgentPro.Controllers
                     .Where(u => !u.IsActive)
                     .ForEachAsync(wapUser =>
                     {
-                        var user = Mapper.Map<User>(wapUser);
+                        var user = Mapper.Map<UserViewModel>(wapUser);
                         userViews.Add(user);
                     });
             }
@@ -103,7 +103,7 @@ namespace WebAgentPro.Controllers
                    .ToList()
                    .ForEach(wapUser =>
                    {
-                       var user = Mapper.Map<User>(wapUser);
+                       var user = Mapper.Map<UserViewModel>(wapUser);
                        user.Roles.Add(userStatusRole);
                        userViews.Add(user);
                    });

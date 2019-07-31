@@ -27,14 +27,14 @@ namespace WebAgentPro.Controllers
     public class AccountsController : ControllerBase
     {
         private WapDbContext _context;
-        private UserManager<WapUser> _userManager;
-        private SignInManager<WapUser> _signInManager;
+        private UserManager<UserViewModel> _userManager;
+        private SignInManager<UserViewModel> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
 
         public AccountsController(WapDbContext context,
-            UserManager<WapUser> userManager,
-            SignInManager<WapUser> signInManager,
+            UserManager<UserViewModel> userManager,
+            SignInManager<UserViewModel> signInManager,
             IConfiguration configuration, 
             ILogger<AccountsController> logger)
         {
@@ -57,7 +57,7 @@ namespace WebAgentPro.Controllers
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
-            WapUser newUser = Mapper.Map<WapUser>(userRegistration);
+            UserViewModel newUser = Mapper.Map<UserViewModel>(userRegistration);
 
             try
             {
@@ -84,7 +84,7 @@ namespace WebAgentPro.Controllers
         /// <param name="credentials">The username and password to be authenticated.</param>
         /// <returns>A user object including First Name, Last Name, User Name, Roles, and JWT Token.</returns>
         [HttpPost("authenticate", Name = "Authenticate")]
-        [ProducesResponseType(typeof(User), 200)]
+        [ProducesResponseType(typeof(UserViewModel), 200)]
         [ProducesResponseType(typeof(ModelStateDictionary), 400)]
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Authenticate(UserCredentials credentials)
@@ -104,7 +104,7 @@ namespace WebAgentPro.Controllers
                     throw new WapException("Unable to authenticate user credentials.");
                 }
 
-                var userViewModel = Mapper.Map<User>(user);
+                var userViewModel = Mapper.Map<UserViewModel>(user);
                 userViewModel.Roles = await _userManager.GetRolesAsync(user); 
                 userViewModel.Token = CreateToken(user, userViewModel.Roles); ;
 
@@ -116,7 +116,7 @@ namespace WebAgentPro.Controllers
             }
         }
 
-        private string CreateToken(WapUser authenticatedUser, IList<string> roles)
+        private string CreateToken(UserViewModel authenticatedUser, IList<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]);

@@ -14,8 +14,10 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using WebAgentPro.Api.Models;
 using WebAgentPro.Data;
 using WebAgentPro.Models;
+using WebAgentProTemplate.Api.Models;
 
 namespace WebAgentPro
 {
@@ -60,7 +62,7 @@ namespace WebAgentPro
             #endregion
 
             #region IDENTITY                Configure ASP.NET Identity to use your DbContext and ApplicationUser
-            services.AddIdentity<WapUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                       .AddEntityFrameworkStores<WapDbContext>();
             #endregion
 
