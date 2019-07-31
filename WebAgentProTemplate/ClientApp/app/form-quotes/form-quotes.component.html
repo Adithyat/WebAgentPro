@@ -2,10 +2,9 @@
   <form #quoteForm="ngForm" (ngSubmit)="onSubmit()"     >
       <div class="card">
           <div class="card-header">
-              <h3 class="card-title">Quote Info</h3>
+              <h3 class="card-title">Customer Info</h3>
           </div>
           <div class="card-body col-12">
-              <h4>Customer Info</h4>
               <div class="row">
                   <div class="form-group col-6">
                       <label for="q_FirstName">First Name</label>
@@ -28,8 +27,8 @@
               </div>
               <div class="row">
                   <div class="form-group col-3">
-                      <label for="stateCode">State</label>
-                      <select id="stateCode" name="stateCode" #stateCode="ngModel" [(ngModel)]="quoteEdit.stateCode" class="form-control" required>
+                      <label for="q_StateCode">State</label>
+                      <select id="q_StateCode" name="q_StateCode" #q_StateCode="ngModel" [(ngModel)]="quoteEdit.q_StateCode" class="form-control" required>
                           <option value="CT">CT</option>
                           <option value="MA">MA</option>
                           <option value="ME">ME</option>
@@ -47,23 +46,22 @@
                       <input id="postalCode" name="postalCode" #postalCode="ngModel" [(ngModel)]="quoteEdit.postalCode" type="text" class="form-control" required />
                   </div>
                   <div class="form-group col-3">
-                      <label for="ssn">SSN</label>
-                      <input id="ssn" name="ssn" #ssn="ngModel" [(ngModel)]="quoteEdit.ssn" type="password" class="form-control" required />
+                      <label for="q_ssn">SSN</label>
+                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" type="password" class="form-control" required />
                   </div>
                   <div class="form-group col-3">
-                      <label for="dateOfBirth">Birthdate mm/dd/yyyy</label>
-                      <input id="dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="quoteEdit.dateOfBirth" type="date" class="form-control" required />
+                      <label for="q_DateOfBirth">Birthdate mm/dd/yyyy</label>
+                      <input id="q_DateOfBirth" name="q_DateOfBirth" #q_DateOfBirth="ngModel" [(ngModel)]="quoteEdit.q_DateOfBirth" type="date" class="form-control" required />
                   </div>
               </div>
               <div class="row">
                   <div class="form-group col-6">
-                      <label for="email">E-Mail</label>
-                      <input id="email" name="email" #email="ngModel" [(ngModel)]="quoteEdit.email" type="email" class="form-control" required />
+                      <label for="q_Email">E-Mail</label>
+                      <input id="q_Email" name="q_Email" #q_Email="ngModel" [(ngModel)]="quoteEdit.q_Email" type="email" class="form-control" required />
                   </div>
                   <div class="form-group col-6">
                       <label for="previousCarrier">Previous Carrier</label>
                       <select id="previousCarrier" name="previousCarrier" #previousCarrier="ngModel" [(ngModel)]="quoteEdit.previousCarrier" class="form-control" required>
-                      <!--<select id="previousCarrier" name="previousCarrier" class="form-control">-->
                           <option value="1">Lizard Insurance</option>
                           <option value="2">Pervasive Insurance</option>
                       </select>
@@ -96,3 +94,4 @@
       </div>
   </form>
 </div>
+<app-form-driver></app-form-driver>

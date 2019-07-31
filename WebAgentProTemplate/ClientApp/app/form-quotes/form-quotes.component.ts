@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./form-quotes.component.css']
 })
 export class FormQuotesComponent implements OnInit {
-  quoteEdit: Quote;
+    quoteEdit: Quote;
 
   constructor(private service: QuotesService, private alertService: AlertService) { }
 
@@ -30,11 +30,13 @@ export class FormQuotesComponent implements OnInit {
   onSubmit() {
       if (this.quoteEdit.q_FirstName != null && this.quoteEdit.q_LastName != null
           && this.quoteEdit.address != null && this.quoteEdit.city != null
-          && this.quoteEdit.stateCode != null && this.quoteEdit.postalCode != null
-          && this.quoteEdit.ssn != null && this.quoteEdit.dateOfBirth != null
-          && this.quoteEdit.email != null && this.quoteEdit.previousCarrier != null) {
+          && this.quoteEdit.q_StateCode != null && this.quoteEdit.postalCode != null
+          && this.quoteEdit.q_ssn != null && this.quoteEdit.q_DateOfBirth != null
+          && this.quoteEdit.q_Email != null && this.quoteEdit.previousCarrier != null) {
       this.saveCreate();
-    }
+      }
+
+      //store quoteId
   }
 
     saveCreate() {
@@ -42,6 +44,7 @@ export class FormQuotesComponent implements OnInit {
         returnedQuote => {
             this.resetEdit();
             this.alertService.success('Quote Created.', false);
+
         },
         error => {
             this.alertService.error('Quote update failed.', false);
