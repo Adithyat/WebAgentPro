@@ -25,6 +25,9 @@ import { ToolbarComponent } from './toolbar.component';
 import {SectionComponent } from './section.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
+
 @NgModule({
     imports: [
         BrowserModule,

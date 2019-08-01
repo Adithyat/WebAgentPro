@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-12">
+        <h1>Vehicles</h1>
+        <!-- Action buttons in the list are disabled when a Widget is being edited-->
+        <button (click)="createVehicle()" [disabled]="editing" class="btn btn-primary">Create</button>
+    </div>
+</div>
+
+<div class="col-12">
+    <!-- Sets up template variable #widgetForm, submission method onSubmit(),
+        and only displays if there is a widget to add/edit. -->
+    <form #vehicleForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="vehicleEdit">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Vehicle {{ vehicleEdit.vehicleId }} Info</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="primaryDriver">Primary Driver</label>
+                        <select id="primaryDriver" name="primaryDriver" #primaryDriver="ngModel" [(ngModel)]="vehicleEdit.primaryDriver" class="form-control" required>
+                            <option value="Driver 1">Driver 1</option>
+                            <option value="Driver 2">Driver 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="vin">VIN</label>
+                        <input id="vin" name="vin" #vin="ngModel" [(ngModel)]="vehicleEdit.vin" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="make">Vehicle Make</label>
+                        <input id="make" name="make" #make="ngModel" [(ngModel)]="vehicleEdit.make" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="model">Model</label>
+                        <input id="model" name="model" #model="ngModel" [(ngModel)]="vehicleEdit.model" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group col-2">
+                        <label for="year">Year</label>
+                        <input id="year" name="year" #year="ngModel" [(ngModel)]="vehicleEdit.year" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group col-2">
+                        <label for="annualMileage">Annual Mileage</label>
+                        <input id="annualMileage" name="annualMileage" #annualMileage="ngModel" [(ngModel)]="vehicleEdit.annualMileage" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="milesDrivenToWork">Miles Driven to Work</label>
+                        <input id="milesDrivenToWork" name="milesDrivenToWork" #milesDrivenToWork="ngModel" [(ngModel)]="vehicleEdit.milesDrivenToWork" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="daysDrivenPerWeek">Days Driven per Week</label>
+                        <input id="daysDrivenPerWeek" name="daysDrivenPerWeek" #daysDrivenPerWeek="ngModel" [(ngModel)]="vehicleEdit.daysDrivenPerWeek" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="currentValue">Current Value</label>
+                        <input id="currentValue" name="currentValue" #currentValue="ngModel" [(ngModel)]="vehicleEdit.currentValue" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <label>Check All that Apply:</label>
+                <div class="row">
+                    <div class="form-group col-4 checkbox">
+                        <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.dayTimeRunningLights" [ngModelOptions]="{standalone: true}">Daytime Running Lights</label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.antiTheft" [ngModelOptions]="{standalone: true}">Anti-Theft</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.antiLockBrakes" [ngModelOptions]="{standalone: true}">Anti-Lock Brakes</label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.reducedUsedDiscount" [ngModelOptions]="{standalone: true}">Reduced Use</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4 checkbox">
+                        <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.passiveRestraints" [ngModelOptions]="{standalone: true}">Passive Restraints</label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.garageDifferentAddressThanResidence" [ngModelOptions]="{standalone: true}">Garage Address Different from Residence</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <!-- Cancel and Submit buttons. Can't submit unless for is passing validation. -->
+                <div class="form-group">
+                    <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" [disabled]="!vehicleForm.form.valid" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
