@@ -1,5 +1,5 @@
 export class Driver {
-    driverId: string;
+    driverId: number;
     d_FirstName: string;
     d_LastName: string;
     d_ssn: string;
