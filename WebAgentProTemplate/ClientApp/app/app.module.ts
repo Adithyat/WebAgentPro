@@ -21,6 +21,8 @@ import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
 import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -28,7 +30,8 @@ import { QuoteProgressComponent } from './quote-progress/quote-progress.componen
         FormsModule,
         HttpClientModule,
         NgxPaginationModule,
-        routing
+        routing,
+        AngularFontAwesomeModule
     ],
     declarations: [
         AppComponent,
