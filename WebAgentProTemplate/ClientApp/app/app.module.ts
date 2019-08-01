@@ -23,6 +23,7 @@ import { QuoteProgressComponent } from './quote-progress/quote-progress.componen
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
+import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
         FormQuotesComponent,
         FormDriverComponent,
         QuoteProgressComponent,
-        FormVehicleComponent
+        FormVehicleComponent,
+        QuoteSummaryComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
