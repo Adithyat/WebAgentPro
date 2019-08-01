@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class FormQuotesComponent implements OnInit {
     quoteEdit: Quote;
-    createdQuoteId: number;
+    //createdQuoteId: number;
 
   constructor(private service: QuotesService, private alertService: AlertService) { }
 
@@ -43,16 +43,13 @@ export class FormQuotesComponent implements OnInit {
     saveCreate() {
     
     this.service.postQuote(this.quoteEdit).subscribe(
-        response => {
-            console.log(response);
-            this.createdQuoteId = response.quoteId;
-            this.quoteEdit.quoteId = response.quoteId;
-            console.log(this.createdQuoteId);
-        },
         returnedQuote => {
+            this.service.setQId(returnedQuote.quoteId);
             this.resetEdit();
             this.alertService.success('Quote Created.', false);
-
+        },
+        error => {
+          this.alertService.error('Quote update failed.', false);
         });
   }
 

@@ -12,6 +12,14 @@ export class QuotesService {
 
 
     apiUrl: string = environment.apiUrl;
+    createdQuoteId: number;
+
+    getQid() {
+      return this.createdQuoteId;
+    }
+    setQId(id: number) {
+      this.createdQuoteId = id;
+    }
 
 
     getQuotes() {
