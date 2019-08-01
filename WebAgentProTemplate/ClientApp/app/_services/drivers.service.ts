@@ -24,9 +24,9 @@ export class DriversService {
         return this.http.put(`${this.apiUrl}/Drivers/${driver.driverId}`, driver);
     }
 
-    postDriver(driver: Driver) {
+    postDriver(driver: Driver, id: number) {
         console.log(driver);
-        return this.http.post<Driver>(`${this.apiUrl}/Drivers`, driver);
+        return this.http.post<Driver>(`${this.apiUrl}/Quotes/${id}/AddDriver`, driver);
     }
 
     deleteDriver(id: number) {

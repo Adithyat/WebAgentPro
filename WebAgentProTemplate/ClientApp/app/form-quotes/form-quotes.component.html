@@ -48,7 +48,7 @@
                   </div>
                   <div class="form-group col-3">
                       <label for="q_ssn">SSN</label>
-                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" type="password" class="form-control" required />
+                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" class="form-control" required />
                   </div>
                   <div class="form-group col-3">
                       <label for="q_DateOfBirth">Birthdate mm/dd/yyyy</label>
@@ -96,3 +96,4 @@
   </form>
 </div>
 <app-form-driver [createdQuoteId]="createdQuoteId"></app-form-driver>
+<app-form-vehicle [createdQuoteId]="createdQuoteId"></app-form-vehicle>
