@@ -47,9 +47,8 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         [HttpGet("Calculate/{id}")]
-        public async Task<ActionResult<decimal>> CalculateQuote(long id)
+        public async Task<ActionResult<QuoteReceipt>> CalculateQuote(long id)
         {
-
             var Calculator = new QuoteCostCalculator(_context);
             return Calculator.CalculateQuoteCost(id);
         }
