@@ -49,10 +49,16 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         [HttpGet("Calculate/{id}")]
-        public async Task<ActionResult<decimal>> CalculateQuote(long id)
+        public async Task<ActionResult<QuoteReceipt>> CalculateQuote(long id)
         {
-
             var Calculator = new QuoteCostCalculator(_context);
+
+            // if status is not submitted
+            // find and update all discounts in lookup tables
+            // if status IS submitted, just call the function
+
+
+
             return Calculator.CalculateQuoteCost(id);
         }
 
