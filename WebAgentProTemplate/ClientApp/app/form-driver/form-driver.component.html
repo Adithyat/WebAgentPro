@@ -1,10 +1,73 @@
+<div class="row">
+    <div class="col-12">
+        <h1>Drivers</h1>
+        <!-- Action buttons in the list are disabled when a Widget is being edited-->
+        <button (click)="createDriver()" [disabled]="editing" class="btn btn-primary">Create</button>
+    </div>
+</div>
+
+<div class="row">
+    <!-- first column contains the list of widgets -->
+    <div class="col-12">
+        <!-- Displays cards if there are widgets. -->
+        <div class="card-deck" *ngIf="drivers">
+            <div class="card m-2" *ngFor="let d of drivers">
+                <div class="card-header">
+                    <h5 class="card-title">Driver {{ d.driverId }} </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="d_FirstName">First Name</label>
+                            <div class="card-text">{{ d.d_FirstName }}</div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="d_LastName">Last Name</label>
+                            <div class="card-text">{{ d.d_LastName }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="driverLicenseNumber">Driver License Number</label>
+                            <div class="card-text">{{ d.driverLicenseNumber }}</div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="driverLicenseStateCode">Driver License State</label>
+                            <div class="card-text">{{ d.driverLicenseStateCode }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="d_ssn">SSN</label>
+                            <div class="card-text">XXX-XX-XXXX</div>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="d_DateOfBirth">Birthdate mm/dd/yyyy</label>
+                            <div class="card-text">{{ d.d_dateOfBirth }}</div>
+                        </div>
+                        <div class="form-group col-4">
+                            <label><input type="checkbox" value="">Attended Safe Driving School</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="editDriver(d.driverId)" [disabled]="editing" class="btn btn-primary">Edit</button>
+                    <button (click)="deleteDriver(d.driverId)" [disabled]="editing" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-12">
-    <form #driverForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Sets up template variable #widgetForm, submission method onSubmit(),
+        and only displays if there is a widget to add/edit. -->
+    <form #driverForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="driverEdit">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Driver Info</h3>
+                <h5 class="card-title">Driver {{ driverEdit.driverId }} Info</h5>
             </div>
-            <div class="card-body col-12">
+            <div class="card-body">
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="d_FirstName">First Name</label>
@@ -91,9 +154,10 @@
                 </div>
             </div>
             <div class="card-footer">
+                <!-- Cancel and Submit buttons. Can't submit unless for is passing validation. -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Save</button>
                     <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" [disabled]="!driverForm.form.valid" class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>

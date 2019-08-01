@@ -19,6 +19,9 @@ import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
+import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
+
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
     imports: [
@@ -27,7 +30,8 @@ import { FormDriverComponent } from './form-driver/form-driver.component';
         FormsModule,
         HttpClientModule,
         NgxPaginationModule,
-        routing
+        routing,
+        AngularFontAwesomeModule
     ],
     declarations: [
         AppComponent,
@@ -40,7 +44,8 @@ import { FormDriverComponent } from './form-driver/form-driver.component';
         WidgetPartsComponent,
         ListQuotesComponent,
         FormQuotesComponent,
-        FormDriverComponent
+        FormDriverComponent,
+        QuoteProgressComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
