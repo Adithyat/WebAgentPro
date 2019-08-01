@@ -35,7 +35,7 @@ export class FormDriverComponent implements OnInit {
         this.driverEdit.quoteId = this.createdQuoteId;
         if (/*this.driverEdit.driverId != null &&*/ this.driverEdit.d_FirstName != null
             && this.driverEdit.d_LastName != null && this.driverEdit.d_ssn != null
-            && this.driverEdit.d_dateOfBirth != null && this.driverEdit.driverLicenseNumber != null
+            && this.driverEdit.d_DateOfBirth != null && this.driverEdit.driverLicenseNumber != null
             && this.driverEdit.driverLicenseStateCode && this.driverEdit.quoteId != null) {
             console.log('pass');
             
@@ -46,6 +46,7 @@ export class FormDriverComponent implements OnInit {
     saveCreate() {
         this.service.postDriver(this.driverEdit).subscribe(
             returnedDriver => {
+                console.log(returnedDriver);
                 console.log(this.driverEdit);
                 this.resetEdit();
                 this.alertService.success('Driver Created.', false);
