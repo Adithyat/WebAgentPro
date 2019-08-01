@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAgentPro.Data;
+using WebAgentProTemplate.Api.CostCalculators;
 using WebAgentProTemplate.Api.Models;
 
 namespace WebAgentProTemplate.Api.Controllers
@@ -45,10 +46,12 @@ namespace WebAgentProTemplate.Api.Controllers
             return quote;
         }
 
-        [HttpGet("Caluculate/{id}")]
+        [HttpGet("Calculate/{id}")]
         public async Task<ActionResult<decimal>> CalculateQuote(long id)
         {
-            return 0.0m;
+
+            var Calculator = new QuoteCostCalculator(_context);
+            return Calculator.CalculateQuoteCost(id);
         }
 
         // PUT: api/Quotes/5
