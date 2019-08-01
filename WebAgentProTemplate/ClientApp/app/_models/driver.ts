@@ -7,5 +7,5 @@ export class Driver {
     driverLicenseNumber: string;
     driverLicenseStateCode: string;
     quoteId: number;
-    //safeDrivingSchoolAttended: string;
+    safeDrivingSchoolAttended: Boolean;
 }
