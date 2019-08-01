@@ -20,6 +20,10 @@ import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
 import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
+import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
+import { ToolbarComponent } from './toolbar.component';
+import {SectionComponent } from './section.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
     imports: [
@@ -28,6 +32,7 @@ import { QuoteProgressComponent } from './quote-progress/quote-progress.componen
         FormsModule,
         HttpClientModule,
         NgxPaginationModule,
+        AngularFontAwesomeModule,
         routing
     ],
     declarations: [
@@ -42,13 +47,17 @@ import { QuoteProgressComponent } from './quote-progress/quote-progress.componen
         ListQuotesComponent,
         FormQuotesComponent,
         FormDriverComponent,
-        QuoteProgressComponent
+        QuoteProgressComponent,
+        DynamicFormDriverCardComponent,
+        ToolbarComponent,
+        SectionComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [DynamicFormDriverCardComponent]
 })
 
 export class AppModule { }

@@ -12,6 +12,14 @@ export class QuotesService {
 
 
     apiUrl: string = environment.apiUrl;
+    createdQuoteId: number;
+
+    getQid() {
+      return this.createdQuoteId;
+    }
+    setQId(id: number) {
+      this.createdQuoteId = id;
+    }
 
 
     getQuotes() {
@@ -27,7 +35,7 @@ export class QuotesService {
         return this.http.post<Quote>(`${this.apiUrl}/Quotes`, quote);
     }
 
-  deleteQuote(id: number) {
-    return this.http.delete(`${this.apiUrl}/Quotes/${id}`);
-  }
+    deleteQuote(id: number) {
+      return this.http.delete(`${this.apiUrl}/Quotes/${id}`);
+    }
 }

@@ -10,6 +10,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
+import { FormDriverComponent } from './form-driver/form-driver.component';
 
 
 const appRoutes: Routes = [
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'all-quotes', component: ListQuotesComponent, canActivate: [AuthGuard] },
     { path: 'add-quotes', component: FormQuotesComponent, canActivate: [AuthGuard] },
+    { path: 'add-drivers', component: FormDriverComponent, canActivate: [AuthGuard] },
     { path: 'users',    component: UsersComponent,  canActivate: [AuthGuard], data: { roles: [Role.Manager] }},
     { path: 'login',    component: LoginComponent },
     { path: 'register', component: RegisterComponent },

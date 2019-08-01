@@ -23,11 +23,18 @@ export class DriversService {
     putDriver(driver: Driver) {
         return this.http.put(`${this.apiUrl}/Drivers/${driver.driverId}`, driver);
     }
-
+    /*
+    postDriver(driver: Driver) {
+        console.log(driver);
+        return this.http.post<Driver>(`${this.apiUrl}/Quotes/${id}/AddDriver`, driver);
+    }
+    */
     postDriver(driver: Driver) {
         console.log(driver);
         return this.http.post<Driver>(`${this.apiUrl}/Drivers`, driver);
     }
+
+
 
     deleteDriver(id: number) {
         return this.http.delete(`${this.apiUrl}/Drivers/${id}`);
