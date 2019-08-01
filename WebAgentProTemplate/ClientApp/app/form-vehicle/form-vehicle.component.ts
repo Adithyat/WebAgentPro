@@ -49,7 +49,7 @@ export class FormVehicleComponent implements OnInit {
     }
 
     saveCreate() {
-        this.service.postVehicle(this.vehicleEdit).subscribe(
+        this.service.postVehicle(this.vehicleEdit, this.quote.quoteId).subscribe(
             returnedVehicle => {
                 console.log(returnedVehicle);
                 console.log(this.vehicleEdit);

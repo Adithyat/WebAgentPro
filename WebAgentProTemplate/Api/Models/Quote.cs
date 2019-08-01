@@ -10,6 +10,11 @@ namespace WebAgentProTemplate.Api.Models
 {
     public class Quote
     {
+        public Quote()
+        {
+            QuoteDrivers = new List<Driver>();
+            QuoteVehicles = new List<Vehicle>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 QuoteId { get; set; }

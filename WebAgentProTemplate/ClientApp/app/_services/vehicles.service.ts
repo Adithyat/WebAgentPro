@@ -24,9 +24,9 @@ export class VehiclesService {
         return this.http.put(`${this.apiUrl}/Vehicles/${vehicle.vehicleId}`, vehicle);
     }
 
-    postVehicle(vehicle: Vehicle) {
+    postVehicle(vehicle: Vehicle, id: number) {
         console.log(vehicle);
-        return this.http.post<Vehicle>(`${this.apiUrl}/Vehicles`, vehicle);
+        return this.http.post<Vehicle>(`${this.apiUrl}/Quotes/${id}/AddVehicle`, vehicle);
     }
 
     deleteVehicle(id: number) {

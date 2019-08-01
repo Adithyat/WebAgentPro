@@ -53,6 +53,12 @@ export class FormQuotesComponent implements OnInit {
         });
   }
 
+    saveChange() {
+        this.service.putQuote(this.quoteEdit, this.createdQuoteId).subscribe(
+            response => {
+                console.log(response);
+            })
+    }
   resetEdit() {
     this.quoteEdit = new Quote;
   }
