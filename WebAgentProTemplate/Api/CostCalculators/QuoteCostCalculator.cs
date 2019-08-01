@@ -103,8 +103,7 @@ namespace WebAgentProTemplate.Api.CostCalculators
             VehicleReceipt receipt = new VehicleReceipt(vehicle);
             if (vehicle.AnnualMileage < 6000)
             {
-                receipt.AppliedDiscounts.Add("Vehicle Annual Mileage less than 6000", 
-                    receipt.FinalCost - (receipt.FinalCost * vehicle.AnnualMileageDiscountValue));
+                receipt.AppliedDiscounts.Add("Vehicle Annual Mileage less than 6000", receipt.FinalCost - (receipt.FinalCost * vehicle.AnnualMileageDiscountValue));
                 receipt.FinalCost *= vehicle.AnnualMileageDiscountValue;
             }
 
@@ -122,29 +121,25 @@ namespace WebAgentProTemplate.Api.CostCalculators
 
             if (vehicle.DaysDrivenPerWeek > 4)
             {
-                receipt.AppliedDiscounts.Add("Days Driven Per Week", receipt.FinalCost - (receipt.FinalCost * vehicle.DaysDrivenPerWeekDiscountValue));
-
+                receipt.AppliedDiscounts.Add("Days Driven Per Week Greater Than 4", receipt.FinalCost - (receipt.FinalCost * vehicle.DaysDrivenPerWeekDiscountValue));
                 receipt.FinalCost *= vehicle.DaysDrivenPerWeekDiscountValue;
             }
 
             if (vehicle.MilesDrivenToWork < 25)
             {
-                receipt.AppliedDiscounts.Add("Miles Driven to Work", receipt.FinalCost - (receipt.FinalCost * vehicle.MileDrivenToWorkDiscountValue));
-
+                receipt.AppliedDiscounts.Add("Miles Driven to Work less than 25", receipt.FinalCost - (receipt.FinalCost * vehicle.MileDrivenToWorkDiscountValue));
                 receipt.FinalCost *= vehicle.MileDrivenToWorkDiscountValue;
             }
 
             if (vehicle.DayTimeRunningLights)
             {
                 receipt.AppliedDiscounts.Add("Daytime Running Lights", receipt.FinalCost - (receipt.FinalCost * vehicle.DaytTimeRunningLightsValue));
-
                 receipt.FinalCost *= vehicle.DaytTimeRunningLightsValue;
             }
 
             if (vehicle.GarageDifferentAddressThanResidence)
             {
-                receipt.AppliedDiscounts.Add("Garage different than Residence", receipt.FinalCost - (receipt.FinalCost * vehicle.GarageDifferentAddressThanResidenceValue));
-
+                receipt.AppliedDiscounts.Add("Garage address different than Residence", receipt.FinalCost - (receipt.FinalCost * vehicle.GarageDifferentAddressThanResidenceValue));
                 receipt.FinalCost *= vehicle.GarageDifferentAddressThanResidenceValue;
             }
 

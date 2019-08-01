@@ -50,6 +50,13 @@ namespace WebAgentProTemplate.Api.Controllers
         public async Task<ActionResult<QuoteReceipt>> CalculateQuote(long id)
         {
             var Calculator = new QuoteCostCalculator(_context);
+
+            // if status is not submitted
+            // find and update all discounts in lookup tables
+            // if status IS submitted, just call the function
+
+
+
             return Calculator.CalculateQuoteCost(id);
         }
 
