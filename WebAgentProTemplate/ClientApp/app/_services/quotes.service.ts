@@ -23,7 +23,7 @@ export class QuotesService {
     }
 
     postQuote(quote: Quote) {
-        console.log(quote);
+        //console.log(quote);
         return this.http.post<Quote>(`${this.apiUrl}/Quotes`, quote);
     }
 

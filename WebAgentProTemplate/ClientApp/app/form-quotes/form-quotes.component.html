@@ -70,18 +70,18 @@
               <label>Check All that Apply:</label>
               <div class="row">
                   <div class="form-group col-4 checkbox">
-                      <label><input type="checkbox" value="">Driving less than 3 years</label>
+                      <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.lessThanThreeYearsDriving" [ngModelOptions]="{standalone: true}">Driving less than 3 years</label>
                   </div>
                   <div class="form-group col-4">
-                      <label><input type="checkbox" value="">Claim in last 5 years</label>
+                      <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.claimInLastFiveYears" [ngModelOptions]="{standalone: true}">Claim in last 5 years</label>
                   </div>
               </div>
               <div class="row">
                   <div class="form-group col-4">
-                      <label><input type="checkbox" value="">Moving Violations in last 5 years</label>
+                      <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.movingViolationInLastFiveYears" [ngModelOptions]="{standalone: true}">Moving Violations in last 5 years</label>
                   </div>
                   <div class="form-group col-4">
-                      <label><input type="checkbox" value="">Force Multi-Car Discount</label>
+                      <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.forceMultiCarDiscount" [ngModelOptions]="{standalone: true}">Force Multi-Car Discount</label>
                   </div>
               </div>
           </div>
@@ -94,4 +94,4 @@
       </div>
   </form>
 </div>
-<app-form-driver></app-form-driver>
+<app-form-driver [createdQuoteId]="createdQuoteId"></app-form-driver>

@@ -24,37 +24,36 @@ export class ListQuotesComponent implements OnInit {
   set listFilter(value: string) {
     this._listFilter = value;
     this.filteredQuotes = this.listFilter ? this.performFilter(this.listFilter) : this.quotes;
-    console.log(this.filteredQuotes);
+    //console.log(this.filteredQuotes);
   }
   
   performFilter(filterBy: string): Quote[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.quotes.filter((quote: Quote) =>
-      quote.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+      quote.q_FirstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   ngOnInit() {
-    this.service.getQuotes().subscribe(
-      quotes => {
-        this.quotes = quotes;
-        this.filteredQuotes = this.quotes;
-      },
-      error => {
-        this.alertService.error('Quote filter failed.');
-      }
-    );
+    this.getQuotes();
   }
 
   getQuotes() {
-    this.service.getQuotes().subscribe(returnedQuotes => { this.quotes = returnedQuotes; });
-    console.log(this.quotes);
+    this.service.getQuotes().subscribe(
+      returnedQuotes => { 
+        this.quotes = returnedQuotes;
+        this.filteredQuotes = this.quotes; 
+      });
+    //console.log(this.filteredQuotes);
   }
 
   deleteQuote(id: number) {
     this.service.deleteQuote(id).subscribe(
         success => {
-            this.alertService.success('Quote deleted successfully.');
             this.getQuotes();
+            this.alertService.success('Quote deleted successfully.'); 
+        },
+        (error: any) => {
+          this.alertService.error('Quote deletion failed.');
         }
     );
   }

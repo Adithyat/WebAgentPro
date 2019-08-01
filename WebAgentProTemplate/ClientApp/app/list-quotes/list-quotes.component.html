@@ -29,10 +29,13 @@
         </thead>
         <tbody>
           <tr *ngFor='let quote of filteredQuotes'>
-            <td>{{ quote.firstName }}</td>
-            <td>{{ quote.lastName }}</td>
+            <td>{{ quote.q_FirstName }}</td>
+            <td>{{ quote.q_LastName }}</td>
             <td>{{ quote.quoteId }}</td>
-            <td><button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button></td>
+            <td>
+              <button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Edit</button>
+              <button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
