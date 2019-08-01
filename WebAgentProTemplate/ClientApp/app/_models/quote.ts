@@ -6,12 +6,12 @@ export class Quote {
     city: string;
     q_StateCode: string;
     postalCode: string;
-    q_ssn: string; 
+    q_ssn: string;
     q_DateOfBirth: string;
-    q_Email: string; //
+    q_Email: string;
     previousCarrier: number;
-    //lessThanThreeYearsDriving: ;
-    //claimInLastFiveYears: ;
-    //movingViolationInLastFiveYears: ;
-    //forceMultiCarDiscount: ;
+    lessThanThreeYearsDriving: Boolean;
+    claimInLastFiveYears: Boolean;
+    movingViolationInLastFiveYears: Boolean;
+    forceMultiCarDiscount: Boolean;
 }

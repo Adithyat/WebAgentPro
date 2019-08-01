@@ -6,5 +6,6 @@ export class Driver {
     d_dateOfBirth: string;
     driverLicenseNumber: string;
     driverLicenseStateCode: string;
+    quoteId: number;
     //safeDrivingSchoolAttended: string;
 }
