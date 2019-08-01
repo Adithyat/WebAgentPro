@@ -49,6 +49,9 @@ namespace WebAgentProTemplate.Api.Models
         public bool? CreatedOnMobile { get; set; }
         public bool? SubmittedOnMobile { get; set; }
 
+        public List<Driver> QuoteDrivers { get; set; }
+        public List<Vehicle> QuoteVehicles { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
         public string UserId { get; set; }
