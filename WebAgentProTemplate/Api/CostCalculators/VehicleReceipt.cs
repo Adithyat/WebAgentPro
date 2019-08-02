@@ -10,14 +10,14 @@ namespace WebAgentProTemplate.Api.CostCalculators
     {
         public decimal BaseCost;
         public decimal FinalCost;
-        public Dictionary<String, decimal> AppliedDiscounts;
+        public Dictionary<String, decimal> vehicleAppliedDiscounts;
         public Vehicle vehicle;
 
 
         public VehicleReceipt(Vehicle vehicle)
         {
             this.vehicle = vehicle;
-            AppliedDiscounts = new Dictionary<string, decimal>();
+            vehicleAppliedDiscounts = new Dictionary<string, decimal>();
             BaseCost = QuoteCostCalculator.VehicleBaseCostMultiplier * vehicle.CurrentValue;
             FinalCost = BaseCost;
         }
