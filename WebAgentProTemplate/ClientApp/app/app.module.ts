@@ -25,6 +25,7 @@ import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
 import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
+import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
 
 import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
 import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
@@ -58,7 +59,8 @@ import { SectionComponent } from './section.component';
         DynamicFormDriverCardComponent,
         ToolbarComponent,
         SectionComponent,
-        FormVehicleComponent
+        FormVehicleComponent,
+        QuoteSummaryComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

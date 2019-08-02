@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class FormQuotesComponent implements OnInit {
     quoteEdit: Quote;
-    //createdQuoteId: number;
+    createdQuoteId: number;
 
   constructor(private service: QuotesService, private alertService: AlertService) { }
 
