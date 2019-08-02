@@ -10,14 +10,14 @@ namespace WebAgentProTemplate.Api.CostCalculators
     {
         public decimal BaseCost;
         public decimal FinalCost;
-        public Dictionary<String, decimal> AppliedDiscounts;
+        public Dictionary<String, decimal> driverAppliedDiscounts;
         public Driver driver;
         public decimal multiplier;
 
         public DriverReceipt(Driver driver)
         {
             this.driver = driver;
-            AppliedDiscounts = new Dictionary<string, decimal>();
+            driverAppliedDiscounts = new Dictionary<string, decimal>();
             BaseCost = QuoteCostCalculator.DriverBaseCost;
             FinalCost = BaseCost;
             multiplier = 1.00m;

@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class FormQuotesComponent implements OnInit {
     quoteEdit: Quote;
-    createdQuoteId: number;
+    //createdQuoteId: number;
 
   constructor(private service: QuotesService, private alertService: AlertService) { }
 
@@ -29,7 +29,6 @@ export class FormQuotesComponent implements OnInit {
     }
 
   onSubmit() {
-    console.log('clicked');
       if (this.quoteEdit.q_FirstName != null && this.quoteEdit.q_LastName != null
           && this.quoteEdit.address != null && this.quoteEdit.city != null
           && this.quoteEdit.q_StateCode != null && this.quoteEdit.postalCode != null
@@ -55,7 +54,7 @@ export class FormQuotesComponent implements OnInit {
   }
 
     saveChange() {
-        this.service.putQuote(this.quoteEdit, 4).subscribe(
+        this.service.putQuote(this.quoteEdit, this.service.getQid()).subscribe(
             response => {
                 console.log(response);
             })

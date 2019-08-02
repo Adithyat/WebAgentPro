@@ -10,17 +10,17 @@ namespace WebAgentProTemplate.Api.CostCalculators
     {
         public decimal BaseCost;
         public decimal FinalCost;
-        public Dictionary<String, decimal> AppliedDiscounts;
-        public List<DriverReceipt> drivers;
-        public List<VehicleReceipt> vehicles;
+        public Dictionary<String, decimal> quoteAppliedDiscounts;
+        public List<DriverReceipt> driverReceipts;
+        public List<VehicleReceipt> vehicleReceipts;
         public Quote quote;
 
         public QuoteReceipt(Quote quote)
         {
             this.quote = quote;
-            AppliedDiscounts = new Dictionary<string, decimal>();
-            drivers = new List<DriverReceipt>();
-            vehicles = new List<VehicleReceipt>();
+            quoteAppliedDiscounts = new Dictionary<string, decimal>();
+            driverReceipts = new List<DriverReceipt>();
+            vehicleReceipts = new List<VehicleReceipt>();
         }
     }
 }
