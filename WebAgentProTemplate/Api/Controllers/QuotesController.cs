@@ -116,6 +116,21 @@ namespace WebAgentProTemplate.Api.Controllers
 
             _context.Entry(quote).State = EntityState.Modified;
 
+            if(quote.QuoteDrivers.Count > 0)
+            {
+                foreach (var driver in quote.QuoteDrivers)
+                {
+                    _context.Entry(driver).State = EntityState.Modified;
+                }
+            }
+
+            if (quote.QuoteVehicles.Count > 0)
+            {
+                foreach (var driver in quote.QuoteDrivers)
+                {
+                    _context.Entry(driver).State = EntityState.Modified;
+                }
+            }
             try
             {
                 await _context.SaveChangesAsync();
