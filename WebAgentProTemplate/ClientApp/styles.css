@@ -1,6 +1,47 @@
+@import url("//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css");
+@import "assets/css/riliwan-rabo.css";
+@import "assets/css/style.css";
+@import "assets/css/form.css";
+@import "assets/css/loading-bars.css";
 /* You can add global styles to this file, and also import other style files */
 a {
     cursor: pointer
+}
+
+h1 {
+    font-family: 'Source Sans Pro';
+    font-weight: 300;
+    font-size: 40px;
+}
+
+h2 {
+    font-family: 'Source Sans Pro';
+    font-weight: 300;
+    font-size: 32px;
+}
+
+h3 {
+    font-family: 'Source Sans Pro';
+    font-weight: 300;
+    font-size: 25px;
+}
+
+h4 {
+    font-family: 'Source Sans Pro';
+    font-weight: 700;
+    font-size: 20px;
+}
+
+h5 {
+    font-family: 'Source Sans Pro';
+    font-weight: 700;
+    font-size: 16px;
+}
+
+p {
+    font-family: 'Source Sans Pro';
+    font-size: 14px;
 }
 
 .ng-valid[required], .ng-valid.required {

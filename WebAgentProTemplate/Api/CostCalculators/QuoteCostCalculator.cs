@@ -11,132 +11,157 @@ namespace WebAgentProTemplate.Api.CostCalculators
     public class QuoteCostCalculator
     {
         private readonly WapDbContext _context;
-        static decimal DriverBaseCost = 200m;
-        static decimal QuoteBaseCost = 100m;
-        static decimal VehicleBaseCostMultiplier = .03m;
+        public static decimal DriverBaseCost = 200m;
+        public static decimal QuoteBaseCost = 100m;
+        public static decimal VehicleBaseCostMultiplier = .03m;
 
         public QuoteCostCalculator(WapDbContext context)
         {
             _context = context;
         }
 
-        public decimal CalculateQuoteCost(long Id)
+        public QuoteReceipt CalculateQuoteCost(long Id)
         {
-            decimal drivers_sum_cost = 0.00M;
-            decimal vehicles_sum_cost = 0.00M;
             Quote current = _context.Quotes.Where(t => t.QuoteId == Id).First();
             List<Driver> drivers = _context.Drivers.Where(t => t.QuoteId == Id).ToList();
             List<Vehicle> vehicles = _context.Vehicles.Where(t => t.QuoteId == Id).ToList();
 
+            QuoteReceipt receipt = new QuoteReceipt(current);
+
             foreach (Driver driver in drivers)
             {
-                drivers_sum_cost += CalculateDriverMultiplier(driver) * DriverBaseCost;
+                receipt.drivers.Add(CalculateDriverReceipt(driver));
             }
 
             foreach (Vehicle vehicle in vehicles)
             {
-                vehicles_sum_cost += CalculateVehicleCost(vehicle);
+                receipt.vehicles.Add(CalculateVehicleReceipt(vehicle));
             }
 
-            decimal base_quote_cost = QuoteBaseCost + drivers_sum_cost + vehicles_sum_cost;
-            decimal quote_multiplier = 1.00m;
+            receipt.BaseCost = QuoteBaseCost + receipt.drivers.Sum(item => item.FinalCost) 
+                                    + receipt.vehicles.Sum(item => item.FinalCost);
+
+            receipt.FinalCost = receipt.BaseCost;
 
             if (current.ClaimInLastFiveYears.GetValueOrDefault())
             {
-                quote_multiplier *= (decimal)current.ClaimInLastFiveYearsValue;
+                receipt.AppliedDiscounts.Add("Claim in Last Five Years", receipt.FinalCost - (receipt.FinalCost * (decimal)current.ClaimInLastFiveYearsValue));
+                receipt.FinalCost *= (decimal)current.ClaimInLastFiveYearsValue;
             }
 
             if (current.ForceMultiCarDiscount.GetValueOrDefault() || vehicles.Count() > 1)
             {
-                quote_multiplier *= (decimal)current.ForceMultiCarDiscoutValue;
+                receipt.AppliedDiscounts.Add("Multicar discount", receipt.FinalCost - (receipt.FinalCost * (decimal)current.ForceMultiCarDiscoutValue));
+                receipt.FinalCost *= (decimal)current.ForceMultiCarDiscoutValue;
             }
 
             if (current.LessThanThreeYearsDriving.GetValueOrDefault())
             {
-                quote_multiplier *= (decimal)current.LessThanThreeYearsDrivingValue;
+                receipt.AppliedDiscounts.Add("Less Than Three Years Driving", receipt.FinalCost - (receipt.FinalCost * (decimal)current.LessThanThreeYearsDrivingValue));
+                receipt.FinalCost *= (decimal)current.LessThanThreeYearsDrivingValue;
             }
 
             if (current.MovingViolationInLastFiveYears.GetValueOrDefault())
             {
-                quote_multiplier *= (decimal)current.MovingViolationInLastFiveYearsValue;
+                receipt.AppliedDiscounts.Add("Moving violations in Last 5 Years", receipt.FinalCost - (receipt.FinalCost * (decimal)current.MovingViolationInLastFiveYearsValue));
+                receipt.FinalCost *= (decimal)current.MovingViolationInLastFiveYearsValue;
             }
 
-            if (current.PreviousCarrier.GetValueOrDefault() == PreviousCarrier.Lizard)
+            // if there is an issue, it will be here.
+            if (current.PreviousCarrier.GetValueOrDefault() == PreviousCarrier.Lizard ||
+                current.PreviousCarrier.GetValueOrDefault() == PreviousCarrier.Pervasive)
             {
-                quote_multiplier *= (decimal)current.PreviousCarrierValue;
+                receipt.AppliedDiscounts.Add("Previous carrier", receipt.FinalCost - (receipt.FinalCost * (decimal)current.PreviousCarrierValue));
+                receipt.FinalCost *= (decimal)current.PreviousCarrierValue;
             }
 
-            return base_quote_cost * quote_multiplier;
-
+            return receipt;
         }
 
-        public decimal CalculateDriverMultiplier(Driver driver)
+        public DriverReceipt CalculateDriverReceipt(Driver driver)
         {
-            decimal multiplier = 1.00m;
+            DriverReceipt receipt = new DriverReceipt(driver);
+
 
             if (driver.SafeDrivingSchoolAttended)
             {
-                multiplier *= driver.SafeDrivingSchoolAttendedValue;
+                receipt.multiplier *= driver.SafeDrivingSchoolAttendedValue;
+                receipt.AppliedDiscounts.Add("Safe Driving School", receipt.FinalCost - (receipt.FinalCost * driver.SafeDrivingSchoolAttendedValue));
+                receipt.FinalCost *= driver.SafeDrivingSchoolAttendedValue;
             }
             if (driver.D_DateOfBirth > DateTime.Now.AddYears(-23))
             {
-                multiplier *= driver.UnderAgeOf23DiscountValue;
+                receipt.multiplier *= driver.UnderAgeOf23DiscountValue;
+                receipt.AppliedDiscounts.Add("Driver Under Age of 23", receipt.FinalCost - (receipt.FinalCost * driver.UnderAgeOf23DiscountValue));
+                receipt.FinalCost *= driver.UnderAgeOf23DiscountValue;
             }
-            return multiplier;
+            return receipt;
         }
 
-        public decimal CalculateVehicleCost(Vehicle vehicle)
+        public VehicleReceipt CalculateVehicleReceipt(Vehicle vehicle)
         {
-            decimal multiplier = 1.00m;
+            VehicleReceipt receipt = new VehicleReceipt(vehicle);
             if (vehicle.AnnualMileage < 6000)
             {
-                multiplier *= vehicle.AnnualMileageDiscountValue;
+                receipt.AppliedDiscounts.Add("Vehicle Annual Mileage less than 6000", receipt.FinalCost - (receipt.FinalCost * vehicle.AnnualMileageDiscountValue));
+                receipt.FinalCost *= vehicle.AnnualMileageDiscountValue;
             }
 
             if (vehicle.AntiLockBrakes)
             {
-                multiplier *= vehicle.AntiLockBrakesValue;
+                receipt.AppliedDiscounts.Add("Antilock brakes",
+                      receipt.FinalCost - (receipt.FinalCost * vehicle.AntiLockBrakesValue));
+                receipt.FinalCost *= vehicle.AntiLockBrakesValue;
             }
             if (vehicle.AntiTheft)
             {
-                multiplier *= vehicle.AntiTheftValue;
+                receipt.AppliedDiscounts.Add("Antitheft", receipt.FinalCost - (receipt.FinalCost * vehicle.AntiTheftValue));
+                receipt.FinalCost *= vehicle.AntiTheftValue;
             }
 
             if (vehicle.DaysDrivenPerWeek > 4)
             {
-                multiplier *= vehicle.DaysDrivenPerWeekDiscountValue;
+                receipt.AppliedDiscounts.Add("Days Driven Per Week Greater Than 4", receipt.FinalCost - (receipt.FinalCost * vehicle.DaysDrivenPerWeekDiscountValue));
+                receipt.FinalCost *= vehicle.DaysDrivenPerWeekDiscountValue;
             }
 
             if (vehicle.MilesDrivenToWork < 25)
             {
-                multiplier *= vehicle.MileDrivenToWorkDiscountValue;
+                receipt.AppliedDiscounts.Add("Miles Driven to Work less than 25", receipt.FinalCost - (receipt.FinalCost * vehicle.MileDrivenToWorkDiscountValue));
+                receipt.FinalCost *= vehicle.MileDrivenToWorkDiscountValue;
             }
 
             if (vehicle.DayTimeRunningLights)
             {
-                multiplier *= vehicle.DaytTimeRunningLightsValue;
+                receipt.AppliedDiscounts.Add("Daytime Running Lights", receipt.FinalCost - (receipt.FinalCost * vehicle.DaytTimeRunningLightsValue));
+                receipt.FinalCost *= vehicle.DaytTimeRunningLightsValue;
             }
 
             if (vehicle.GarageDifferentAddressThanResidence)
             {
-                multiplier *= vehicle.GarageDifferentAddressThanResidenceValue;
+                receipt.AppliedDiscounts.Add("Garage address different than Residence", receipt.FinalCost - (receipt.FinalCost * vehicle.GarageDifferentAddressThanResidenceValue));
+                receipt.FinalCost *= vehicle.GarageDifferentAddressThanResidenceValue;
             }
 
             if (vehicle.PassiveRestraints)
             {
-                multiplier *= vehicle.PassiveRestraintsValue;
+                receipt.AppliedDiscounts.Add("Passive Restraints", receipt.FinalCost - (receipt.FinalCost * vehicle.PassiveRestraintsValue));
+                receipt.FinalCost *= vehicle.PassiveRestraintsValue;
             }
 
             if (vehicle.ReducedUsedDiscount)
             {
-                multiplier *= vehicle.ReducedUsedDiscountValue;
+                receipt.AppliedDiscounts.Add("Reduced Used Discount", receipt.FinalCost - (receipt.FinalCost * vehicle.ReducedUsedDiscountValue));
+                receipt.FinalCost *= vehicle.ReducedUsedDiscountValue;
             }
 
             // A primary driver MUST be on a car
             Driver PrimaryDriver = _context.Drivers.Where(t => t.DriverId == vehicle.DriverId).First();
-            decimal DriverMultiplier = CalculateDriverMultiplier(PrimaryDriver);
+            decimal DriverMultiplier = CalculateDriverReceipt(PrimaryDriver).multiplier;
 
-            return DriverMultiplier * multiplier * VehicleBaseCostMultiplier * vehicle.CurrentValue;
+            receipt.AppliedDiscounts.Add("Primary operator", receipt.FinalCost - (receipt.FinalCost * DriverMultiplier));
+            receipt.FinalCost *= DriverMultiplier;
+            return receipt;
         }
     }
 }

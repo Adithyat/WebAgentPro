@@ -29,6 +29,7 @@ export class FormQuotesComponent implements OnInit {
     }
 
   onSubmit() {
+    console.log('clicked');
       if (this.quoteEdit.q_FirstName != null && this.quoteEdit.q_LastName != null
           && this.quoteEdit.address != null && this.quoteEdit.city != null
           && this.quoteEdit.q_StateCode != null && this.quoteEdit.postalCode != null
@@ -43,18 +44,22 @@ export class FormQuotesComponent implements OnInit {
     saveCreate() {
     
     this.service.postQuote(this.quoteEdit).subscribe(
-        response => {
-            console.log(response);
-            this.createdQuoteId = response.quoteId;
-            console.log(this.createdQuoteId);
-        },
         returnedQuote => {
+            this.service.setQId(returnedQuote.quoteId);
             this.resetEdit();
             this.alertService.success('Quote Created.', false);
-
+        },
+        error => {
+          this.alertService.error('Quote update failed.', false);
         });
   }
 
+    saveChange() {
+        this.service.putQuote(this.quoteEdit, 4).subscribe(
+            response => {
+                console.log(response);
+            })
+    }
   resetEdit() {
     this.quoteEdit = new Quote;
   }

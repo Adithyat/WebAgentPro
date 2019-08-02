@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAgentPro.Data;
@@ -26,17 +27,18 @@ namespace WebAgentProTemplate.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
         {
-            return await _context.Quotes
-                .Include(q => q.QuoteDrivers)
-                .Include(q => q.QuoteVehicles)
-                .ToListAsync();
+            return await _context.Quotes.ToListAsync();
         }
 
         // GET: api/Quotes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Quote>> GetQuote(long id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
+            var quote = _context.Quotes
+                .Include(q => q.QuoteDrivers)
+                .Include(q => q.QuoteVehicles)
+                .Where(q => q.QuoteId == id)
+                .FirstOrDefault();
 
             if (quote == null)
             {
@@ -47,10 +49,59 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         [HttpGet("Calculate/{id}")]
-        public async Task<ActionResult<decimal>> CalculateQuote(long id)
+        public async Task<ActionResult<QuoteReceipt>> CalculateQuote(long id)
         {
-
             var Calculator = new QuoteCostCalculator(_context);
+
+            // if status is not submitted
+            // find and update all discounts in lookup tables
+            // if status IS submitted, just call the function
+
+            Quote current = _context.Quotes.Where(t => t.QuoteId == id).First();
+            // created, NOT submitted
+            if (current.QuoteStatus == QuoteStatus.Created)
+            {
+                //get fresh copies from the database
+                Discount discount = _context.Discounts.Where(t => t.StateCode == current.Q_StateCode).First();
+                List<Driver> drivers = _context.Drivers.Where(t => t.QuoteId == id).ToList();
+                List<Vehicle> vehicles = _context.Vehicles.Where(t => t.QuoteId == id).ToList();
+
+                foreach (var driver in drivers)
+                {
+                    driver.SafeDrivingSchoolAttendedValue = discount.SafeDrivingSchoolAttended;
+                    driver.UnderAgeOf23DiscountValue = discount.DriverLessThanTwentyThree;
+                }
+
+                foreach (var vehicle in vehicles)
+                {
+                    vehicle.AnnualMileageDiscountValue = discount.AnnualMileage;
+                    vehicle.AntiLockBrakesValue = discount.AntiLockBrakes;
+                    vehicle.AntiTheftValue = discount.AntiTheftInstalled;
+                    vehicle.DaysDrivenPerWeekDiscountValue = discount.DaysDrivenPerWeek;
+                    vehicle.DaytTimeRunningLightsValue = discount.DayTimeRunningLights;
+                    vehicle.GarageDifferentAddressThanResidenceValue = discount.GarageAddressDifferentFromResidence;
+                    vehicle.MileDrivenToWorkDiscountValue = discount.MilesDrivenToWork;
+                    vehicle.PassiveRestraintsValue = discount.PassiveRestraints;
+                    vehicle.ReducedUsedDiscountValue = discount.ReduceUseDiscount;
+                }
+
+                current.ClaimInLastFiveYearsValue = discount.ClaimInLastFiveYears;
+                current.ForceMultiCarDiscoutValue = discount.MultiCarDiscount;
+                current.LessThanThreeYearsDrivingValue = discount.CustomerLessThanThreeYearsDriving;
+                current.MovingViolationInLastFiveYearsValue = discount.MovingViolationInLastFiveYears;
+
+                if (current.PreviousCarrier.Value == PreviousCarrier.Lizard)
+                {
+                    current.PreviousCarrierValue = discount.PreviousCarrierLizardIns;
+                } else if (current.PreviousCarrier.Value == PreviousCarrier.Pervasive) {
+                    current.PreviousCarrierValue = discount.PreviousCarrierPervasiveStateIns;
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+
+
             return Calculator.CalculateQuoteCost(id);
         }
 
@@ -60,7 +111,7 @@ namespace WebAgentProTemplate.Api.Controllers
         {
             if (id != quote.QuoteId)
             {
-                return BadRequest();
+                return BadRequest("Bad QuoteId");
             }
 
             _context.Entry(quote).State = EntityState.Modified;
@@ -73,7 +124,7 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 if (!QuoteExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Quote does not exist");
                 }
                 else
                 {
@@ -108,6 +159,74 @@ namespace WebAgentProTemplate.Api.Controllers
             await _context.SaveChangesAsync();
 
             return quote;
+        }
+
+        [HttpPost("{quoteId}/AddDriver")]
+        public async Task<ActionResult<Driver>> AddDriver(Driver driver, int quoteId)
+        {
+            driver.QuoteId = quoteId;
+            _context.Drivers.Add(driver);
+               
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetQuote", new { id = driver.DriverId }, driver);
+        }
+
+        [HttpDelete("RemoveDriver/{driverId}")]
+        public async Task<ActionResult<Driver>> RemoveDriver(Driver driver, int driverId)
+        {
+            var driverToRemove = _context.Drivers
+                .Where(d => d.DriverId == driverId)
+                .FirstOrDefault();
+            _context.Drivers.Remove(driverToRemove);
+
+            await _context.SaveChangesAsync();
+
+            return driverToRemove;
+        }
+
+        [HttpPost("{quoteId}/AddVehicle")]
+        public async Task<ActionResult<Vehicle>> AddVehicle(Vehicle vehicle, int quoteId)
+        {
+            vehicle.QuoteId = quoteId;
+            _context.Vehicles.Add(vehicle);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetQuote", new { id = vehicle.VehicleId }, vehicle);
+        }
+
+        [HttpDelete("RemoveVehicle/{vehicleId}")]
+        public async Task<ActionResult<Vehicle>> RemoveVehicle(Vehicle vehicle, int vehicleId)
+        {
+            var vehicleToRemove = _context.Vehicles
+                .Where(d => d.VehicleId == vehicleId)
+                .FirstOrDefault();
+            _context.Vehicles.Remove(vehicleToRemove);
+
+            await _context.SaveChangesAsync();
+
+            return vehicleToRemove;
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Quote>> UpdateQuote([FromBody]JsonPatchDocument<Quote> patch, int id)
+        {
+            if(patch == null)
+            {
+                return BadRequest();
+            }
+
+            var update = _context.Quotes.Where(q => q.QuoteId == id).FirstOrDefault();
+
+            if(update == null)
+            {
+                return NotFound("Unable to find quote");
+            }
+
+            patch.ApplyTo(update, ModelState);
+
+            return Ok();
         }
 
         private bool QuoteExists(long id)

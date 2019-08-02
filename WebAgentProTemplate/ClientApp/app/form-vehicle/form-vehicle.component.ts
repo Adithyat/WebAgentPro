@@ -4,6 +4,7 @@ import { VehiclesService } from '@app/_services/vehicles.service';
 import { QuotesService } from '@app/_services/quotes.service';
 import { Vehicle } from '@app/_models/vehicle';
 import { Quote } from '@app/_models/quote';
+import { Driver } from '@app/_models/driver';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -15,6 +16,8 @@ export class FormVehicleComponent implements OnInit {
     @Input() createdQuoteId: number;
     vehicleEdit: Vehicle;
     quote: Quote;
+    drivers: Driver[] = [];
+    
 
     constructor(private service: VehiclesService, private quotesService: QuotesService, private alertService: AlertService) { }
 
@@ -34,19 +37,21 @@ export class FormVehicleComponent implements OnInit {
     onSubmit() {
         console.log(this.createdQuoteId);
         this.vehicleEdit.quoteId = this.createdQuoteId;
-        //if (/*this.driverEdit.driverId != null &&*/ this.driverEdit.d_FirstName != null
-            //&& this.driverEdit.d_LastName != null && this.driverEdit.d_ssn != null
-            //&& this.driverEdit.d_dateOfBirth != null && this.driverEdit.driverLicenseNumber != null
-            //&& this.driverEdit.driverLicenseStateCode && this.driverEdit.quoteId != null) {
-            //console.log('pass');
+        if (this.vehicleEdit.quoteId != null && this.vehicleEdit.primaryDriver != null
+            && this.vehicleEdit.vin != null && this.vehicleEdit.make != null
+            && this.vehicleEdit.model != null && this.vehicleEdit.year != null
+            && this.vehicleEdit.annualMileage && this.vehicleEdit.daysDrivenPerWeek != null
+            && this.vehicleEdit.milesDrivenToWork && this.vehicleEdit.currentValue != null) {
+            console.log('pass');
 
             this.saveCreate();
-        //}
+        }
     }
 
     saveCreate() {
-        this.service.postVehicle(this.vehicleEdit).subscribe(
-            returnedDriver => {
+        this.service.postVehicle(this.vehicleEdit, this.quote.quoteId).subscribe(
+            returnedVehicle => {
+                console.log(returnedVehicle);
                 console.log(this.vehicleEdit);
                 this.resetEdit();
                 this.alertService.success('Vehicle Created.', false);

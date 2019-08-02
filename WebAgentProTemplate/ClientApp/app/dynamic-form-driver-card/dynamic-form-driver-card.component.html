@@ -1,38 +1,28 @@
-<div class="row">
-    <div class="col-12">
-        <h1>Drivers</h1>
-        <!-- Action buttons in the list are disabled when a Widget is being edited-->
-        <button (click)="createDriver()"  class="btn btn-primary">Create</button>
-    </div>
-</div>
-
-
-<!--
 <div class="col-12">
-    <form #driverForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="drivers">
+    <form #driverForm="ngForm" (ngSubmit)="onSubmit()" >
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Driver {{ driverEdit.driverId }} Info</h5>
+                <h5 class="card-title">Driver {{ driver.driverId }} Info</h5>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="d_FirstName">First Name</label>
-                        <input id="d_FirstName" name="d_FirstName" #d_FirstName="ngModel" [(ngModel)]="driverEdit.d_FirstName" type="text" class="form-control" required />
+                        <input id="d_FirstName" name="d_FirstName" #d_FirstName="ngModel" [(ngModel)]="driver.d_FirstName" type="text" class="form-control" required />
                     </div>
                     <div class="form-group col-6">
                         <label for="d_LastName">Last Name</label>
-                        <input id="d_LastName" name="d_LastName" #d_LastName="ngModel" [(ngModel)]="driverEdit.d_LastName" type="text" class="form-control" required />
+                        <input id="d_LastName" name="d_LastName" #d_LastName="ngModel" [(ngModel)]="driver.d_LastName" type="text" class="form-control" required />
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="driverLicenseNumber">Driver License Number</label>
-                        <input id="driverLicenseNumber" name="driverLicenseNumber" #driverLicenseNumber="ngModel" [(ngModel)]="driverEdit.driverLicenseNumber" type="text" class="form-control" required />
+                        <input id="driverLicenseNumber" name="driverLicenseNumber" #driverLicenseNumber="ngModel" [(ngModel)]="driver.driverLicenseNumber" type="text" class="form-control" required />
                     </div>
                     <div class="form-group col-6">
                         <label for="driverLicenseStateCode">Driver License State</label>
-                        <select id="driverLicenseStateCode" name="driverLicenseStateCode" #driverLicenseStateCode="ngModel" [(ngModel)]="driverEdit.driverLicenseStateCode" class="form-control" required>
+                        <select id="driverLicenseStateCode" name="driverLicenseStateCode" #driverLicenseStateCode="ngModel" [(ngModel)]="driver.driverLicenseStateCode" class="form-control" required>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AZ">AZ</option>
@@ -89,14 +79,14 @@
                 <div class="row">
                     <div class="form-group col-4">
                         <label for="d_ssn">SSN</label>
-                        <input id="d_ssn" name="d_ssn" #d_ssn="ngModel" [(ngModel)]="driverEdit.d_ssn" type="password" class="form-control" required />
+                        <input id="d_ssn" name="d_ssn" #d_ssn="ngModel" [(ngModel)]="driver.d_ssn" type="password" class="form-control" required />
                     </div>
                     <div class="form-group col-4">
                         <label for="d_DateOfBirth">Birthdate mm/dd/yyyy</label>
-                        <input id="d_DateOfBirth" name="d_DateOfBirth" #d_DateOfBirth="ngModel" [(ngModel)]="driverEdit.d_dateOfBirth" type="date" class="form-control" required />
+                        <input id="d_DateOfBirth" name="d_DateOfBirth" #d_DateOfBirth="ngModel" [(ngModel)]="driver.d_dateOfBirth" type="date" class="form-control" required />
                     </div>
                     <div class="form-group col-4">
-                        <label><input type="checkbox" value="" [(ngModel)]="driverEdit.safeDrivingSchoolAttended" [ngModelOptions]="{standalone: true}">Attended Safe Driving School</label>
+                        <label><input type="checkbox" value="" [(ngModel)]="driver.safeDrivingSchoolAttended" [ngModelOptions]="{standalone: true}">Attended Safe Driving School</label>
                     </div>
                 </div>
             </div>
@@ -109,4 +99,3 @@
         </div>
     </form>
 </div>
--->
