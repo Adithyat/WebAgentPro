@@ -32,6 +32,7 @@ const appRoutes: Routes = [
             { path: 'quotes', outlet: 'form', component: FormQuotesComponent, canActivate: [AuthGuard] },
             { path: 'drivers', outlet: 'form', component: FormDriverComponent, canActivate: [AuthGuard] },
             { path: 'vehicles', outlet: 'form', component: FormVehicleComponent, canActivate: [AuthGuard] },
+            { path: 'summary', outlet: 'form', component: FormSummaryComponent, canActivate: [AuthGuard] },
             { path: '**', redirectTo: '' }
         ]
     },
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+    //{ path: '**', redirectTo: '' }
 ];
 
 

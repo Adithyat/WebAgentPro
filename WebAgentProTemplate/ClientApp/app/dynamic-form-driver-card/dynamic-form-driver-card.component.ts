@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from '@app/_services';
 import { DriversService } from '@app/_services/drivers.service';
 import { QuotesService } from '@app/_services/quotes.service';
+import { FormService } from '@app/_services/form.service';
 import { Driver } from '@app/_models/driver';
 import { Quote } from '@app/_models/quote';
 
@@ -12,9 +13,12 @@ import { Quote } from '@app/_models/quote';
 })
 export class DynamicFormDriverCardComponent implements OnInit {
   driver: Driver = new Driver();
-  constructor(private service: DriversService,
-    private quotesService: QuotesService,
-    private alertService: AlertService) { }
+  constructor(private driverService: DriversService,
+    private quoteService: QuotesService,
+    private alertService: AlertService,
+    private formService: FormService,
+
+    ) { }
 
   ngOnInit() {
     this.createDriver();
@@ -31,7 +35,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
 
   onSubmit() {
       this.driver.quoteId = 4; // this.quotesService.getQid();
-      console.log(this.driver);
+      //console.log(this.driver);
       if (/*this.driver.d_FirstName != null && this.driver.d_LastName != null && this.driver.d_ssn != null
           && this.driver.d_dateOfBirth != null && this.driver.driverLicenseNumber != null
           && this.driver.driverLicenseStateCode && this.driver.quoteId != null*/1) {
@@ -41,10 +45,10 @@ export class DynamicFormDriverCardComponent implements OnInit {
       }
   }
 
-    saveCreate() {
-        this.service.postDriver(this.driver, this.quotesService.getQid()).subscribe(
+  saveCreate() {
+      this.driverService.postDriver(this.driver, 1).subscribe(
           returnedDriver => {
-              console.log(returnedDriver);
+              //console.log(returnedDriver);
               //this.resetEdit();
               this.alertService.success('Driver Created.', false);
           },
@@ -54,7 +58,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
   }
 
   resetEdit() {
-      this.quotesService.setQId(null);
+      this.formService.setQId(null);
       this.driver = new Driver;
   }
 
