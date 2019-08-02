@@ -1,10 +1,11 @@
-import { Component, AfterViewInit, ViewChildren, QueryList, ElementRef, ComponentFactoryResolver, ComponentFactory, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChildren, QueryList, ElementRef, ComponentFactoryResolver, ComponentFactory, OnInit, Output, EventEmitter } from '@angular/core';
 import { AlertService } from '@app/_services';
 import { DriversService } from '@app/_services/drivers.service';
-import { QuotesService } from '@app/_services/quotes.service';
+import { FormService }from '@app/_services/form.service';
 import { Driver } from '@app/_models/driver';
 import { Quote } from '@app/_models/quote';
 import { first } from 'rxjs/operators';
+
 
 import { DynamicFormDriverCardComponent } from '../dynamic-form-driver-card/dynamic-form-driver-card.component';
 import { SectionComponent } from '../section.component';
@@ -18,11 +19,7 @@ import {
 
 @Component({
   selector: 'app-form-driver',
-  template: `<div class="container">
-  <app-toolbar (addComponentClick)="onAddComponentClick()"></app-toolbar>
-  <div app-type="section" id="SECTION1" [active]="true"></div>
-  <div app-type="section" id="SECTION2"></div>
-  </div>`,
+  templateUrl: './form-driver.component.html',
   styleUrls: ['./form-driver.component.css']
 })
 export class FormDriverComponent implements AfterViewInit, OnInit {
@@ -35,14 +32,16 @@ export class FormDriverComponent implements AfterViewInit, OnInit {
       activeSections: SectionComponent[];
       textComponentFactory: ComponentFactory<DynamicFormDriverCardComponent>;
 
-    constructor(private service: DriversService,
-                private quotesService: QuotesService,
+    constructor(private driverService: DriversService,
                 private alertService: AlertService,
-                private componentFactoryResolver: ComponentFactoryResolver
+                private componentFactoryResolver: ComponentFactoryResolver,
+                private formService: FormService
                 ){}
 
     ngOnInit() {
         this.textComponentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicFormDriverCardComponent);
+        
+        //this.onAddComponentClick();
         //this.createDriver();
     }
 
@@ -61,7 +60,7 @@ export class FormDriverComponent implements AfterViewInit, OnInit {
     });
     }
 
-
+    /*
     createDriver() {
         // this.drivers[1] = new Driver();
     }
@@ -72,11 +71,11 @@ export class FormDriverComponent implements AfterViewInit, OnInit {
     }
 
     onSubmit() {
-        this.driverEdit.quoteId = this.quotesService.getQid();
+        this.driverEdit.quoteId = this.formService.getQid();
         console.log(this.driverEdit);
         if (/*this.driverEdit.d_FirstName != null && this.driverEdit.d_LastName != null && this.driverEdit.d_ssn != null
             && this.driverEdit.d_dateOfBirth != null && this.driverEdit.driverLicenseNumber != null
-            && this.driverEdit.driverLicenseStateCode && this.driverEdit.quoteId != null*/1) {
+            && this.driverEdit.driverLicenseStateCode && this.driverEdit.quoteId != null1) {
             console.log('pass');
 
             this.saveCreate();
@@ -84,7 +83,7 @@ export class FormDriverComponent implements AfterViewInit, OnInit {
     }
 
     saveCreate() {
-        this.service.postDriver(this.driverEdit, this.driverEdit.quoteId).subscribe(
+        this.driverService.postDriver(this.driverEdit, this.driverEdit.quoteId).subscribe(
             returnedDriver => {
                 console.log(returnedDriver);
                 this.resetEdit();
@@ -96,7 +95,7 @@ export class FormDriverComponent implements AfterViewInit, OnInit {
     }
 
     resetEdit() {
-        this.quotesService.setQId(null);
+        this.formService.setQId(null);
         this.driverEdit = new Driver;
     }
 
@@ -104,5 +103,6 @@ export class FormDriverComponent implements AfterViewInit, OnInit {
         this.alertService.success('Driver update cancelled.');
         this.resetEdit();
     }
+    */
 
 }
