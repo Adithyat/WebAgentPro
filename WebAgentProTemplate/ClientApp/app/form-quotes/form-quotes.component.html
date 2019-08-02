@@ -1,9 +1,12 @@
 <!--<app-quote-progress></app-quote-progress>-->
 <div class="col-12">
-  <form #quoteForm="ngForm" (ngSubmit)="onSubmit()"     >
+  <form #quoteForm="ngForm" >
       <div class="card">
           <div class="card-header">
-                <button (click)="saveCreate()" type="button" style="float: right;"class="btn btn-secondary" [routerLink]="[{ outlets: { primary: ['drivers'], form: ['drivers'] } }]">Next</button>
+                <button (click)="saveCreate()"  type="button" style="float: right;"class="btn btn-success" >Save</button>
+                <!--
+                <button (click)="goToNext()" [routerLink]="[{ outlets: { primary: ['drivers'], form: ['drivers'] } }]" type="button" style="float: right;"class="btn btn-secondary" >Next</button>
+          -->
           </div>
           <div class="card-body col-12">
               <div class="row">

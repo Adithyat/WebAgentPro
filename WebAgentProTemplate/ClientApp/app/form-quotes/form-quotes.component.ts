@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '@app/_services';
 import { QuotesService } from '@app/_services/quotes.service';
+import { FormService }from '@app/_services/form.service';
 import { Quote } from '@app/_models/quote';
 import { first } from 'rxjs/operators';
+import { Router }              from '@angular/router';
 
 @Component({
   selector: 'app-form-quotes',
-  templateUrl:'./form-quotes.component.html',
+  templateUrl: './form-quotes.component.html',
   styleUrls: ['./form-quotes.component.css']
 })
 export class FormQuotesComponent implements OnInit {
     quoteEdit: Quote;
-    createdQuoteId: number;
+    // createdQuoteId: number;
 
-  constructor(private service: QuotesService, private alertService: AlertService) { }
+  constructor(
+    private router: Router, 
+    private quoteService: QuotesService, 
+    private formService: FormService, 
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.createQuote();
@@ -28,24 +34,17 @@ export class FormQuotesComponent implements OnInit {
     this.resetEdit();
     }
 
-  onSubmit() {
-    console.log('clicked');
-      if (this.quoteEdit.q_FirstName != null && this.quoteEdit.q_LastName != null
-          && this.quoteEdit.address != null && this.quoteEdit.city != null
-          && this.quoteEdit.q_StateCode != null && this.quoteEdit.postalCode != null
-          && this.quoteEdit.q_ssn != null && this.quoteEdit.q_DateOfBirth != null
-          && this.quoteEdit.q_Email != null && this.quoteEdit.previousCarrier != null) {
-      this.saveCreate();
-      }
+  goToNext() {
+        // Navigate to the result page
 
-      //store quoteId
   }
 
-    saveCreate() {
-    
-    this.service.postQuote(this.quoteEdit).subscribe(
+
+  saveCreate() {
+    this.quoteService.postQuote(this.quoteEdit).subscribe(
         returnedQuote => {
-            this.service.setQId(returnedQuote.quoteId);
+            console.log(returnedQuote);
+            this.formService.setQId(returnedQuote.quoteId);
             this.resetEdit();
             this.alertService.success('Quote Created.', false);
         },
@@ -55,10 +54,10 @@ export class FormQuotesComponent implements OnInit {
   }
 
     saveChange() {
-        this.service.putQuote(this.quoteEdit, 4).subscribe(
+        this.quoteService.putQuote(this.quoteEdit, 4).subscribe(
             response => {
                 console.log(response);
-            })
+            });
     }
   resetEdit() {
     this.quoteEdit = new Quote;

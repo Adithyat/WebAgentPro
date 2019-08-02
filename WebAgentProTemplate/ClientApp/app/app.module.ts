@@ -31,7 +31,6 @@ import { FormNavbarComponent } from './form-navbar/form-navbar.component';
 
 import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
 import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
-import { ToolbarComponent } from './toolbar.component';
 import { SectionComponent } from './section.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
 
@@ -62,7 +61,6 @@ import { FormSummaryComponent } from './form-summary/form-summary.component';
         FormDriverComponent,
         QuoteProgressComponent,
         DynamicFormDriverCardComponent,
-        ToolbarComponent,
         SectionComponent,
         FormVehicleComponent,
         FormSummaryComponent,

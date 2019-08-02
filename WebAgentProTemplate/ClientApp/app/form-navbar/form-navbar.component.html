@@ -31,7 +31,7 @@
 
       <!-- circular ok icon -->
       <li>
-          <a routerLink="/add-summary" routerLinkActive="active" data-toggle="tab" title="completed">
+          <a [routerLink]="[{ outlets: { primary: ['summary'], form: ['summary'] } }]" routerLinkActive="active" data-toggle="tab" title="completed">
               <span class="round-tabs four">
                   <i class="glyphicon glyphicon-ok"></i>
               </span>
