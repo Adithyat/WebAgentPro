@@ -2,23 +2,23 @@
     <div class="col-12">
         <h1>Vehicles</h1>
         <!-- Action buttons in the list are disabled when a Widget is being edited-->
-        <button (click)="createVehicle()" [disabled]="editing" class="btn btn-primary">Create</button>
+        <button (click)="createVehicle()"  class="btn btn-primary">Create</button>
     </div>
 </div>
 
 <div class="col-12">
     <!-- Sets up template variable #widgetForm, submission method onSubmit(),
         and only displays if there is a widget to add/edit. -->
-    <form #vehicleForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="vehicleEdit">
+    <form #vehicleForm="ngForm" (ngSubmit)="saveCreate()" *ngIf="vehicleEdit">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Vehicle {{ vehicleEdit.vehicleId }} Info</h5>
+                <button type="submit"  class="btn btn-success">Save</button>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="primaryDriver">Primary Driver</label>
-                        <select id="primaryDriver" name="primaryDriver" #primaryDriver="ngModel" [(ngModel)]="vehicleEdit.primaryDriver" class="form-control" required>
+                        <select id="primaryDriver" name="primaryDriver" #primaryDriver="ngModel" [(ngModel)]="vehicleEdit.driverId" class="form-control" required>
                             <option value="Driver 1">Driver 1</option>
                             <option value="Driver 2">Driver 2</option>
                         </select>
@@ -89,8 +89,8 @@
             <div class="card-footer">
                 <!-- Cancel and Submit buttons. Can't submit unless for is passing validation. -->
                 <div class="form-group">
-                    <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
-                    <button type="submit" [disabled]="!vehicleForm.form.valid" class="btn btn-success">Save</button>
+
+                    
                 </div>
             </div>
         </div>

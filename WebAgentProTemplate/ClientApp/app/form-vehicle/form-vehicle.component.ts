@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlertService } from '@app/_services';
 import { VehiclesService } from '@app/_services/vehicles.service';
-import { QuotesService } from '@app/_services/quotes.service';
+import { FormService } from '@app/_services/form.service';
 import { Vehicle } from '@app/_models/vehicle';
 import { Quote } from '@app/_models/quote';
 import { Driver } from '@app/_models/driver';
@@ -13,13 +13,12 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./form-vehicle.component.css']
 })
 export class FormVehicleComponent implements OnInit {
-    @Input() createdQuoteId: number;
     vehicleEdit: Vehicle;
-    quote: Quote;
-    drivers: Driver[] = [];
-    
 
-    constructor(private service: VehiclesService, private quotesService: QuotesService, private alertService: AlertService) { }
+    constructor(
+        private vehicleService: VehiclesService, 
+        private formService: FormService, 
+        private alertService: AlertService) { }
 
     ngOnInit() {
         this.createVehicle();
@@ -33,11 +32,11 @@ export class FormVehicleComponent implements OnInit {
         this.alertService.success('Vehicle creation cancelled.');
         this.resetEdit();
     }
-
+    /*
     onSubmit() {
         console.log(this.createdQuoteId);
         this.vehicleEdit.quoteId = this.createdQuoteId;
-        if (this.vehicleEdit.quoteId != null && this.vehicleEdit.primaryDriver != null
+        if (this.vehicleEdit.quoteId != null && this.vehicleEdit.driverId != null
             && this.vehicleEdit.vin != null && this.vehicleEdit.make != null
             && this.vehicleEdit.model != null && this.vehicleEdit.year != null
             && this.vehicleEdit.annualMileage && this.vehicleEdit.daysDrivenPerWeek != null
@@ -46,13 +45,16 @@ export class FormVehicleComponent implements OnInit {
 
             this.saveCreate();
         }
-    }
+    }*/
 
     saveCreate() {
-        this.service.postVehicle(this.vehicleEdit, this.quote.quoteId).subscribe(
+        this.vehicleEdit.quoteId = this.formService.getQid();
+        this.vehicleEdit.driverId = this.formService.getDid();
+
+        console.log(this.vehicleEdit);
+        this.vehicleService.postVehicle(this.vehicleEdit, this.vehicleEdit.quoteId).subscribe(
             returnedVehicle => {
                 console.log(returnedVehicle);
-                console.log(this.vehicleEdit);
                 this.resetEdit();
                 this.alertService.success('Vehicle Created.', false);
             },

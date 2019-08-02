@@ -17,6 +17,15 @@ export class FormService {
     setQId(id: number) {
       this.createdQuoteId = id;
     }
+  
+    createdDriverId: number;
+
+    getDid() {
+      return this.createdDriverId;
+    }
+    setDId(id: number) {
+      this.createdDriverId = id;
+    }
 
 
 }

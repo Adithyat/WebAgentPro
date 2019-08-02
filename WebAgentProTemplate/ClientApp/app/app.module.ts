@@ -22,6 +22,7 @@ import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+import { FilterQuotesComponent } from './filter-quotes/filter-quotes.component';
 
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
@@ -65,7 +66,8 @@ import { FormSummaryComponent } from './form-summary/form-summary.component';
         FormVehicleComponent,
         FormSummaryComponent,
         FormShellComponent,
-        FormNavbarComponent
+        FormNavbarComponent,
+        FilterQuotesComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

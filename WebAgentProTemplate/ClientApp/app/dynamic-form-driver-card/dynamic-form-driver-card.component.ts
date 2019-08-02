@@ -34,7 +34,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
   }
 
   onSubmit() {
-      this.driver.quoteId = 4; // this.quotesService.getQid();
+      this.driver.quoteId = this.formService.getQid();
       //console.log(this.driver);
       if (/*this.driver.d_FirstName != null && this.driver.d_LastName != null && this.driver.d_ssn != null
           && this.driver.d_dateOfBirth != null && this.driver.driverLicenseNumber != null
@@ -46,9 +46,11 @@ export class DynamicFormDriverCardComponent implements OnInit {
   }
 
   saveCreate() {
-      this.driverService.postDriver(this.driver, 1).subscribe(
+      
+      this.driverService.postDriver(this.driver, this.driver.quoteId).subscribe(
           returnedDriver => {
-              //console.log(returnedDriver);
+              console.log(returnedDriver);
+              this.formService.setDId(returnedDriver.driverId);
               //this.resetEdit();
               this.alertService.success('Driver Created.', false);
           },
