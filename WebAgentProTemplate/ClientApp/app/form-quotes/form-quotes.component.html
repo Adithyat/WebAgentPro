@@ -47,11 +47,11 @@
                   </div>
                   <div class="form-group col-3">
                       <label for="postalCode">Postal Code</label>
-                      <input id="postalCode" name="postalCode" #postalCode="ngModel" [(ngModel)]="quoteEdit.postalCode" type="text" class="form-control" required />
+                      <input id="postalCode" name="postalCode" #postalCode="ngModel" [(ngModel)]="quoteEdit.postalCode" type="text" class="form-control" maxlength="10" required />
                   </div>
                   <div class="form-group col-3">
                       <label for="q_ssn">SSN</label>
-                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" class="form-control" required />
+                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" maxlength="9" class="form-control" required />
                   </div>
                   <div class="form-group col-3">
                       <label for="q_DateOfBirth">Birthdate mm/dd/yyyy</label>
