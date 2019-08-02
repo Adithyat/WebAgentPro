@@ -29,6 +29,7 @@ export class FormQuotesComponent implements OnInit {
     }
 
   onSubmit() {
+    console.log('clicked');
       if (this.quoteEdit.q_FirstName != null && this.quoteEdit.q_LastName != null
           && this.quoteEdit.address != null && this.quoteEdit.city != null
           && this.quoteEdit.q_StateCode != null && this.quoteEdit.postalCode != null
