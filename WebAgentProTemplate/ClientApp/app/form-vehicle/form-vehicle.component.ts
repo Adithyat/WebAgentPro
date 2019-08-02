@@ -14,7 +14,7 @@ import { first } from 'rxjs/operators';
 })
 export class FormVehicleComponent implements OnInit {
     vehicleEdit: Vehicle;
-
+    Did: number[]= new Array();
     constructor(
         private vehicleService: VehiclesService, 
         private formService: FormService, 
@@ -22,6 +22,8 @@ export class FormVehicleComponent implements OnInit {
 
     ngOnInit() {
         this.createVehicle();
+        this.Did = this.formService.getDid();
+        console.log(this.Did);
     }
 
     createVehicle() {
@@ -49,9 +51,9 @@ export class FormVehicleComponent implements OnInit {
 
     saveCreate() {
         this.vehicleEdit.quoteId = this.formService.getQid();
-        this.vehicleEdit.driverId = this.formService.getDid();
+        //this.vehicleEdit.driverId = this.formService.getDid();
 
-        console.log(this.vehicleEdit);
+        //console.log(this.vehicleEdit);
         this.vehicleService.postVehicle(this.vehicleEdit, this.vehicleEdit.quoteId).subscribe(
             returnedVehicle => {
                 console.log(returnedVehicle);

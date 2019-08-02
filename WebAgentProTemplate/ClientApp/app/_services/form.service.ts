@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { QuoteReceipt } from '../_models/quotereceipt';
+import { Driver } from '../_models/driver';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class FormService {
 
     createdQuoteId: number;
     apiUrl: string = environment.apiUrl;
+  
+    createdDriverId: number[]  = new Array();
+
+
 
     getQid() {
       return this.createdQuoteId;
@@ -19,14 +24,16 @@ export class FormService {
     setQId(id: number) {
       this.createdQuoteId = id;
     }
-  
-    createdDriverId: number;
 
     getDid() {
+      console.log(this.createdDriverId);
       return this.createdDriverId;
+
     }
     setDId(id: number) {
-      this.createdDriverId = id;
+
+      this.createdDriverId.push(id);
+      console.log(this.createdDriverId);
     }
 
     getCalculatedQuote() {

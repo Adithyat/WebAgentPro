@@ -39,7 +39,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
       if (/*this.driver.d_FirstName != null && this.driver.d_LastName != null && this.driver.d_ssn != null
           && this.driver.d_dateOfBirth != null && this.driver.driverLicenseNumber != null
           && this.driver.driverLicenseStateCode && this.driver.quoteId != null*/1) {
-          console.log('pass');
+          //console.log('pass');
 
           this.saveCreate();
       }

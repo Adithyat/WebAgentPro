@@ -59,7 +59,7 @@ namespace WebAgentProTemplate.Api.Controllers
 
             Quote current = _context.Quotes.Where(t => t.QuoteId == id).First();
             // created, NOT submitted
-            if (current.QuoteStatus == QuoteStatus.Created)
+            if (true)
             {
                 //get fresh copies from the database
                 Discount discount = _context.Discounts.Where(t => t.StateCode == current.Q_StateCode).First();

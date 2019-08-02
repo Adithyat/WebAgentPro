@@ -19,8 +19,7 @@
                     <div class="form-group col-6">
                         <label for="primaryDriver">Primary Driver</label>
                         <select id="primaryDriver" name="primaryDriver" #primaryDriver="ngModel" [(ngModel)]="vehicleEdit.driverId" class="form-control" required>
-                            <option value="Driver 1">Driver 1</option>
-                            <option value="Driver 2">Driver 2</option>
+                                <option *ngFor="let d of Did" name="fieldName" ngDefaultControl [value]="d" [selected]="vehicleEdit.driverId == d">{{d}}</option>
                         </select>
                     </div>
                     <div class="form-group col-6">
