@@ -57,6 +57,49 @@ namespace WebAgentProTemplate.Api.Controllers
             // find and update all discounts in lookup tables
             // if status IS submitted, just call the function
 
+            Quote current = _context.Quotes.Where(t => t.QuoteId == id).First();
+            // created, NOT submitted
+            if (current.QuoteStatus == QuoteStatus.Created)
+            {
+                //get fresh copies from the database
+                Discount discount = _context.Discounts.Where(t => t.StateCode == current.Q_StateCode).First();
+                List<Driver> drivers = _context.Drivers.Where(t => t.QuoteId == id).ToList();
+                List<Vehicle> vehicles = _context.Vehicles.Where(t => t.QuoteId == id).ToList();
+
+                foreach (var driver in drivers)
+                {
+                    driver.SafeDrivingSchoolAttendedValue = discount.SafeDrivingSchoolAttended;
+                    driver.UnderAgeOf23DiscountValue = discount.DriverLessThanTwentyThree;
+                }
+
+                foreach (var vehicle in vehicles)
+                {
+                    vehicle.AnnualMileageDiscountValue = discount.AnnualMileage;
+                    vehicle.AntiLockBrakesValue = discount.AntiLockBrakes;
+                    vehicle.AntiTheftValue = discount.AntiTheftInstalled;
+                    vehicle.DaysDrivenPerWeekDiscountValue = discount.DaysDrivenPerWeek;
+                    vehicle.DaytTimeRunningLightsValue = discount.DayTimeRunningLights;
+                    vehicle.GarageDifferentAddressThanResidenceValue = discount.GarageAddressDifferentFromResidence;
+                    vehicle.MileDrivenToWorkDiscountValue = discount.MilesDrivenToWork;
+                    vehicle.PassiveRestraintsValue = discount.PassiveRestraints;
+                    vehicle.ReducedUsedDiscountValue = discount.ReduceUseDiscount;
+                }
+
+                current.ClaimInLastFiveYearsValue = discount.ClaimInLastFiveYears;
+                current.ForceMultiCarDiscoutValue = discount.MultiCarDiscount;
+                current.LessThanThreeYearsDrivingValue = discount.CustomerLessThanThreeYearsDriving;
+                current.MovingViolationInLastFiveYearsValue = discount.MovingViolationInLastFiveYears;
+
+                if (current.PreviousCarrier.Value == PreviousCarrier.Lizard)
+                {
+                    current.PreviousCarrierValue = discount.PreviousCarrierLizardIns;
+                } else if (current.PreviousCarrier.Value == PreviousCarrier.Pervasive) {
+                    current.PreviousCarrierValue = discount.PreviousCarrierPervasiveStateIns;
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
 
 
             return Calculator.CalculateQuoteCost(id);

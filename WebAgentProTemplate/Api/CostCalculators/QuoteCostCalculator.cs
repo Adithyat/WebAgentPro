@@ -67,15 +67,15 @@ namespace WebAgentProTemplate.Api.CostCalculators
                 receipt.FinalCost *= (decimal)current.MovingViolationInLastFiveYearsValue;
             }
 
-            // if there is an issue, it will be here. Can I fix it yet? No
-            if (current.PreviousCarrier.GetValueOrDefault() == PreviousCarrier.Lizard)
+            // if there is an issue, it will be here.
+            if (current.PreviousCarrier.GetValueOrDefault() == PreviousCarrier.Lizard ||
+                current.PreviousCarrier.GetValueOrDefault() == PreviousCarrier.Pervasive)
             {
                 receipt.AppliedDiscounts.Add("Previous carrier", receipt.FinalCost - (receipt.FinalCost * (decimal)current.PreviousCarrierValue));
                 receipt.FinalCost *= (decimal)current.PreviousCarrierValue;
             }
 
             return receipt;
-
         }
 
         public DriverReceipt CalculateDriverReceipt(Driver driver)
