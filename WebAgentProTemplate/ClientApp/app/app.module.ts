@@ -14,15 +14,23 @@ import { HomeComponent } from './home';
 import { UsersComponent } from './users';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
-import { ListQuotesComponent } from './list-quotes/list-quotes.component';
-import { FormQuotesComponent } from './form-quotes/form-quotes.component';
-import { FormDriverComponent } from './form-driver/form-driver.component';
-import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
+import { ListQuotesComponent } from './list-quotes/list-quotes.component';
+
+import { FormQuotesComponent } from './form-quotes/form-quotes.component';
+import { FormDriverComponent } from './form-driver/form-driver.component';
 import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
+
+import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
+import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
+import { ToolbarComponent } from './toolbar.component';
+import { SectionComponent } from './section.component';
+
 
 @NgModule({
     imports: [
@@ -31,8 +39,8 @@ import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
         FormsModule,
         HttpClientModule,
         NgxPaginationModule,
-        routing,
-        AngularFontAwesomeModule
+        AngularFontAwesomeModule,
+        routing
     ],
     declarations: [
         AppComponent,
@@ -47,13 +55,17 @@ import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
         FormQuotesComponent,
         FormDriverComponent,
         QuoteProgressComponent,
+        DynamicFormDriverCardComponent,
+        ToolbarComponent,
+        SectionComponent,
         FormVehicleComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [DynamicFormDriverCardComponent]
 })
 
 export class AppModule { }
