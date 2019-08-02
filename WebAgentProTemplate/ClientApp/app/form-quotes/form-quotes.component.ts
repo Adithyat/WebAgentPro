@@ -54,7 +54,7 @@ export class FormQuotesComponent implements OnInit {
   }
 
     saveChange() {
-        this.service.putQuote(this.quoteEdit, this.createdQuoteId).subscribe(
+        this.service.putQuote(this.quoteEdit, 4).subscribe(
             response => {
                 console.log(response);
             })

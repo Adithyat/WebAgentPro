@@ -4,7 +4,8 @@ import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent }  from './app.component';
-import { routing }        from './app.routing';
+
+import { AppRoutingModule }        from './app.routing';
 
 import { AlertComponent } from './_components';
 import { NgxPaginationModule } from 'ngx-pagination'; 
@@ -25,11 +26,16 @@ import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
 import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
+import { FormShellComponent } from './form-shell/form-shell.component';
+import { FormNavbarComponent } from './form-navbar/form-navbar.component';
 
 import { QuoteProgressComponent } from './quote-progress/quote-progress.component';
 import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
 import { ToolbarComponent } from './toolbar.component';
 import { SectionComponent } from './section.component';
+import { FormSummaryComponent } from './form-summary/form-summary.component';
+
+
 
 
 @NgModule({
@@ -40,7 +46,7 @@ import { SectionComponent } from './section.component';
         HttpClientModule,
         NgxPaginationModule,
         AngularFontAwesomeModule,
-        routing
+        AppRoutingModule
     ],
     declarations: [
         AppComponent,
@@ -58,7 +64,10 @@ import { SectionComponent } from './section.component';
         DynamicFormDriverCardComponent,
         ToolbarComponent,
         SectionComponent,
-        FormVehicleComponent
+        FormVehicleComponent,
+        FormSummaryComponent,
+        FormShellComponent,
+        FormNavbarComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
