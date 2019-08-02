@@ -18,7 +18,7 @@ import {
 
 @Component({
   selector: 'app-form-driver',
-  template: `<div class="container">
+  template: `<div class="col-12">
   <app-toolbar (addComponentClick)="onAddComponentClick()"></app-toolbar>
   <div app-type="section" id="SECTION1" [active]="true"></div>
   <div app-type="section" id="SECTION2"></div>
