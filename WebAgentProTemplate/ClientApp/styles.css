@@ -325,4 +325,8 @@ li.active span.round-tabs.five {
     .btn-outline-rounded {
         padding: 12px 20px;
     }
+
+}
+.navbar {
+    border-radius: 0px;
 }
