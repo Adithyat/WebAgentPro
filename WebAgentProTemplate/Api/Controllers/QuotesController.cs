@@ -48,6 +48,13 @@ namespace WebAgentProTemplate.Api.Controllers
             return quote;
         }
 
+        //GET: API/Quotes/Users/2
+        [HttpGet("Users/{id}")]
+        public async Task<ActionResult<IEnumerable<Quote>>> GetUserQuotes(string id)
+        {
+            return await _context.Quotes.Where(q => q.UserId == id).ToListAsync();
+        }
+
         [HttpGet("Calculate/{id}")]
         public async Task<ActionResult<QuoteReceipt>> CalculateQuote(long id)
         {
@@ -59,7 +66,7 @@ namespace WebAgentProTemplate.Api.Controllers
 
             Quote current = _context.Quotes.Where(t => t.QuoteId == id).First();
             // created, NOT submitted
-            if (current.QuoteStatus == QuoteStatus.Created)
+            if (true)
             {
                 //get fresh copies from the database
                 Discount discount = _context.Discounts.Where(t => t.StateCode == current.Q_StateCode).First();

@@ -1,6 +1,6 @@
 export class Vehicle {
     vehicleId: number;
-    primaryDriver: string;
+    driverId: number;
     vin: string;
     make: string;
     model: string;

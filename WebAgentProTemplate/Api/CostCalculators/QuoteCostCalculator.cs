@@ -75,6 +75,8 @@ namespace WebAgentProTemplate.Api.CostCalculators
                 receipt.FinalCost *= (decimal)current.PreviousCarrierValue;
             }
 
+            receipt.FinalCost = Math.Round(receipt.FinalCost, 2);
+
             return receipt;
         }
 

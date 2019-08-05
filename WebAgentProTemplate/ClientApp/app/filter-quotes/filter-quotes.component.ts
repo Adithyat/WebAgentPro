@@ -7,6 +7,7 @@ import { Quote } from '@app/_models/quote';
   templateUrl: './filter-quotes.component.html',
   styleUrls: ['./filter-quotes.component.css']
 })
+
 export class FilterQuotesComponent implements OnInit {
 
   filteredProducts: Quote[] = [];

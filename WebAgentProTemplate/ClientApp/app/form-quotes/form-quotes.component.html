@@ -47,11 +47,11 @@
                   </div>
                   <div class="form-group col-3">
                       <label for="postalCode">Postal Code</label>
-                      <input id="postalCode" name="postalCode" #postalCode="ngModel" [(ngModel)]="quoteEdit.postalCode" type="text" class="form-control" required />
+                      <input id="postalCode" name="postalCode" #postalCode="ngModel" [(ngModel)]="quoteEdit.postalCode" type="text" class="form-control" maxlength="10" required />
                   </div>
                   <div class="form-group col-3">
                       <label for="q_ssn">SSN</label>
-                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" class="form-control" required />
+                      <input id="q_ssn" name="q_ssn" #q_ssn="ngModel" [(ngModel)]="quoteEdit.q_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" maxlength="9" pattern="[0-9]{9}" class="form-control" required />
                   </div>
                   <div class="form-group col-3">
                       <label for="q_DateOfBirth">Birthdate mm/dd/yyyy</label>
@@ -71,20 +71,20 @@
                       </select>
                   </div>
               </div>
-              <label>Check All that Apply:</label>
+              <h5>Check All that Apply:</h5>
               <div class="row">
                   <div class="form-group col-4 checkbox">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.lessThanThreeYearsDriving" [ngModelOptions]="{standalone: true}">Driving less than 3 years</label>
                   </div>
-                  <div class="form-group col-4">
+                  <div class="form-group col-4 checkbox">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.claimInLastFiveYears" [ngModelOptions]="{standalone: true}">Claim in last 5 years</label>
                   </div>
               </div>
               <div class="row">
-                  <div class="form-group col-4">
+                  <div class="form-group col-4 checkbox">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.movingViolationInLastFiveYears" [ngModelOptions]="{standalone: true}">Moving Violations in last 5 years</label>
                   </div>
-                  <div class="form-group col-4">
+                  <div class="form-group col-4 checkbox">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.forceMultiCarDiscount" [ngModelOptions]="{standalone: true}">Force Multi-Car Discount</label>
                   </div>
               </div>

@@ -6,7 +6,7 @@ export class Quote {
     city: string;
     q_StateCode: string;
     postalCode: string;
-    q_ssn: string;
+    q_SSN: string;
     q_DateOfBirth: string;
     q_Email: string;
     previousCarrier: number;

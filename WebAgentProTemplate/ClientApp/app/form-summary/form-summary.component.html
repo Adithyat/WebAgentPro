@@ -13,11 +13,11 @@
 <br />
 
 <div class="row col-12">
-    <h4 class="col-12 text-center"><!-- Customer name here -->AIA Quote is:</h4>
+    <h4 class="col-12 text-center">AIA Quote is:</h4>
 </div>
 
 <div class="row col-12">
-    <h3 class="col-12 text-center">$<!-- Monthly quote price here -->/mo</h3>
+    <h3 class="col-12 text-center">{{ CQ.finalCost }}</h3>
 </div>
 
 <div class="row col-12">
@@ -28,13 +28,13 @@
 
 <div class="row col-12">
     <div class="col-6">
-        <p>Name: <!-- customer name --></p>
-        <p>Address: <!-- customer address --></p>
-        <p>City, State, Zip: <!-- customer city, state, zip --></p>
-        <p>SSN: XXX-XX-<!-- last 4 customer ssn --></p>
-        <p>DOB: <!-- customer dob --></p>
-        <p>E-Mail: <!-- customer email --></p>
-        <p>Previous Carrier: <!-- customer previous carrier --></p>
+        <p>Name: {{ CQ.quote.q_FirstName }} {{ CQ.quote.q_LastName }}</p>
+        <p>Address: {{ CQ.quote.address }}</p>
+        <p>City, State, Zip: {{ CQ.quote.city }}, {{ CQ.quote.q_StateCode }} {{ CQ.quote.postalCode }}</p>
+        <p>SSN: XXX-XX-{{ lastFour }}</p>
+        <p>DOB: {{ birthday }}</p>
+        <p>E-Mail: {{ CQ.quote.q_Email }}</p>
+        <p>Previous Carrier: {{ previousCarrier }}</p>
     </div>
 
     <div class="col-6">
@@ -51,12 +51,12 @@
 
 <hr />
 
-<div class="row col-12">
+<div *ngFor="let d of CQ.driverReceipts" class="row col-12">
     <div class="col-4">
-        <p style="font-weight: bold">Driver<!-- driver number --></p>
-        <p>Name: <!-- driver *number* name --></p>
-        <p>SSN: XXX-XX-<!-- driver *number* ssn --></p>
-        <p>DOB: <!-- driver *number* dob --></p>
+        <p style="font-weight: bold">Driver {{ d.driver.driverId }}</p> <!-- not ID, number! -->
+        <p>Name: {{ d.driver.d_FirstName }} {{ d.driver.d_LastName }}</p>
+        <p>SSN: XXX-XX-{{ d.driver.d_SSN.substring(5) }}</p>
+        <p>DOB: {{ d.driver.d_DateOfBirth.substring(5, 7) }}/{{ d.driver.d_DateOfBirth.substring(8, 10) }}/{{ d.driver.d_DateOfBirth.substring(0, 4) }}<!-- driver *number* dob --></p>
     </div>
     <div class="col-2">
         <p style="font-weight: bold">$<!-- driver *number* cost --></p>
@@ -75,17 +75,17 @@
 
 <hr />
 
-<div class="row col-12">
+<div *ngFor="let v of CQ.vehicleReceipts" class="row col-12">
     <div class="col-4">
-        <p style="font-weight: bold">Vehicle<!-- vehicle number --></p>
-        <p>Primary Driver: <!-- primary driver name --></p>
-        <p>VIN: <!-- vin --></p>
-        <p>Make/Model: <!-- make AND model --></p>
-        <p>Year: <!-- year --></p>
-        <p>Miles Driven to Work: <!-- miles driven to work --></p>
-        <p>Days Driven per Week: <!-- days driven per week --></p>
-        <p>Current Value: $<!-- current value --></p>
-        <p>Annual Mileage: <!-- annual mileage --></p>
+        <p style="font-weight: bold">Vehicle {{ v.vehicle.vehicleId }}</p>
+        <p>Primary Driver: {{ v.vehicle.driverId }}</p> <!-- change to name not number -->
+        <p>VIN: {{ v.vehicle.vin }}</p>
+        <p>Make/Model: {{ v.vehicle.make }} {{ v.vehicle.model }}</p>
+        <p>Year: {{ v.vehicle.year }}</p>
+        <p>Miles Driven to Work: {{ v.vehicle.milesDrivenToWork }}</p>
+        <p>Days Driven per Week: {{ v.vehicle.daysDrivenPerWeek }}</p>
+        <p>Current Value: ${{ v.vehicle.currentValue }}</p> <!-- format????? -->
+        <p>Annual Mileage: {{ v.vehicle.annualMileage }}</p>
     </div>
     <div class="col-2">
         <p style="font-weight: bold">$<!-- vehicle *number* cost --></p>

@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="driverLicenseNumber">Driver License Number</label>
-                        <input id="driverLicenseNumber" name="driverLicenseNumber" #driverLicenseNumber="ngModel" [(ngModel)]="driver.driverLicenseNumber" type="text" class="form-control" required />
+                        <input id="driverLicenseNumber" name="driverLicenseNumber" #driverLicenseNumber="ngModel" [(ngModel)]="driver.driverLicenseNumber" type="text" class="form-control" pattern="[a-zA-Z0-9]+" maxlength="16" required />
                     </div>
                     <div class="form-group col-6">
                         <label for="driverLicenseStateCode">Driver License State</label>
@@ -79,13 +79,13 @@
                 <div class="row">
                     <div class="form-group col-4">
                         <label for="d_ssn">SSN</label>
-                        <input id="d_ssn" name="d_ssn" #d_ssn="ngModel" [(ngModel)]="driver.d_ssn" type="password" class="form-control" required />
+                        <input id="d_ssn" name="d_ssn" #d_ssn="ngModel" [(ngModel)]="driver.d_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" pattern="[0-9]{9}" maxlength="9" class="form-control" required />
                     </div>
                     <div class="form-group col-4">
                         <label for="d_DateOfBirth">Birthdate mm/dd/yyyy</label>
-                        <input id="d_DateOfBirth" name="d_DateOfBirth" #d_DateOfBirth="ngModel" [(ngModel)]="driver.d_dateOfBirth" type="date" class="form-control" required />
+                        <input id="d_DateOfBirth" name="d_DateOfBirth" #d_DateOfBirth="ngModel" [(ngModel)]="driver.d_DateOfBirth" type="date" class="form-control" required />
                     </div>
-                    <div class="form-group col-4">
+                    <div class="form-group col-4 checkbox">
                         <label><input type="checkbox" value="" [(ngModel)]="driver.safeDrivingSchoolAttended" [ngModelOptions]="{standalone: true}">Attended Safe Driving School</label>
                     </div>
                 </div>
