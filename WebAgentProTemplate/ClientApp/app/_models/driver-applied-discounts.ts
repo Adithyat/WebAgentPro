@@ -1,4 +1,4 @@
 export class DriverAppliedDiscounts {
     SafeDrivingSchool: number;
-    DrivingUnderAgeOf23: number;
+    DriverUnderAgeOf23: number;
 }

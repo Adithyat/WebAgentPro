@@ -34,11 +34,16 @@
         <p>SSN: XXX-XX-{{ lastFour }}</p>
         <p>DOB: {{ birthday }}</p>
         <p>E-Mail: {{ CQ.quote.q_Email }}</p>
-        <p>Previous Carrier: {{ previousCarrier }}</p>
+        <p>Previous Carrier: {{ previousCarrier }}</p>  
     </div>
 
     <div class="col-6">
-        <p style="font-weight: bold">Customer Discounts&nbsp;&nbsp;&nbsp;&nbsp;-$<!-- total customer discount --></p>
+        <p style="font-weight: bold">Customer Discounts&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(totalQuoteDiscount) }}</p>
+        <p [hidden]="CQ.quoteAppliedDiscounts.ClaimInLastFiveYears == null" style="font-weight: bold">Claim in Last Five Years&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.ClaimInLastFiveYears) }}</p>
+        <p [hidden]="CQ.quoteAppliedDiscounts.LessThanThreeYearsDriving == null" style="font-weight: bold">Less Than Three Years Driving&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.LessThanThreeYearsDriving) }}</p>
+        <p [hidden]="CQ.quoteAppliedDiscounts.MulticarDiscount == null" style="font-weight: bold">Multicar Discount&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.MulticarDiscount) }}</p>
+        <p [hidden]="CQ.quoteAppliedDiscounts.MovingViolationsInLast5Years == null" style="font-weight: bold">Moving Violations in Last Five Years&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.MovingViolationsInLast5Years) }}</p>
+        <p [hidden]="CQ.quoteAppliedDiscounts.PreviousCarrier == null" style="font-weight: bold">Previous Carrier Discount&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.PreviousCarrier) }}</p>
     </div>
 </div>
 
@@ -46,23 +51,25 @@
 
 <div class="row col-12">
     <h4 class="col-6">DRIVERS</h4>
-    <h4 class="col-6 text-right">TOTAL $<!-- total driver discounts --></h4>
+    <h4 class="col-6 text-right">TOTAL ${{ CQ.sumDriverCost }}</h4>
 </div>
 
 <hr />
 
-<div *ngFor="let d of CQ.driverReceipts" class="row col-12">
+<div *ngFor="let d of CQ.driverReceipts; let i = index" [attr.data-index]="i" class="row col-12">
     <div class="col-4">
-        <p style="font-weight: bold">Driver {{ d.driver.driverId }}</p> <!-- not ID, number! -->
+        <p style="font-weight: bold">Driver {{ i+1 }}</p> <!-- not ID, number! -->
         <p>Name: {{ d.driver.d_FirstName }} {{ d.driver.d_LastName }}</p>
         <p>SSN: XXX-XX-{{ d.driver.d_SSN.substring(5) }}</p>
         <p>DOB: {{ d.driver.d_DateOfBirth.substring(5, 7) }}/{{ d.driver.d_DateOfBirth.substring(8, 10) }}/{{ d.driver.d_DateOfBirth.substring(0, 4) }}<!-- driver *number* dob --></p>
     </div>
     <div class="col-2">
-        <p style="font-weight: bold">$<!-- driver *number* cost --></p>
+        
     </div>
     <div class="col-6">
         <p style="font-weight: bold">Driver <!-- driver number -->Discounts&nbsp;&nbsp;&nbsp;&nbsp;-$<!-- total driver *number* discount --></p>
+        <p [hidden]="d.driverAppliedDiscounts.SafeDrivingSchool == null" style="font-weight: bold">Safe Driving School Attended&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(d.driverAppliedDiscounts.SafeDrivingSchool) }}</p>
+        <p [hidden]="d.driverAppliedDiscounts.DriverUnderAgeOf23 == null" style="font-weight: bold">Driver Under Age of 23&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(d.driverAppliedDiscounts.DriverUnderAgeOf23) }}</p>
     </div>
 </div>
 
