@@ -76,6 +76,12 @@ namespace WebAgentPro
             ConfigureJwtAuthentication(services);
             #endregion
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ManagerOnly",
+                    policy => policy.RequireClaim("Manager"));
+            });
+
             #region SWAGGER                 Provide a Swagger endpoint for your API
             services.AddSwaggerGen(c =>
             {

@@ -12,7 +12,9 @@ namespace WebAgentProTemplate.Api.CostCalculators
         public decimal FinalCost;
         public Dictionary<String, decimal> quoteAppliedDiscounts;
         public List<DriverReceipt> driverReceipts;
+        public decimal sumDriverCost;
         public List<VehicleReceipt> vehicleReceipts;
+        public decimal sumVehicleCost;
         public Quote quote;
 
         public QuoteReceipt(Quote quote)
