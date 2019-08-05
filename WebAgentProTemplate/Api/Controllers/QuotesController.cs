@@ -48,6 +48,13 @@ namespace WebAgentProTemplate.Api.Controllers
             return quote;
         }
 
+        //GET: API/Quotes/Users/2
+        [HttpGet("Users/{id}")]
+        public async Task<ActionResult<IEnumerable<Quote>>> GetUserQuotes(string id)
+        {
+            return await _context.Quotes.Where(q => q.UserId == id).ToListAsync();
+        }
+
         [HttpGet("Calculate/{id}")]
         public async Task<ActionResult<QuoteReceipt>> CalculateQuote(long id)
         {
