@@ -9,16 +9,19 @@
                     <div class="form-group col-lg-6 col-xs-12">
                         <label for="d_FirstName">First Name</label>
                         <input id="d_FirstName" name="d_FirstName" #d_FirstName="ngModel" [(ngModel)]="driver.d_FirstName" type="text" class="form-control" required />
+                        <div [hidden]="d_FirstName.valid || d_FirstName.untouched" class="alert alert-danger">First name is required.</div>
                     </div>
                     <div class="form-group col-lg-6 col-xs-12">
                         <label for="d_LastName">Last Name</label>
                         <input id="d_LastName" name="d_LastName" #d_LastName="ngModel" [(ngModel)]="driver.d_LastName" type="text" class="form-control" required />
+                        <div [hidden]="d_LastName.valid || d_LastName.untouched" class="alert alert-danger">Last name is required.</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6 col-xs-12">
                         <label for="driverLicenseNumber">Driver License Number</label>
                         <input id="driverLicenseNumber" name="driverLicenseNumber" #driverLicenseNumber="ngModel" [(ngModel)]="driver.driverLicenseNumber" type="text" class="form-control" pattern="[a-zA-Z0-9]+" maxlength="16" required />
+                        <div [hidden]="driverLicenseNumber.valid || driverLicenseNumber.untouched" class="alert alert-danger">Driver License number is required.</div>
                     </div>
                     <div class="form-group col-lg-6 col-xs-12">
                         <label for="driverLicenseStateCode">Driver License State</label>
@@ -74,16 +77,19 @@
                             <option value="WI">WI</option>
                             <option value="WY">WY</option>
                         </select>
+                        <div [hidden]="driverLicenseStateCode.valid || driverLicenseStateCode.untouched" class="alert alert-danger">Driver License state is required.</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-4 col-xs-12">
-                        <label for="d_ssn">SSN</label>
-                        <input id="d_ssn" name="d_ssn" #d_ssn="ngModel" [(ngModel)]="driver.d_ssn" onfocus="this.type ='text'" onblur="this.type = 'password'" pattern="[0-9]{9}" maxlength="9" class="form-control" required />
+                        <label for="d_SSN">SSN</label>
+                        <input id="d_SSN" name="d_SSN" #d_ssn="ngModel" [(ngModel)]="driver.d_SSN" onfocus="this.type ='text'" onblur="this.type = 'password'" pattern="[0-9]{9}" maxlength="9" class="form-control" required />
+                        <div [hidden]="d_ssn.valid || d_ssn.untouched" class="alert alert-danger">Valid SSN is required.</div>
                     </div>
                     <div class="form-group col-lg-4 col-xs-12">
                         <label for="d_DateOfBirth">Birthdate mm/dd/yyyy</label>
                         <input id="d_DateOfBirth" name="d_DateOfBirth" #d_DateOfBirth="ngModel" [(ngModel)]="driver.d_DateOfBirth" type="date" class="form-control" required />
+                        <div [hidden]="d_DateOfBirth.valid || d_DateOfBirth.untouched" class="alert alert-danger">Date of birth is required.</div>
                     </div>
                     <div class="form-group col-lg-4 col-xs-12">
                         <label>Safe Driving School Attended?</label>
@@ -100,7 +106,7 @@
             <div class="card-footer">
                 <div class="form-group">
                     <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
-                    <button type="submit"  class="btn btn-success">Save</button>
+                    <button type="submit"  class="btn btn-success" [disabled]="!driverForm.form.valid">Save</button>
                 </div>
             </div>
         </div>

@@ -127,6 +127,15 @@ namespace WebAgentPro.Controllers
                 new Claim(ClaimTypes.Name, authenticatedUser.UserName)
             };
 
+            if (authenticatedUser.Role == 1) //manager
+            {
+                subjectClaims.Add(new Claim("Manager", ""));
+            } else if (authenticatedUser.Role == 2) // agent
+            {
+                subjectClaims.Add(new Claim("Agent", "")); 
+
+            }
+
             subjectClaims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
             var tokenDescriptor = new SecurityTokenDescriptor
