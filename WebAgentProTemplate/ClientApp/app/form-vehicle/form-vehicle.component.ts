@@ -65,6 +65,10 @@ export class FormVehicleComponent implements OnInit {
             });
     }
 
+    UpperCase(x) {
+        x = x.toUpperCase();
+    }
+
     resetEdit() {
         this.vehicleEdit = new Vehicle;
     }
