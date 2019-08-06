@@ -34,7 +34,7 @@ namespace WebAgentProTemplate.Api.Models
         public bool AntiTheft { get; set; }
         public decimal AntiTheftValue { get; set; }
         public bool DayTimeRunningLights { get; set; }
-        public decimal DaytTimeRunningLightsValue { get; set; }
+        public decimal DayTimeRunningLightsValue { get; set; }
         public bool GarageDifferentAddressThanResidence { get; set; }
         public decimal GarageDifferentAddressThanResidenceValue { get; set; }
         public bool PassiveRestraints { get; set; }

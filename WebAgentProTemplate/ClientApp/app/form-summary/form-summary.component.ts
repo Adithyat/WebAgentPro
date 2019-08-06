@@ -24,6 +24,7 @@ export class FormSummaryComponent implements OnInit {
     year: string;
     birthday: string;
     totalQuoteDiscount: number;
+    totalDiscount: number;
 
     ngOnInit() {
         //console.log(this.formService.getCalculatedQuote());
@@ -76,5 +77,12 @@ export class FormSummaryComponent implements OnInit {
         if (discount < 0)
             return `+$${Math.abs(discount).toFixed(2)}`;
         return `-$${Math.abs(discount).toFixed(2)}`;
+    }
+
+    getTotalDiscountValue(total) {
+        this.totalDiscount = total.baseCost - total.finalCost;
+        if (this.totalDiscount < 0)
+            return `+$${Math.abs(this.totalDiscount).toFixed(2)}`;
+        return `-$${Math.abs(this.totalDiscount).toFixed(2)}`;
     }
 }

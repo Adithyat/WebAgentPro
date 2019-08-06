@@ -24,7 +24,7 @@ const appRoutes: Routes = [
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'all-quotes', component: ListQuotesComponent, canActivate: [AuthGuard] },
     { 
-        path: 'form', 
+        path: 'new-quote', 
         component: FormShellComponent, 
         canActivate: [AuthGuard],
         children: [

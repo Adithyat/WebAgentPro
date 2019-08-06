@@ -19,7 +19,7 @@
                     <div class="form-group col-xs-12 col-lg-6">
                         <label for="primaryDriver">Primary Driver</label>
                         <select id="primaryDriver" name="primaryDriver" #primaryDriver="ngModel" [(ngModel)]="vehicleEdit.driverId" class="form-control" required>
-                            <option *ngFor="let d of Did" name="fieldName" ngDefaultControl [value]="d" [selected]="vehicleEdit.driverId == d">{{d}}</option>
+                            <option *ngFor="let d of Drivers" name="fieldName" ngDefaultControl [value]="d.driverId" [selected]="vehicleEdit.driverId == d.driverId">{{ d.d_FirstName }} {{ d.d_LastName }}</option>
                         </select>
                         <div [hidden]="primaryDriver.valid || primaryDriver.untouched" class="alert alert-danger">Primary Driver is required.</div>
                     </div>
@@ -72,26 +72,22 @@
                 </div>
                 <label>Check All that Apply:</label>
                 <div class="row">
-                    <div class="form-group col-xs-12 col-lg-4 checkbox">
+                    <div class="form-group col-xs-12 col-lg-4">
                         <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.dayTimeRunningLights" [ngModelOptions]="{standalone: true}">Daytime Running Lights</label>
                     </div>
-                    <div class="form-group col-xs-12 col-lg-4 checkbox">
+                    <div class="form-group col-xs-12 col-lg-8">
                         <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.antiTheft" [ngModelOptions]="{standalone: true}">Anti-Theft</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-xs-12 col-lg-4 checkbox">
+                    <div class="form-group col-xs-12 col-lg-4">
                         <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.antiLockBrakes" [ngModelOptions]="{standalone: true}">Anti-Lock Brakes</label>
                     </div>
-                    <div class="form-group col-xs-12 col-lg-4 checkbox">
+                    <div class="form-group col-xs-12 col-lg-8">
                         <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.reducedUsedDiscount" [ngModelOptions]="{standalone: true}">Reduced Use</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-xs-12 col-lg-4 checkbox">
+                    <div class="form-group col-xs-12 col-lg-4">
                         <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.passiveRestraints" [ngModelOptions]="{standalone: true}">Passive Restraints</label>
                     </div>
-                    <div class="form-group col-xs-12 col-lg-4 checkbox">
+                    <div class="form-group col-xs-12 col-lg-4">
                         <label><input type="checkbox" value="" [(ngModel)]="vehicleEdit.garageDifferentAddressThanResidence" [ngModelOptions]="{standalone: true}">Garage Address Different from Residence</label>
                     </div>
                 </div>
