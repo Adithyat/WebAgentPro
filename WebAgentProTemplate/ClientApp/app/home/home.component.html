@@ -1,9 +1,33 @@
-<h1>Home</h1>
-<p>You're logged in with Angular 7 & JWT!!</p>
-<p>Your roles are: <strong>{{currentUser.roles}}</strong>.</p>
-<p>This page can be accessed by all authenticated user.</p>
-<div>
- 
+<h2 class="text-center">Welcome, {{ currentUser.userName }}!</h2>
+<br />
+<div class="row">
+    <button class="btn btn-success col-lg-2 col-xs-4 center-block" routerLink="/new-quote">
+        New Quote
+    </button>
+</div>
+<br />
+<div class='card'>
+    <div class='card-body'>
+        <div class='table-responsive'>
+            <table class='table'
+                   *ngIf='quotes && quotes.length'>
+                <thead>
+                    <tr>
+                        <th>Recent Quotes (Open)</th>
+                        <th></th>
+                        <th routerLink="/all-quotes" class="viewAll"><a>View All <fa name="chevron-right"></fa></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let quote of quotes'>
+                        <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
+                        <td>Created mm/dd/yyyy</td>
+                        <td>Quote Number: {{ quote.quoteId }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 

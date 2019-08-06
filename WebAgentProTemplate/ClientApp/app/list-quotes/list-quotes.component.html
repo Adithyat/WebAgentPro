@@ -29,8 +29,8 @@
         </thead>
         <tbody>
           <tr *ngFor='let quote of filteredQuotes'>
-            <td>{{ quote.q_FirstName }}</td>
-            <td>{{ quote.q_LastName }}</td>
+              <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
+              <td>{{ quote.createdAt }}</td>
             <td>{{ quote.quoteId }}</td>
             <td>
               <button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Edit</button>
