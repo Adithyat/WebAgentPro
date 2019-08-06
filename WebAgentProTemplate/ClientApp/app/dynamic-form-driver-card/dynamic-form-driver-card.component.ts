@@ -50,7 +50,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
       this.driverService.postDriver(this.driver, this.driver.quoteId).subscribe(
           returnedDriver => {
               console.log(returnedDriver);
-              this.formService.setDId(returnedDriver.driverId);
+              this.formService.setDriver(returnedDriver);
               //this.resetEdit();
               this.alertService.success('Driver Created.', false);
           },

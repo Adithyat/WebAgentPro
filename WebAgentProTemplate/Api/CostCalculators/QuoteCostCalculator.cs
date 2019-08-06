@@ -176,6 +176,7 @@ namespace WebAgentProTemplate.Api.CostCalculators
             decimal DriverMultiplier = CalculateDriverReceipt(PrimaryDriver).multiplier;
 
             receipt.vehicleAppliedDiscounts.Add("PrimaryOperator", receipt.FinalCost - (receipt.FinalCost * DriverMultiplier));
+            receipt.primaryDriver = PrimaryDriver;
             receipt.FinalCost *= DriverMultiplier;
             return receipt;
         }

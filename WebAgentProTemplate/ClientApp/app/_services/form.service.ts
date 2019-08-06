@@ -13,8 +13,8 @@ export class FormService {
 
     createdQuoteId: number;
     apiUrl: string = environment.apiUrl;
-  
-    createdDriverId: number[]  = new Array();
+
+    createdDrivers: Driver[] = new Array();
 
 
 
@@ -25,15 +25,15 @@ export class FormService {
       this.createdQuoteId = id;
     }
 
-    getDid() {
-      console.log(this.createdDriverId);
-      return this.createdDriverId;
+    getDriver() {
+      console.log(this.createdDrivers);
+      return this.createdDrivers;
 
     }
-    setDId(id: number) {
+    setDriver(newDriver: Driver) {
 
-      this.createdDriverId.push(id);
-      console.log(this.createdDriverId);
+      this.createdDrivers.push(newDriver);
+      console.log(this.createdDrivers);
     }
 
     getCalculatedQuote() {
