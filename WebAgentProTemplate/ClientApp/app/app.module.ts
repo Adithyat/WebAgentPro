@@ -34,6 +34,7 @@ import { QuoteProgressComponent } from './quote-progress/quote-progress.componen
 import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
 import { SectionComponent } from './section.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
+import { ManagerDiscountFormComponent } from './manager-discount-form/manager-discount-form.component';
 
 
 
@@ -67,7 +68,8 @@ import { FormSummaryComponent } from './form-summary/form-summary.component';
         FormSummaryComponent,
         FormShellComponent,
         FormNavbarComponent,
-        FilterQuotesComponent
+        FilterQuotesComponent,
+        ManagerDiscountFormComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
