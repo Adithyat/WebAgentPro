@@ -6,7 +6,8 @@ import { VehicleReceipts } from '@app/_models/vehicle-receipts';
 export class QuoteReceipt {
     baseCost: number;
     finalCost: number;
-    appliedDiscounts: QuoteAppliedDiscounts;
+    quoteAppliedDiscounts: QuoteAppliedDiscounts;
+    sumDriverCost: number;
     driverReceipts: DriverReceipts[];
     vehicleReceipts: VehicleReceipts[];
     quote: Quote;

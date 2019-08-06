@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         // GET: api/Discounts
+        [Authorize(Policy = "ManagerOnly")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Discount>>> GetDiscounts()
         {
@@ -29,6 +31,7 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         // GET: api/Discounts/5
+        [Authorize(Policy = "ManagerOnly")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Discount>> GetDiscount(string id)
         {
@@ -43,6 +46,7 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         // PUT: api/Discounts/5
+        [Authorize(Policy = "ManagerOnly")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDiscount(string id, Discount discount)
         {
@@ -73,6 +77,7 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         // POST: api/Discounts
+        [Authorize(Policy = "ManagerOnly")]
         [HttpPost]
         public async Task<ActionResult<Discount>> PostDiscount(Discount discount)
         {
@@ -97,6 +102,7 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         // DELETE: api/Discounts/5
+        [Authorize(Policy = "ManagerOnly")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Discount>> DeleteDiscount(string id)
         {

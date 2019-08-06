@@ -1,6 +1,7 @@
 export class QuoteAppliedDiscounts {
     ClaimInLastFiveYears: number;
-    MulticarDiscounts: number;
+    MulticarDiscount: number;
     LessThanThreeYearsDriving: number;
     MovingViolationsInLast5Years: number;
+    PreviousCarrier: number;
 }

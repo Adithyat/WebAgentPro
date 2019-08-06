@@ -4,7 +4,7 @@ import { DriverAppliedDiscounts } from '@app/_models/driver-applied-discounts'
 export class DriverReceipts {
     baseCost: number;
     finalCost: number;
-    appliedDiscounts: DriverAppliedDiscounts;
+    driverAppliedDiscounts: DriverAppliedDiscounts;
     driver: Driver;
     multiplier: number;
 }
