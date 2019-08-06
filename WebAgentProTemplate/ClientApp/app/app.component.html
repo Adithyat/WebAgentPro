@@ -1,10 +1,10 @@
 <!-- nav --> 
 <nav class="navbar navbar-expand" *ngIf="currentUser">
     <div class="navbar-nav">
-        <img src="assets/Logo.png" class="img-responsive" width="30" height="30" />
-        <a routerLinkActive="active" class="nav-item nav-link" routerLink="/">Home</a>
+        <img src="assets/Logo.png" class="img-responsive" />
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item nav-link" routerLink="/">Home</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/all-quotes">All Quotes</a>
-        <a routerLinkActive="active" class="nav-item nav-link" routerLink="/form">Form</a>
+        <a routerLinkActive="active" class="nav-item nav-link" routerLink="/new-quote">New Quote</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Users</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/ " (click)="logout()">Logout</a>
     </div>

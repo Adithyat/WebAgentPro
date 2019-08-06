@@ -48,7 +48,7 @@
                           <option value="VT">VT</option>
                           <option value="WV">WV</option>
                       </select>
-                      <div [hidden]="q_StateCode.valid || q_StateCode.pristine" class="alert alert-danger">StateCode is required.</div>
+                      <div [hidden]="q_StateCode.valid || q_StateCode.untouched" class="alert alert-danger">State Code is required.</div>
                   </div>
                   <div class="form-group col-xs-12 col-lg-3">
                       <label for="postalCode">Postal Code</label>
@@ -79,22 +79,21 @@
                           <option value="1">Lizard Insurance</option>
                           <option value="2">Pervasive Insurance</option>
                       </select>
+                      <div [hidden]="previousCarrier.valid || previousCarrier.untouched" class="alert alert-danger">Previous Carrier is required.</div>
                   </div>
               </div>
               <h5>Check All that Apply:</h5>
               <div class="row">
-                  <div class="form-group col-xs-12 col-lg-4 checkbox">
+                  <div class="form-group col-xs-12 col-lg-4">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.lessThanThreeYearsDriving" [ngModelOptions]="{standalone: true}">Driving less than 3 years</label>
                   </div>
-                  <div class="form-group col-xs-12 col-lg-4 checkbox">
+                  <div class="form-group col-xs-12 col-lg-8">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.claimInLastFiveYears" [ngModelOptions]="{standalone: true}">Claim in last 5 years</label>
                   </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-xs-12 col-lg-4 checkbox">
+                  <div class="form-group col-xs-12 col-lg-4">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.movingViolationInLastFiveYears" [ngModelOptions]="{standalone: true}">Moving Violations in last 5 years</label>
                   </div>
-                  <div class="form-group col-xs-12 col-lg-4 checkbox">
+                  <div class="form-group col-xs-12 col-lg-8">
                       <label><input type="checkbox" value="" [(ngModel)]="quoteEdit.forceMultiCarDiscount" [ngModelOptions]="{standalone: true}">Force Multi-Car Discount</label>
                   </div>
               </div>
