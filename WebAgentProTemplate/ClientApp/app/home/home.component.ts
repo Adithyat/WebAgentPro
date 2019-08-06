@@ -2,19 +2,30 @@ import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '@app/_models';
 import { UserService, AccountService } from '@app/_services';
+import { QuotesService } from '@app/_services/quotes.service';
+import { Quote } from '@app/_models/quote';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     currentUser: User;
+    quotes: Quote[] = [];
 
     constructor(
         private userService: UserService,
-        private authenticationService: AccountService
+        private authenticationService: AccountService,
+        private quoteService: QuotesService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
     }
 
     ngOnInit() {
-        
+        this.getQuotes();
+    }
+
+    getQuotes() {
+        this.quoteService.getQuotes().subscribe(
+            returnedQuotes => {
+                this.quotes = returnedQuotes;
+            });
     }
 }

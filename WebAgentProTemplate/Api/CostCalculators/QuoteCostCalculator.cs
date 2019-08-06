@@ -76,6 +76,20 @@ namespace WebAgentProTemplate.Api.CostCalculators
             }
 
             receipt.FinalCost = Math.Round(receipt.FinalCost, 2);
+            decimal driver_sum_cost = 0.00M;
+            foreach (var driver_receipt in receipt.driverReceipts)
+            {
+                driver_sum_cost += driver_receipt.FinalCost;
+            }
+
+            decimal vehicle_sum_cost = 0.00M;
+            foreach (var vehicle_receipt in receipt.vehicleReceipts)
+            {
+                vehicle_sum_cost += vehicle_receipt.FinalCost;
+            }
+
+            receipt.sumDriverCost = driver_sum_cost;
+            receipt.sumVehicleCost = vehicle_sum_cost;
 
             return receipt;
         }
@@ -135,8 +149,8 @@ namespace WebAgentProTemplate.Api.CostCalculators
 
             if (vehicle.DayTimeRunningLights)
             {
-                receipt.vehicleAppliedDiscounts.Add("DaytimeRunningLights", receipt.FinalCost - (receipt.FinalCost * vehicle.DaytTimeRunningLightsValue));
-                receipt.FinalCost *= vehicle.DaytTimeRunningLightsValue;
+                receipt.vehicleAppliedDiscounts.Add("DaytimeRunningLights", receipt.FinalCost - (receipt.FinalCost * vehicle.DayTimeRunningLightsValue));
+                receipt.FinalCost *= vehicle.DayTimeRunningLightsValue;
             }
 
             if (vehicle.GarageDifferentAddressThanResidence)
@@ -162,6 +176,7 @@ namespace WebAgentProTemplate.Api.CostCalculators
             decimal DriverMultiplier = CalculateDriverReceipt(PrimaryDriver).multiplier;
 
             receipt.vehicleAppliedDiscounts.Add("PrimaryOperator", receipt.FinalCost - (receipt.FinalCost * DriverMultiplier));
+            receipt.primaryDriver = PrimaryDriver;
             receipt.FinalCost *= DriverMultiplier;
             return receipt;
         }
