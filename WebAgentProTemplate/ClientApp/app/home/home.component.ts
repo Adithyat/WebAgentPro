@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '@app/_models';
 import { UserService, AccountService } from '@app/_services';
-import { QuotesService } from '@app/_services/quotes.service';
+import { QuoteService } from '@app/_services/quote.service';
 import { Quote } from '@app/_models/quote';
 
 @Component({ templateUrl: 'home.component.html' })
@@ -13,7 +13,7 @@ export class HomeComponent {
     constructor(
         private userService: UserService,
         private authenticationService: AccountService,
-        private quoteService: QuotesService
+        private quoteService: QuoteService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
     }
