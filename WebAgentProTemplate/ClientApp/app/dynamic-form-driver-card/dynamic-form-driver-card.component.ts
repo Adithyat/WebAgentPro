@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '@app/_services';
-import { DriversService } from '@app/_services/drivers.service';
-import { QuotesService } from '@app/_services/quotes.service';
-import { FormService } from '@app/_services/form.service';
+import { DriverService } from '@app/_services/driver.service';
+import { QuoteService } from '@app/_services/quote.service';
 import { Driver } from '@app/_models/driver';
 import { Quote } from '@app/_models/quote';
 
@@ -13,10 +12,9 @@ import { Quote } from '@app/_models/quote';
 })
 export class DynamicFormDriverCardComponent implements OnInit {
   driver: Driver = new Driver();
-  constructor(private driverService: DriversService,
-    private quoteService: QuotesService,
+  constructor(private driverService: DriverService,
+    private quoteService: QuoteService,
     private alertService: AlertService,
-    private formService: FormService,
 
     ) { }
 
@@ -34,7 +32,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
   }
 
   onSubmit() {
-      this.driver.quoteId = this.formService.getQid();
+      //this.driver.quoteId = this.quoteService.getQid();
       //console.log(this.driver);
       if (/*this.driver.d_FirstName != null && this.driver.d_LastName != null && this.driver.d_ssn != null
           && this.driver.d_dateOfBirth != null && this.driver.driverLicenseNumber != null
@@ -50,7 +48,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
       this.driverService.postDriver(this.driver, this.driver.quoteId).subscribe(
           returnedDriver => {
               console.log(returnedDriver);
-              this.formService.setDId(returnedDriver.driverId);
+              //this.quoteService.setDId(returnedDriver.driverId);
               //this.resetEdit();
               this.alertService.success('Driver Created.', false);
           },
@@ -60,7 +58,7 @@ export class DynamicFormDriverCardComponent implements OnInit {
   }
 
   resetEdit() {
-      this.formService.setQId(null);
+     //this.quoteService.setQId(null);
       this.driver = new Driver;
   }
 

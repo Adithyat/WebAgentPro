@@ -4,7 +4,7 @@
                   
       <!-- circular user icon -->
       <li>
-          <a [routerLink]="[{ outlets: { primary: ['quotes'], form: ['quotes'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="Customer">
+          <a [routerLink]="[{ outlets: { subforms: ['customer'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="Customer">
               <span class="round-tabs one">
                   C
               </span>
@@ -13,7 +13,7 @@
 
       <!-- circular tasks icon -->
        <li>
-          <a [routerLink]="[{ outlets: { primary: ['drivers'], form: ['drivers'] } }]" routerLinkActive="active" data-toggle="tab" title="Drivers">
+          <a [routerLink]="[{ outlets: { subforms: ['driver'] } }]" routerLinkActive="active" data-toggle="tab" title="Drivers">
               <span class="round-tabs two">
                   D
               </span> 
@@ -22,7 +22,7 @@
 
       <!-- circular home icon -->
       <li>
-          <a [routerLink]="[{ outlets: { primary: ['vehicles'], form: ['vehicles'] } }]" routerLinkActive="active" data-toggle="tab" title="Vehicles">    
+          <a [routerLink]="[{ outlets: { subforms: ['vehicle'] } }]" routerLinkActive="active" data-toggle="tab" title="Vehicles">    
               <span class="round-tabs three">
                   V
               </span>
@@ -31,7 +31,7 @@
 
       <!-- circular ok icon -->
       <li>
-          <a [routerLink]="[{ outlets: { primary: ['summary'], form: ['summary'] } }]" routerLinkActive="active" data-toggle="tab" title="completed">
+          <a [routerLink]="[{ outlets: { subforms: ['summary'] } }]" routerLinkActive="active" data-toggle="tab" title="Completed">
               <span class="round-tabs four">
                   Q
               </span>

@@ -1,0 +1,30 @@
+<mat-horizontal-stepper>
+    <mat-step>
+        <div>
+            <button mat-button matStepperNext (click)="goToDriver()">Next</button>
+        </div>
+        <app-form-customer></app-form-customer>
+    </mat-step>
+    <mat-step>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext (click)="goToVehicle()">Next</button>
+        </div>
+        <app-form-driver></app-form-driver>
+    </mat-step>
+    <mat-step>
+        
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+          
+</mat-horizontal-stepper>

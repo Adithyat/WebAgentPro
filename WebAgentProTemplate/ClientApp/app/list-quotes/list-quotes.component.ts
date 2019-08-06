@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuotesService } from '@app/_services/quotes.service';
+import { QuoteService } from '@app/_services/quote.service';
 import { Quote } from '@app/_models/quote';
 import { AlertService } from '@app/_services';
 
@@ -16,7 +16,7 @@ export class ListQuotesComponent implements OnInit {
   _listFilter = '';
 
 
-  constructor(private service: QuotesService, private alertService: AlertService) { }
+  constructor(private quoteService: QuoteService, private alertService: AlertService) { }
   
   get listFilter(): string {
     return this._listFilter;
@@ -38,7 +38,7 @@ export class ListQuotesComponent implements OnInit {
   }
 
   getQuotes() {
-    this.service.getQuotes().subscribe(
+    this.quoteService.getQuotes().subscribe(
       returnedQuotes => { 
         this.quotes = returnedQuotes;
         this.filteredQuotes = this.quotes; 
@@ -47,7 +47,7 @@ export class ListQuotesComponent implements OnInit {
   }
 
   deleteQuote(id: number) {
-    this.service.deleteQuote(id).subscribe(
+    this.quoteService.deleteQuote(id).subscribe(
         success => {
             this.getQuotes();
             this.alertService.success('Quote deleted successfully.'); 

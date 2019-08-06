@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuotesService } from '@app/_services/quotes.service';
-import { FormService } from '@app/_services/form.service';
+import { QuoteService } from '@app/_services/quote.service';
 import { QuoteReceipt } from '@app/_models/quotereceipt';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -13,8 +12,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FormSummaryComponent implements OnInit {
   CQ: QuoteReceipt = new QuoteReceipt;
   constructor(
-    private formService: FormService,
-    private quoteService: QuotesService
+    private quoteService: QuoteService
     ) { }
 
     previousCarrier: string;
@@ -25,15 +23,15 @@ export class FormSummaryComponent implements OnInit {
     birthday: string;
 
   ngOnInit() {
-    //console.log(this.formService.getCalculatedQuote());
+    //console.log(this.quoteService.getCalculatedQuote());
     /*
-    this.quoteService.getQuote(this.formService.getQid())
+    this.quoteService.getQuote(this.quoteService.getQid())
     .subscribe(
       returnedQuote => { 
         console.log(returnedQuote)
       });
-    */
-    this.formService.getCalculatedQuote()
+      
+    this.quoteService.getCalculatedQuote()
     .subscribe(QuoteReceipt => {
         console.log(QuoteReceipt)
         this.CQ = QuoteReceipt;
@@ -66,7 +64,7 @@ export class FormSummaryComponent implements OnInit {
         }
 
     })
-
+    */
     }
-
+    
 }
