@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlertService } from '@app/_services';
-import { VehiclesService } from '@app/_services/vehicles.service';
-import { FormService } from '@app/_services/form.service';
+import { QuoteService } from '@app/_services/quote.service';
+import { VehicleService } from '@app/_services/vehicle.service';
 import { Vehicle } from '@app/_models/vehicle';
 import { Quote } from '@app/_models/quote';
 import { Driver } from '@app/_models/driver';
@@ -14,16 +14,16 @@ import { first } from 'rxjs/operators';
 })
 export class FormVehicleComponent implements OnInit {
     vehicleEdit: Vehicle;
-    Drivers: Driver[]= new Array();
+    Did: number[]= new Array();
     constructor(
-        private vehicleService: VehiclesService, 
-        private formService: FormService, 
+        private quoteService: QuoteService, 
+        private vehicleService: VehicleService, 
         private alertService: AlertService) { }
 
     ngOnInit() {
         this.createVehicle();
-        this.Drivers = this.formService.getDriver();
-        console.log(this.Drivers);
+        //this.Did = this.quoteService.getDid();
+        console.log(this.Did);
     }
 
     createVehicle() {
@@ -50,8 +50,8 @@ export class FormVehicleComponent implements OnInit {
     }*/
 
     saveCreate() {
-        this.vehicleEdit.quoteId = this.formService.getQid();
-        //this.vehicleEdit.driverId = this.formService.getDid();
+        //this.vehicleEdit.quoteId = this.quoteService.getQid();
+        //this.vehicleEdit.driverId = this.quoteService.getDid();
 
         //console.log(this.vehicleEdit);
         this.vehicleService.postVehicle(this.vehicleEdit, this.vehicleEdit.quoteId).subscribe(
@@ -63,6 +63,10 @@ export class FormVehicleComponent implements OnInit {
             error => {
                 this.alertService.error('Vehicle update failed.', false);
             });
+    }
+
+    UpperCase(x) {
+        x = x.toUpperCase();
     }
 
     resetEdit() {

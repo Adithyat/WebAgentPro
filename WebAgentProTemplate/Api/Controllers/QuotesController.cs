@@ -120,7 +120,8 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return BadRequest("Bad QuoteId");
             }
-
+            _context.Quotes.Update(quote);
+            /*
             _context.Entry(quote).State = EntityState.Modified;
 
             if(quote.QuoteDrivers.Count > 0)
@@ -138,6 +139,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     _context.Entry(driver).State = EntityState.Modified;
                 }
             }
+            */
             try
             {
                 await _context.SaveChangesAsync();

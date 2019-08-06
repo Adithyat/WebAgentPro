@@ -6,7 +6,7 @@ import { Driver } from '@app/_models/driver';
 @Injectable({
   providedIn: 'root'
 })
-export class DriversService {
+export class DriverService {
 
     constructor(private http: HttpClient) { }
 
