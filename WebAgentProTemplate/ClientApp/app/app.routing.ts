@@ -14,6 +14,7 @@ import { FormQuotesComponent } from './form-quotes/form-quotes.component';
 import { FormDriverComponent } from './form-driver/form-driver.component';
 import { FormVehicleComponent } from './form-vehicle/form-vehicle.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
+import { ManagerDiscountFormComponent } from './manager-discount-form/manager-discount-form.component';
 import { NgModule } from '@angular/core';
 
 
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
     { path: 'users',    component: UsersComponent,  canActivate: [AuthGuard], data: { roles: [Role.Manager] }},
     { path: 'login',    component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-
+    { path: 'manage-discounts', component: ManagerDiscountFormComponent }
     // otherwise redirect to home
     //{ path: '**', redirectTo: '' }
 ];

@@ -6,6 +6,7 @@
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/all-quotes">All Quotes</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/new-quote">New Quote</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Users</a>
+        <a routerLinkActive="active" class="nav-item nav-link" routerLink="/manage-discounts" *ngIf="isManager">Manage Discounts</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/ " (click)="logout()">Logout</a>
     </div>
 </nav>
