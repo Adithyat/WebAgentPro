@@ -42,7 +42,7 @@ p {
 }
 
 .ng-valid[required], .ng-valid.required {
-    border-left: 5px solid #42A948; /* green */
+    border-left: 5px solid #557B34; /* green */
 }
 
 .userList {
@@ -425,3 +425,34 @@ body {
         height: 35px;
     }
 }
+
+.viewAll:hover {
+    color: #646464;
+}
+
+.btn-success {
+    background-color: #557B34;
+    border-color: #3D6817;
+}
+
+    .btn-success:hover {
+        background-color: #3D6817;
+        border-color: #355B14;
+    }
+
+    .btn-success:disabled, .btn-success:disabled:hover {
+        color: #557B34;
+        background-color: #f8f8f8;
+        border-color: #557B34;
+    }
+
+    .btn-success:active, .btn-success:focus, .btn-success:visited, .btn-success:current {
+        background-color: #70a244;
+    }
+
+.alert-danger {
+    color: #922220;
+    background-color: #F1C1C0;
+    border-color: #E89896;
+}
+

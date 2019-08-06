@@ -14,4 +14,5 @@ export class Quote {
     claimInLastFiveYears: Boolean;
     movingViolationInLastFiveYears: Boolean;
     forceMultiCarDiscount: Boolean;
+    createdAt: Date;
 }
