@@ -149,8 +149,8 @@ namespace WebAgentProTemplate.Api.CostCalculators
 
             if (vehicle.DayTimeRunningLights)
             {
-                receipt.vehicleAppliedDiscounts.Add("DaytimeRunningLights", receipt.FinalCost - (receipt.FinalCost * vehicle.DaytTimeRunningLightsValue));
-                receipt.FinalCost *= vehicle.DaytTimeRunningLightsValue;
+                receipt.vehicleAppliedDiscounts.Add("DaytimeRunningLights", receipt.FinalCost - (receipt.FinalCost * vehicle.DayTimeRunningLightsValue));
+                receipt.FinalCost *= vehicle.DayTimeRunningLightsValue;
             }
 
             if (vehicle.GarageDifferentAddressThanResidence)
