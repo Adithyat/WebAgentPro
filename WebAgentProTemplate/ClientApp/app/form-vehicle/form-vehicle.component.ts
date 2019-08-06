@@ -14,7 +14,7 @@ import { first } from 'rxjs/operators';
 })
 export class FormVehicleComponent implements OnInit {
     vehicleEdit: Vehicle;
-    Did: number[]= new Array();
+    Drivers: Driver[]= new Array();
     constructor(
         private vehicleService: VehiclesService, 
         private formService: FormService, 
@@ -22,8 +22,8 @@ export class FormVehicleComponent implements OnInit {
 
     ngOnInit() {
         this.createVehicle();
-        this.Did = this.formService.getDid();
-        console.log(this.Did);
+        this.Drivers = this.formService.getDriver();
+        console.log(this.Drivers);
     }
 
     createVehicle() {
@@ -63,10 +63,6 @@ export class FormVehicleComponent implements OnInit {
             error => {
                 this.alertService.error('Vehicle update failed.', false);
             });
-    }
-
-    UpperCase(x) {
-        x = x.toUpperCase();
     }
 
     resetEdit() {

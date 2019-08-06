@@ -8,6 +8,7 @@ export class QuoteReceipt {
     finalCost: number;
     quoteAppliedDiscounts: QuoteAppliedDiscounts;
     sumDriverCost: number;
+    sumVehicleCost: number;
     driverReceipts: DriverReceipts[];
     vehicleReceipts: VehicleReceipts[];
     quote: Quote;

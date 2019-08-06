@@ -85,7 +85,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     vehicle.AntiLockBrakesValue = discount.AntiLockBrakes;
                     vehicle.AntiTheftValue = discount.AntiTheftInstalled;
                     vehicle.DaysDrivenPerWeekDiscountValue = discount.DaysDrivenPerWeek;
-                    vehicle.DaytTimeRunningLightsValue = discount.DayTimeRunningLights;
+                    vehicle.DayTimeRunningLightsValue = discount.DayTimeRunningLights;
                     vehicle.GarageDifferentAddressThanResidenceValue = discount.GarageAddressDifferentFromResidence;
                     vehicle.MileDrivenToWorkDiscountValue = discount.MilesDrivenToWork;
                     vehicle.PassiveRestraintsValue = discount.PassiveRestraints;
