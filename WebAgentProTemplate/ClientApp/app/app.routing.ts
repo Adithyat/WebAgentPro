@@ -11,12 +11,14 @@ import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { ManagerDiscountFormComponent } from './manager-discount-form/manager-discount-form.component';
+import { DashboardsComponent } from './dashboards/dashboards.component';
 import { NgModule } from '@angular/core';
 
 
 
 const appRoutes: Routes = [
-    { path: '',         component: HomeComponent,   canActivate: [AuthGuard] },
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'dashboards', component: DashboardsComponent, canActivate: [AuthGuard] },
     { path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard] },
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'all-quotes', component: ListQuotesComponent, canActivate: [AuthGuard] },
