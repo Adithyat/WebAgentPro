@@ -84,7 +84,7 @@ import { FormSummaryComponent } from './quote-form/form-summary/form-summary.com
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

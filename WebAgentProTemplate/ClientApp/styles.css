@@ -152,79 +152,6 @@ p.narrow {
     border-bottom-color: transparent;
 }
 
-span.round-tabs {
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    display: inline-block;
-    border-radius: 100px;
-    background: white;
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    text-align: center;
-    font-size: 25px;
-}
-
-    span.round-tabs.one {
-        color: #173d68;
-        border: 2px solid #173d68;
-    }
-
-li.active span.round-tabs.one {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.two {
-    color: #173d68;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.two {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.three {
-    color: #173d68;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.three {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.four {
-    color: #173d68;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.four {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.five {
-    color: #999;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.five {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #999;
-}
-
-.nav-tabs > li.active > a span.round-tabs {
-    background: #fafafa;
-}
-
 .nav-tabs > li {
     width: 25%;
 }
@@ -286,44 +213,6 @@ li.active span.round-tabs.five {
 .btn.green {
     background-color: #5cb85c;
     color: #ffffff;
-}
-
-
-
-@media( max-width : 585px ) {
-
-    .board {
-        width: 90%;
-        height: auto !important;
-    }
-
-    span.round-tabs {
-        font-size: 16px;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-    }
-
-    .tab-content .head {
-        font-size: 20px;
-    }
-
-    .nav-tabs > li a {
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-    }
-
-    .nav-tabs > li.active:after {
-        content: " ";
-        position: absolute;
-        left: 35%;
-    }
-
-    .btn-outline-rounded {
-        padding: 12px 20px;
-    }
-
 }
 
 .navbar {
@@ -457,4 +346,3 @@ body {
     background-color: #F1C1C0;
     border-color: #E89896;
 }
-

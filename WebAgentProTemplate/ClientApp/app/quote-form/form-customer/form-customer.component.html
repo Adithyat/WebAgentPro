@@ -40,16 +40,16 @@
                   <div class="form-group col-xs-12 col-lg-3">
                       <label for="q_StateCode">State</label>
                       <select id="q_StateCode" name="q_StateCode" #q_StateCode="ngModel" [(ngModel)]="quote.q_StateCode" class="form-control" required>
-                          <option value="CT">CT</option>
-                          <option value="MA">MA</option>
-                          <option value="ME">ME</option>
-                          <option value="NH">NH</option>
-                          <option value="NY">NY</option>
-                          <option value="PA">PA</option>
-                          <option value="SC">SC</option>
-                          <option value="VA">VA</option>
-                          <option value="VT">VT</option>
-                          <option value="WV">WV</option>
+                          <option value="CT">Connecticut</option>
+                          <option value="ME">Maine</option>
+                          <option value="MA">Massachusetts</option>
+                          <option value="NH">New Hampshire</option>
+                          <option value="NY">New York</option>
+                          <option value="PA">Pennsylvania</option>
+                          <option value="SC">South Carolina</option>
+                          <option value="VT">Vermont</option>
+                          <option value="VA">Virginia</option>
+                          <option value="WV">West Virginia</option>
                       </select>
                       <div [hidden]="q_StateCode.valid || q_StateCode.untouched" class="alert alert-danger">State Code is required.</div>
                   </div>
@@ -78,9 +78,10 @@
                   <div class="form-group col-xs-12 col-lg-6">
                       <label for="previousCarrier">Previous Carrier</label>
                       <select id="previousCarrier" name="previousCarrier" #previousCarrier="ngModel" [(ngModel)]="quote.previousCarrier" class="form-control" required>
-                          <option value="0" selected>N/A</option>
+                          <option value="0" selected>None</option>
                           <option value="1">Lizard Insurance</option>
                           <option value="2">Pervasive Insurance</option>
+                          <option value="3">Other Carrier</option>
                       </select>
                       <div [hidden]="previousCarrier.valid || previousCarrier.untouched" class="alert alert-danger">Previous Carrier is required.</div>
                   </div>
