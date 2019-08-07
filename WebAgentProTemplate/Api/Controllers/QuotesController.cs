@@ -34,6 +34,14 @@ namespace WebAgentProTemplate.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Quote>> GetQuote(long id)
         {
+            var s = HttpContext.User.Claims;
+            Console.WriteLine("Here");
+
+            Console.WriteLine(s);
+            foreach (var claim in s)
+            {
+                Console.WriteLine($"CLAIM TYPE: {claim.Type}; CLAIM VALUE: {claim.Value}");
+            }
             var quote = _context.Quotes
                 .Include(q => q.QuoteDrivers)
                 .Include(q => q.QuoteVehicles)
@@ -43,6 +51,15 @@ namespace WebAgentProTemplate.Api.Controllers
             if (quote == null)
             {
                 return NotFound();
+            }
+            Console.WriteLine(quote.UserId);
+            Console.WriteLine(s.SingleOrDefault(p => p.Type == "strID")?.Value);
+
+
+            if (quote.UserId != s.SingleOrDefault(p => p.Type == "strID")?.Value &&
+                s.SingleOrDefault(p => p.Type == "Manager")?.Value != "Manager")
+            {
+                return Forbid("Only managers and the agent who issued the quote can see this");
             }
 
             return quote;

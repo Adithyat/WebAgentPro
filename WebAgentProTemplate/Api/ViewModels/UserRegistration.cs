@@ -21,5 +21,8 @@ namespace WebAgentPro.ViewModels
     [Required]
     [MinLength(9, ErrorMessage = "Password must be at least 9 characters long.")]
     public string Password { get; set; }
+
+    [Required]
+    public int Role { get; set; }
   }
 }
