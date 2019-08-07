@@ -120,7 +120,8 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return BadRequest("Bad QuoteId");
             }
-
+            _context.Quotes.Update(quote);
+            /*
             _context.Entry(quote).State = EntityState.Modified;
 
             if(quote.QuoteDrivers.Count > 0)
@@ -138,6 +139,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     _context.Entry(driver).State = EntityState.Modified;
                 }
             }
+            */
             try
             {
                 await _context.SaveChangesAsync();
@@ -154,7 +156,7 @@ namespace WebAgentProTemplate.Api.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
         }
 
         // POST: api/Quotes
@@ -195,12 +197,14 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         [HttpDelete("RemoveDriver/{driverId}")]
-        public async Task<ActionResult<Driver>> RemoveDriver(Driver driver, int driverId)
+        public async Task<ActionResult<Driver>> RemoveDriver(int driverId)
         {
             var driverToRemove = _context.Drivers
                 .Where(d => d.DriverId == driverId)
                 .FirstOrDefault();
             _context.Drivers.Remove(driverToRemove);
+
+            _context.Entry(driverToRemove).State = EntityState.Deleted;
 
             await _context.SaveChangesAsync();
 
@@ -219,7 +223,7 @@ namespace WebAgentProTemplate.Api.Controllers
         }
 
         [HttpDelete("RemoveVehicle/{vehicleId}")]
-        public async Task<ActionResult<Vehicle>> RemoveVehicle(Vehicle vehicle, int vehicleId)
+        public async Task<ActionResult<Vehicle>> RemoveVehicle(int vehicleId)
         {
             var vehicleToRemove = _context.Vehicles
                 .Where(d => d.VehicleId == vehicleId)
@@ -227,6 +231,8 @@ namespace WebAgentProTemplate.Api.Controllers
             _context.Vehicles.Remove(vehicleToRemove);
 
             await _context.SaveChangesAsync();
+
+            _context.Entry(vehicleToRemove).State = EntityState.Deleted;
 
             return vehicleToRemove;
         }

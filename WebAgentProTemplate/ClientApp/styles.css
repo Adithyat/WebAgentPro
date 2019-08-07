@@ -1,5 +1,7 @@
 @import url("//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 /* You can add global styles to this file, and also import other style files */
 a {
     cursor: pointer;
@@ -150,79 +152,6 @@ p.narrow {
     border-bottom-color: transparent;
 }
 
-span.round-tabs {
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    display: inline-block;
-    border-radius: 100px;
-    background: white;
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    text-align: center;
-    font-size: 25px;
-}
-
-    span.round-tabs.one {
-        color: #173d68;
-        border: 2px solid #173d68;
-    }
-
-li.active span.round-tabs.one {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.two {
-    color: #173d68;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.two {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.three {
-    color: #173d68;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.three {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.four {
-    color: #173d68;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.four {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #173d68;
-}
-
-span.round-tabs.five {
-    color: #999;
-    border: 2px solid #173d68;
-}
-
-li.active span.round-tabs.five {
-    background: #fff !important;
-    border: 2px solid #173d68;
-    color: #999;
-}
-
-.nav-tabs > li.active > a span.round-tabs {
-    background: #fafafa;
-}
-
 .nav-tabs > li {
     width: 25%;
 }
@@ -286,44 +215,6 @@ li.active span.round-tabs.five {
     color: #ffffff;
 }
 
-
-
-@media( max-width : 585px ) {
-
-    .board {
-        width: 90%;
-        height: auto !important;
-    }
-
-    span.round-tabs {
-        font-size: 16px;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-    }
-
-    .tab-content .head {
-        font-size: 20px;
-    }
-
-    .nav-tabs > li a {
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-    }
-
-    .nav-tabs > li.active:after {
-        content: " ";
-        position: absolute;
-        left: 35%;
-    }
-
-    .btn-outline-rounded {
-        padding: 12px 20px;
-    }
-
-}
-
 .navbar {
     border-radius: 0px;
     color: #f8f8f8;
@@ -365,43 +256,6 @@ body {
 
 * {
     box-sizing: border-box;
-}
-
-/* For mobile phones: */
-[class*="col-"] {
-  width: 100%;
-}
-
-@media only screen and (min-width: 600px) {
-  /* For tablets: */
-  .col-s-1 {width: 8.33%;}
-  .col-s-2 {width: 16.66%;}
-  .col-s-3 {width: 25%;}
-  .col-s-4 {width: 33.33%;}
-  .col-s-5 {width: 41.66%;}
-  .col-s-6 {width: 50%;}
-  .col-s-7 {width: 58.33%;}
-  .col-s-8 {width: 66.66%;}
-  .col-s-9 {width: 75%;}
-  .col-s-10 {width: 83.33%;}
-  .col-s-11 {width: 91.66%;}
-  .col-s-12 {width: 100%;}
-}
-
-@media only screen and (min-width: 768px) {
-  /* For desktop: */
-  .col-1 {width: 8.33%;}
-  .col-2 {width: 16.66%;}
-  .col-3 {width: 25%;}
-  .col-4 {width: 33.33%;}
-  .col-5 {width: 41.66%;}
-  .col-6 {width: 50%;}
-  .col-7 {width: 58.33%;}
-  .col-8 {width: 66.66%;}
-  .col-9 {width: 75%;}
-  .col-10 {width: 83.33%;}
-  .col-11 {width: 91.66%;}
-  .col-12 {width: 100%;}
 }
 
 @media (min-width: 1200px) {
@@ -456,3 +310,37 @@ body {
     border-color: #E89896;
 }
 
+.btn-primary {
+    background-color: #346eb0;
+    border-color: #205A9C;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background-color: #205A9C;
+        border-color: #0C4688;
+    }
+
+.btn-outline-primary {
+    border-color: white;
+    background-color: white;
+    color: #346eb0;
+}
+
+    .btn-outline-primary:hover {
+        border-color: #346eb0;
+        background-color: white;
+        color: #346eb0;
+    }
+
+.btn-danger {
+    border-color: #922220;
+    background-color: #922220;
+    color: white;
+}
+
+    .btn-danger:hover {
+        border-color: #801E1C;
+        background-color: #801E1C;
+        color: white;
+    }

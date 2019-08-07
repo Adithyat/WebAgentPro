@@ -1,0 +1,133 @@
+<!--
+<div class="col-12">
+        
+        <button type="button" [routerLink]="[{ outlets: { primary: ['drivers'], form: ['drivers'] } }]" class="btn btn-success">Back</button>
+        <a [routerLink]="[{ outlets: { primary: ['quotes'], form: ['quotes'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="personal">
+        <button type="button" [routerLink]="[{ outlets: { primary: ['vehicles'], form: ['vehicles'] } }]" class="btn btn-success">Next</button>
+        </a>
+        <div app-type="section" id="SECTION1" [active]="true"></div>
+        <div app-type="section" id="SECTION2" ></div>
+        <button (click)="onAddComponentClick()" class="btn btn-success">Add Driver</button>
+<button (click)="addDrivers()">Add</button>
+</div>
+-->
+
+<div class="col-12">
+        <form #driverForm="ngForm" >
+                <button (click)="addDriver()" class="btn btn-success">Add</button>
+                <div class="col-12"  *ngFor="let driver of quote.quoteDrivers; let i = index">
+                                <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Driver {{i+1}} Info</h5>
+                                        </div>
+                                        <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-lg-6 col-xs-12">
+                                                <label for="d_FirstName">First Name</label>
+                                                <input id="d_FirstName" [name]="'d_FirstName' + i" #d_FirstName="ngModel" [(ngModel)]="driver.d_FirstName" type="text" class="form-control" required />
+                                                <div [hidden]="d_FirstName.valid || d_FirstName.untouched" class="alert alert-danger">First name is required.</div>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-xs-12">
+                                                <label for="d_LastName">Last Name</label>
+                                                <input id="d_LastName" [name]="'d_LastName' + i" #d_LastName="ngModel" [(ngModel)]="driver.d_LastName" type="text" class="form-control" required />
+                                                <div [hidden]="d_LastName.valid || d_LastName.untouched" class="alert alert-danger">Last name is required.</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-lg-6 col-xs-12">
+                                                <label for="driverLicenseNumber">Driver License Number</label>
+                                                <input id="driverLicenseNumber" [name]="'driverLicenseNumber'+i" #driverLicenseNumber="ngModel" [(ngModel)]="driver.driverLicenseNumber" type="text" class="form-control" pattern="[a-zA-Z0-9]+" maxlength="16" required />
+                                                <div [hidden]="driverLicenseNumber.valid || driverLicenseNumber.untouched" class="alert alert-danger">Driver License number is required.</div>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-xs-12">
+                                                <label for="driverLicenseStateCode">Driver License State</label>
+                                                <select id="driverLicenseStateCode" [name]="'driverLicenseStateCode'+i" #driverLicenseStateCode="ngModel" [(ngModel)]="driver.driverLicenseStateCode" class="form-control" required>
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="AK">Alaska</option>
+                                                    <option value="AZ">Arizona</option>
+                                                    <option value="AR">Arkansas</option>
+                                                    <option value="CA">California</option>
+                                                    <option value="CO">Colorado</option>
+                                                    <option value="CT">Connecticut</option>
+                                                    <option value="DE">Delaware</option>
+                                                    <option value="FL">Florida</option>
+                                                    <option value="GA">Georgia</option>
+                                                    <option value="HI">Hawaii</option>
+                                                    <option value="ID">Idaho</option>
+                                                    <option value="IL">Illinois</option>
+                                                    <option value="IN">Indiana</option>
+                                                    <option value="IA">Iowa</option>
+                                                    <option value="KS">Kansas</option>
+                                                    <option value="KY">Kentucky</option>
+                                                    <option value="LA">Louisiana</option>
+                                                    <option value="ME">Maine</option>
+                                                    <option value="MD">Maryland</option>
+                                                    <option value="MA">Massachusetts</option>
+                                                    <option value="MI">Michigan</option>
+                                                    <option value="MN">Minnesota</option>
+                                                    <option value="MS">Mississippi</option>
+                                                    <option value="MO">Missouri</option>
+                                                    <option value="MT">Montana</option>
+                                                    <option value="NE">Nebraska</option>
+                                                    <option value="NV">Nevada</option>
+                                                    <option value="NH">New Hampshire</option>
+                                                    <option value="NJ">New Jersey</option>
+                                                    <option value="NM">New Mexico</option>
+                                                    <option value="NY">New York</option>
+                                                    <option value="NC">North Carolina</option>
+                                                    <option value="ND">North Dakota</option>
+                                                    <option value="OH">Ohio</option>
+                                                    <option value="OK">Oklahoma</option>
+                                                    <option value="OR">Oregon</option>
+                                                    <option value="PA">Pennsylvania</option>
+                                                    <option value="RI">Rhode Island</option>
+                                                    <option value="SC">South Carolina</option>
+                                                    <option value="SD">South Dakota</option>
+                                                    <option value="TN">Tennessee</option>
+                                                    <option value="TX">Texas</option>
+                                                    <option value="UT">Utah</option>
+                                                    <option value="VT">Vermont</option>
+                                                    <option value="VA">Virginia</option>
+                                                    <option value="WA">Washington</option>
+                                                    <option value="WV">West Virginia</option>
+                                                    <option value="WI">Wisconsin</option>
+                                                    <option value="WY">Wyoming</option>
+                                                </select>
+                                                <div [hidden]="driverLicenseStateCode.valid || driverLicenseStateCode.untouched" class="alert alert-danger">Driver License state is required.</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-lg-4 col-xs-12">
+                                                <label for="d_ssn">SSN</label>
+                                                <input id="d_ssn" [name]="'d_SSN'+i" #d_ssn="ngModel" [(ngModel)]="driver.d_SSN" onfocus="this.type ='text'" onblur="this.type = 'password'" pattern="[0-9]{9}" maxlength="9" class="form-control" required />
+                                                <div [hidden]="d_ssn.valid || d_ssn.untouched" class="alert alert-danger">Valid SSN is required.</div>
+                                            </div>
+                                            <div class="form-group col-lg-4 col-xs-12">
+                                                <label for="d_DateOfBirth">Birthdate mm/dd/yyyy</label>
+                                                <input id="d_DateOfBirth" [name]="'d_DateOfBirth'+i" #d_DateOfBirth="ngModel" [(ngModel)]="driver.d_DateOfBirth" type="date" class="form-control" required />
+                                                <div [hidden]="d_DateOfBirth.valid || d_DateOfBirth.untouched" class="alert alert-danger">Date of birth is required.</div>
+                                            </div>
+                                            <div class="form-group col-lg-4 col-xs-12">
+                                                <label>Safe Driving School Attended?</label>
+                                                <br />
+
+                                                <input class="col-1" type="radio" name="safeDriving" id="always" value="true" [(ngModel)]="driver.safeDrivingSchoolAttended" required />
+                                                <label for="always" class="col-5">Yes</label>
+
+                                                <input class="col-1" type="radio" name="safeDriving" id="never" value="false" [(ngModel)]="driver.safeDrivingSchoolAttended" required />
+                                                <label for="never" class="col-5">No</label>
+                                            </div>
+                                        </div>
+                                        </div> 
+                                        <div class="card-footer">
+                                               
+                                        <div class="form-group">
+                                                
+                                                <button (click)="removeDriver(driver, i)" class="btn btn-danger">Delete</button>
+                                               
+                                        </div> 
+                                        </div>
+                                </div>              
+                </div>
+        </form>
+</div>

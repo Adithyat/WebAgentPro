@@ -6,7 +6,7 @@ import { Vehicle } from '@app/_models/vehicle';
 @Injectable({
   providedIn: 'root'
 })
-export class VehiclesService {
+export class VehicleService {
 
     constructor(private http: HttpClient) { }
 

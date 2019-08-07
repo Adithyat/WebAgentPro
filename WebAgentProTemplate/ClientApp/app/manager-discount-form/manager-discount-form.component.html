@@ -1,57 +1,148 @@
-<div>
+<div class="col-12">
     <!-- Search state -->
-    <div>
-        <p>Select a State</p>
-        <select>
-            <option></option>
-        </select>
-    </div>
-
-    <!-- Load Discounts -->
     <div class="row col-12">
-        <!-- Customer Discounts -->
-        <div class="col-4">
-            <p>Claim In Last Five Years</p>
-            <input />
-            <p>Multicar Discount</p>
-            <input />
-            <p>Less Than Three Years Driving</p>
-            <input />
-            <p>Moving Violations In Last 5 Years</p>
-            <input />
-            <p>PreviousCarrier: Lizard Ins</p>
-            <input />
-            <p>Previous Carrier: Pervasive Ins</p>
-        </div>
-
-        <!-- Driver Discounts -->
-        <div class="col-4">
-            <p>Safe Driving School</p>
-            <input />
-            <p>Driver Under Age of 23</p>
-            <input />
-        </div>
-
-        <!-- Vehicle Discounts -->
-        <div class="col-4">
-            <p>Antilock Brakes</p>
-            <input />
-            <p>Antitheft</p>
-            <input />
-            <p>DaytimeRunningLights</p>
-            <input />
-            <p>GarageAddressDifferentThanResidence</p>
-            <input />
-            <p>PassiveRestraints</p>
-            <input />
-            <p>ReducedUsedDiscount</p>
-            <input />
-            <p>Vehicle Annual Mileage Less Than 4000</p>
-            <input />
-            <p>DaysDrivenPerWeekGreaterThan4</p>
-            <input />
-            <p>MilesDrivenToWorkLessThan25</p>
-            <input />
+        <div class="form-group col-lg-3">
+            <h4>Select a State</h4>
+            <select class="form-control">
+                <option value="CT">Connecticut</option>
+                <option value="ME">Maine</option>
+                <option value="MA">Massachusetts</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NY">New York</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="SC">South Carolina</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WV">West Virginia</option>
+            </select>
         </div>
     </div>
+
+
+    <br />
+
+    <div class="col-12">
+        <form>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Customer Discounts</h4>
+                </div>
+                <div class="card-body col-12">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Claim in Last Five Years</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Multicar Discount</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Less than Three Years Driving</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Moving Violations in Last 5 Years</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Previous Carrier: Lizard Insurance</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Previous Carrier: Pervasive Insurance</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-12">
+        <form>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Driver Discounts</h4>
+                </div>
+                <div class="card-body col-12">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Safe Driving School</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Driver Under Age of 23</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-12">
+        <form>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Vehicle Discounts</h4>
+                </div>
+                <div class="card-body col-12">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Antilock Brakes</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Antitheft</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Daytime Running Lights</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Garage Address Different than Residence</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Passive Restraints</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Reduced Use Discount</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Vehicle Annual Mileage Less than 4000</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Days Driven per Week Greater than 4</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-4">
+                            <label>Miles Driven to Work Less than 25</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br />
+
+    <div class="col-12">
+        <button class="btn btn-success pull-right">
+            Save
+        </button>
+    </div>
+
 </div>
