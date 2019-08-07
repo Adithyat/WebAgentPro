@@ -66,6 +66,7 @@ export class FormDriverComponent {
         this.quoteService.getQuote(this.quote.quoteId)
         .subscribe(
           returnedQuote => {
+            console.log(returnedQuote);
             this.quote = returnedQuote;
             if (returnedQuote.quoteDrivers.length !== 0) {
                 //console.log(returnedQuote.quoteDrivers.length);
