@@ -1,4 +1,5 @@
-<!-- nav --> 
+
+<!-- nav -->
 <nav class="navbar navbar-expand" *ngIf="currentUser">
     <div class="navbar-nav">
         <img src="assets/Logo.png" class="img-responsive" />
@@ -19,8 +20,15 @@
         </div>
     </div>
 </div>
- 
+
+
+<div *ngIf="!show" id="frame" style="background: white;" class="float-right position-absolute">
+    <button id="x" class="float-right position-absolute" mat-button (click)="onNoClick()"><fa name="times"></fa></button>
+    <iframe src='https://webchat.botframework.com/embed/aiachatbot2019-bot?s=TFc4Bc5wsZw.s-OelJidYtMCWccM174TdmjRiBjceujZdpmxDBEBwDI' style='min-width: 375px; width: 100%; min-height: 300px;'></iframe>
+</div>
+<button *ngIf="show" id="open" type="button" class="btn btn-primary btn-lg float-right position-absolute" (click)="openDialog()"><fa name="comments"></fa></button>
+
 <!-- footer -->
 <div class="text-center">
-  <p>Web Agent Pro Template</p>
+    <p>Web Agent Pro Template</p>
 </div>

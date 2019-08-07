@@ -36,9 +36,10 @@ import { SectionComponent } from './section.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
 import { ManagerDiscountFormComponent } from './manager-discount-form/manager-discount-form.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
-
-
+ 
 @NgModule({
     imports: [
         BrowserModule,
@@ -47,7 +48,9 @@ import { ManagerDiscountFormComponent } from './manager-discount-form/manager-di
         HttpClientModule,
         NgxPaginationModule,
         AngularFontAwesomeModule,
-        AppRoutingModule
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule
     ],
     declarations: [
         AppComponent,
