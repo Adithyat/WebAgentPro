@@ -1,28 +1,32 @@
 <mat-horizontal-stepper labelPosition="bottom">
     <mat-step label="Customer">
         <div>
-            <button mat-button matStepperNext (click)="goToDriver()">Next</button>
+            <button matStepperNext (click)="goToDriver()" class="btn btn-primary">Next</button>
         </div>
+        <br />
         <app-form-customer></app-form-customer>
     </mat-step>
     <mat-step label="Drivers">
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext (click)="goToVehicle()">Next</button>
+            <button matStepperPrevious class="btn btn-outline-primary">Back</button>
+            <button matStepperNext (click)="goToVehicle()" class="btn btn-primary">Next</button>
         </div>
+        <br />
         <app-form-driver></app-form-driver>
     </mat-step>
     <mat-step label="Vehicles">
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext (click)="goToSummary()">Next</button>
+            <button matStepperPrevious class="btn btn-outline-primary">Back</button>
+            <button matStepperNext (click)="goToSummary()" class="btn btn-primary">Next</button>
         </div>
+        <br />
         <app-form-vehicle></app-form-vehicle>
     </mat-step>
     <mat-step label="Quote Summary">
         <div>
-            <button mat-button matStepperPrevious>Back</button>
+            <button matStepperPrevious class="btn btn-outline-primary">Back</button>
         </div>
+        <br />
         <app-form-summary></app-form-summary>
     </mat-step>
           
