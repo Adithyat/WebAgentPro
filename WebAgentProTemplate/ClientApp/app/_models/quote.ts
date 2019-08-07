@@ -1,3 +1,5 @@
+import { Driver } from '@app/_models/driver';
+import { Vehicle } from '@app/_models/vehicle';
 export class Quote {
     quoteId: number;
     q_FirstName: string;
@@ -14,4 +16,7 @@ export class Quote {
     claimInLastFiveYears: Boolean;
     movingViolationInLastFiveYears: Boolean;
     forceMultiCarDiscount: Boolean;
+    quoteDrivers: Driver[];
+    quoteVehicles: Vehicle[];
 }
+    

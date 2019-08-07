@@ -102,7 +102,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     vehicle.AntiLockBrakesValue = discount.AntiLockBrakes;
                     vehicle.AntiTheftValue = discount.AntiTheftInstalled;
                     vehicle.DaysDrivenPerWeekDiscountValue = discount.DaysDrivenPerWeek;
-                    vehicle.DaytTimeRunningLightsValue = discount.DayTimeRunningLights;
+                    vehicle.DayTimeRunningLightsValue = discount.DayTimeRunningLights;
                     vehicle.GarageDifferentAddressThanResidenceValue = discount.GarageAddressDifferentFromResidence;
                     vehicle.MileDrivenToWorkDiscountValue = discount.MilesDrivenToWork;
                     vehicle.PassiveRestraintsValue = discount.PassiveRestraints;
@@ -137,7 +137,8 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return BadRequest("Bad QuoteId");
             }
-
+            _context.Quotes.Update(quote);
+            /*
             _context.Entry(quote).State = EntityState.Modified;
 
             if(quote.QuoteDrivers.Count > 0)
@@ -155,6 +156,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     _context.Entry(driver).State = EntityState.Modified;
                 }
             }
+            */
             try
             {
                 await _context.SaveChangesAsync();

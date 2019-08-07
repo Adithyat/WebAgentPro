@@ -1,0 +1,120 @@
+<!--
+<div class="col-12">
+        
+        <button type="button" [routerLink]="[{ outlets: { primary: ['drivers'], form: ['drivers'] } }]" class="btn btn-success">Back</button>
+        <a [routerLink]="[{ outlets: { primary: ['quotes'], form: ['quotes'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="personal">
+        <button type="button" [routerLink]="[{ outlets: { primary: ['vehicles'], form: ['vehicles'] } }]" class="btn btn-success">Next</button>
+        </a>
+        <div app-type="section" id="SECTION1" [active]="true"></div>
+        <div app-type="section" id="SECTION2" ></div>
+        <button (click)="onAddComponentClick()" class="btn btn-success">Add Driver</button>
+<button (click)="addDrivers()">Add</button>
+</div>
+-->
+
+<div class="col-12">
+        <form #driverForm="ngForm" >
+                <button (click)="addDriver()" class="btn btn-success">Add</button>
+                <div class="col-12"  *ngFor="let driver of quote.quoteDrivers; let i = index">
+                                <div class="card">
+                                        <div class="card-header">
+                                                <h5 class="card-title">Driver Info {{i+1}}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                        <div class="row">
+                                                <div class="form-group col-6">
+                                                <label for="d_FirstName">First Name</label>
+                                                <input id="d_FirstName" [name]="'d_FirstName' + i" #d_FirstName="ngModel" [(ngModel)]="driver.d_FirstName" type="text" class="form-control" required />
+                                                </div>
+                                                <div class="form-group col-6">
+                                                <label for="d_LastName">Last Name</label>
+                                                <input id="d_LastName" [name]="'d_LastName' + i" #d_LastName="ngModel" [(ngModel)]="driver.d_LastName" type="text" class="form-control" required />
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="form-group col-6">
+                                                <label for="driverLicenseNumber">Driver License Number</label>
+                                                <input id="driverLicenseNumber" [name]="'driverLicenseNumber'+i" #driverLicenseNumber="ngModel" [(ngModel)]="driver.driverLicenseNumber" type="text" class="form-control" pattern="[a-zA-Z0-9]+" maxlength="16" required />
+                                                </div>
+                                                <div class="form-group col-6">
+                                                <label for="driverLicenseStateCode">Driver License State</label>
+                                                <select id="driverLicenseStateCode" [name]="'driverLicenseStateCode'+i" #driverLicenseStateCode="ngModel" [(ngModel)]="driver.driverLicenseStateCode" class="form-control" required>
+                                                        <option value="AL">AL</option>
+                                                        <option value="AK">AK</option>
+                                                        <option value="AZ">AZ</option>
+                                                        <option value="AR">AR</option>
+                                                        <option value="CA">CA</option>
+                                                        <option value="CO">CO</option>
+                                                        <option value="CT">CT</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="FL">FL</option>
+                                                        <option value="GA">GA</option>
+                                                        <option value="HI">HI</option>
+                                                        <option value="ID">ID</option>
+                                                        <option value="IL">IL</option>
+                                                        <option value="IN">IN</option>
+                                                        <option value="IA">IA</option>
+                                                        <option value="KS">KS</option>
+                                                        <option value="KY">KY</option>
+                                                        <option value="LA">LA</option>
+                                                        <option value="ME">ME</option>
+                                                        <option value="MD">MD</option>
+                                                        <option value="MA">MA</option>
+                                                        <option value="MI">MI</option>
+                                                        <option value="MN">MN</option>
+                                                        <option value="MS">MS</option>
+                                                        <option value="MO">MO</option>
+                                                        <option value="MT">MT</option>
+                                                        <option value="NE">NE</option>
+                                                        <option value="NV">NV</option>
+                                                        <option value="NH">NH</option>
+                                                        <option value="NJ">NJ</option>
+                                                        <option value="NM">NM</option>
+                                                        <option value="NY">NY</option>
+                                                        <option value="NC">NC</option>
+                                                        <option value="ND">ND</option>
+                                                        <option value="OH">OH</option>
+                                                        <option value="OK">OK</option>
+                                                        <option value="OR">OR</option>
+                                                        <option value="PA">PA</option>
+                                                        <option value="RI">RI</option>
+                                                        <option value="SC">SC</option>
+                                                        <option value="SD">SD</option>
+                                                        <option value="TN">TN</option>
+                                                        <option value="TX">TX</option>
+                                                        <option value="UT">UT</option>
+                                                        <option value="VT">VT</option>
+                                                        <option value="VA">VA</option>
+                                                        <option value="WA">WA</option>
+                                                        <option value="WV">WV</option>
+                                                        <option value="WI">WI</option>
+                                                        <option value="WY">WY</option>
+                                                </select>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="form-group col-4">
+                                                <label for="d_ssn">SSN</label>
+                                                <input id="d_ssn" [name]="'d_SSN'+i" #d_ssn="ngModel" [(ngModel)]="driver.d_SSN" onfocus="this.type ='text'" onblur="this.type = 'password'" pattern="[0-9]{9}" maxlength="9" class="form-control" required />
+                                                </div>
+                                                <div class="form-group col-4">
+                                                <label for="d_DateOfBirth">Birthdate mm/dd/yyyy</label>
+                                                <input id="d_DateOfBirth" [name]="'d_DateOfBirth'+i" #d_DateOfBirth="ngModel" [(ngModel)]="driver.d_DateOfBirth" type="date" class="form-control" required />
+                                                </div>
+                                                <div class="form-group col-4 checkbox">
+                                                <label><input type="checkbox" value="" [(ngModel)]="driver.safeDrivingSchoolAttended" [ngModelOptions]="{standalone: true}">Attended Safe Driving School</label>
+                                                </div>
+                                        </div>
+                                        </div> 
+                                        <div class="card-footer">
+                                               
+                                        <div class="form-group">
+                                                
+                                                <button (click)="removeDriver()" class="btn btn-secondary">Delete</button>
+                                               
+                                        </div> 
+                                        </div>
+                                </div>              
+                </div>
+        </form>
+</div>

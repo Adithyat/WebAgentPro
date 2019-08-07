@@ -149,8 +149,8 @@ namespace WebAgentProTemplate.Api.CostCalculators
 
             if (vehicle.DayTimeRunningLights)
             {
-                receipt.vehicleAppliedDiscounts.Add("DaytimeRunningLights", receipt.FinalCost - (receipt.FinalCost * vehicle.DaytTimeRunningLightsValue));
-                receipt.FinalCost *= vehicle.DaytTimeRunningLightsValue;
+                receipt.vehicleAppliedDiscounts.Add("DaytimeRunningLights", receipt.FinalCost - (receipt.FinalCost * vehicle.DayTimeRunningLightsValue));
+                receipt.FinalCost *= vehicle.DayTimeRunningLightsValue;
             }
 
             if (vehicle.GarageDifferentAddressThanResidence)
@@ -176,6 +176,7 @@ namespace WebAgentProTemplate.Api.CostCalculators
             decimal DriverMultiplier = CalculateDriverReceipt(PrimaryDriver).multiplier;
 
             receipt.vehicleAppliedDiscounts.Add("PrimaryOperator", receipt.FinalCost - (receipt.FinalCost * DriverMultiplier));
+            receipt.primaryDriver = PrimaryDriver;
             receipt.FinalCost *= DriverMultiplier;
             return receipt;
         }

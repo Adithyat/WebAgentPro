@@ -1,0 +1,47 @@
+<div class="board-inner col-12" id="status-buttons">
+  <ul class="nav nav-tabs" id="myTab">
+      <div class="liner"></div>
+                  
+      <!-- circular user icon -->
+      <li>
+          <a [routerLink]="[{ outlets: { subforms: ['customer'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="Customer">
+              <span class="round-tabs one">
+                  
+                  <img src="assets/customer.png" class="img-responsive nav-img" />
+              </span>
+          </a>
+      </li>
+
+      <!-- circular tasks icon -->
+       <li>
+          <a [routerLink]="[{ outlets: { subforms: ['driver'] } }]" routerLinkActive="active" data-toggle="tab" title="Drivers">
+              <span class="round-tabs two">
+                  
+                  <img src="assets/driver.png" class="img-responsive nav-img" />
+              </span> 
+          </a>
+      </li>
+
+      <!-- circular home icon -->
+      <li>
+          <a [routerLink]="[{ outlets: { subforms: ['vehicle'] } }]" routerLinkActive="active" data-toggle="tab" title="Vehicles">    
+              <span class="round-tabs three">
+                  
+                  <img src="assets/vehicle.png" class="img-responsive nav-img" />
+              </span>
+          </a>
+      </li>
+
+      <!-- circular ok icon -->
+      <li>
+          <a [routerLink]="[{ outlets: { subforms: ['summary'] } }]" routerLinkActive="active" data-toggle="tab" title="Completed">
+              <span class="round-tabs four">
+                  
+                  <img src="assets/quote.png" class="img-responsive nav-img" />
+              </span>
+          </a>
+      </li>
+              
+  </ul>
+  <div class="clearfix"></div>
+</div>

@@ -12,6 +12,7 @@ namespace WebAgentProTemplate.Api.CostCalculators
         public decimal FinalCost;
         public Dictionary<String, decimal> vehicleAppliedDiscounts;
         public Vehicle vehicle;
+        public Driver primaryDriver;
 
 
         public VehicleReceipt(Vehicle vehicle)
