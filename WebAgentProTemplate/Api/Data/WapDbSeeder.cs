@@ -26,7 +26,6 @@ namespace WebAgentPro.Data
             InitializeUsers();
 
             //Initialize your data
-            InitializeWidgets();
             InitializeDiscounts();
         }
 
@@ -285,53 +284,71 @@ namespace WebAgentPro.Data
         {
             if (_userManager.Users.Count<User>().Equals(0))
             {
-                var manager = new User()
+                //Analytics Seed Data
+                var user1 = new User()
                 {
-                    UserName = "manager@aia.com",
-                    Email = "manager@aia.com",
+                    UserName = "strice8@goo.gl",
+                    Email = "strice8@goo.gl",
                     EmailConfirmed = true,
-                    U_FirstName = "Jacob",
-                    U_LastName = "Jones"
+                    U_FirstName = "Sorcha",
+                    U_LastName = "Trice",
+                    TempUserId = "105507"
                 };
 
-                _userManager.CreateAsync(manager, "Asdfjkl!1").Wait();
-                _userManager.AddToRoleAsync(manager, "Manager").Wait();
+                _userManager.CreateAsync(user1, "Asdfjkl!1").Wait();
+                _userManager.AddToRoleAsync(user1, "Agent").Wait();
 
-                var agent = new User()
+                var user2 = new User()
                 {
-                    UserName = "agent@aia.com",
-                    Email = "agent@aia.com",
+                    UserName = "amcdavitti@123-reg.co.uk",
+                    Email = "amcdavitti@123-reg.co.uk",
                     EmailConfirmed = true,
-                    U_FirstName = "Janet",
-                    U_LastName = "Roberts"
+                    U_FirstName = "Adrien",
+                    U_LastName = "McDavitt",
+                    TempUserId = "112734"
                 };
 
-                _userManager.CreateAsync(agent, "Asdfjkl!1").Wait();
-                _userManager.AddToRoleAsync(agent, "Agent").Wait();
+                _userManager.CreateAsync(user2, "Asdfjkl!1").Wait();
+                _userManager.AddToRoleAsync(user2, "Agent").Wait();
 
-                var manager2= new User()
+                var user3 = new User()
                 {
-                    UserName = "manager2@aia.com",
-                    Email = "manager2@aia.com",
+                    UserName = "rpurchases@disqus.com",
+                    Email = "rpurchases@disqus.com",
                     EmailConfirmed = true,
-                    U_FirstName = "Jacob",
-                    U_LastName = "Johnson"
+                    U_FirstName = "Reidar",
+                    U_LastName = "Purchase",
+                    TempUserId = "120338"
                 };
 
-                _userManager.CreateAsync(manager2, "Asdfjkl!1").Wait();
-                _userManager.AddToRoleAsync(manager2, "Manager").Wait();
+                _userManager.CreateAsync(user3, "Asdfjkl!1").Wait();
+                _userManager.AddToRoleAsync(user3, "Manager").Wait();
 
-                var agent2 = new User()
+                var user4 = new User()
                 {
-                    UserName = "agent2@aia.com",
-                    Email = "agent2@aia.com",
+                    UserName = "dstollmanx@shop-pro.jp",
+                    Email = "dstollmanx@shop-pro.jp",
                     EmailConfirmed = true,
-                    U_FirstName = "Janet",
-                    U_LastName = "Robertson",
+                    U_FirstName = "Davida",
+                    U_LastName = "Stollman",
+                    TempUserId = "123506"
                 };
 
-                _userManager.CreateAsync(agent2, "Asdfjkl!1").Wait();
-                _userManager.AddToRoleAsync(agent2, "Agent").Wait();
+                _userManager.CreateAsync(user4, "Asdfjkl!1").Wait();
+                _userManager.AddToRoleAsync(user4, "Agent").Wait();
+
+                var user5 = new User()
+                {
+                    UserName = "mcalafato12@berkeley.edu",
+                    Email = "mcalafato12@berkeley.edu",
+                    EmailConfirmed = true,
+                    U_FirstName = "Madelyn",
+                    U_LastName = "Calafato",
+                    TempUserId = "126901"
+                };
+
+                _userManager.CreateAsync(user5, "Asdfjkl!1").Wait();
+                _userManager.AddToRoleAsync(user5, "Agent").Wait();
             }
 
         }

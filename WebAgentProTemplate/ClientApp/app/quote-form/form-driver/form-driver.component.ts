@@ -83,8 +83,17 @@ export class FormDriverComponent {
         this.quote.quoteDrivers.push(driver);
     }
 
-    removeDriver(i) {
+    removeDriver(driver, i) {
         this.quote.quoteDrivers.splice(i, 1);
+        if (driver.driverId != null) {
+            this.quoteService.deleteDriver(driver.driverId).subscribe(
+                response => {
+                    this.alertService.success('Driver Removed.', false);
+                },
+                error => {
+                    this.alertService.error('Driver Remove Failed.', false);
+                });
+        }
     }
 
     saveDrivers() {
@@ -94,7 +103,8 @@ export class FormDriverComponent {
             response => {
               console.log(response);
               // this.newQuote();
-              this.alertService.success('Driver saved.', false);
+                this.alertService.success('Driver saved.', false);
+                this.quote = response;
             },
             error => {
               this.alertService.error('Driver save failed.', false);
