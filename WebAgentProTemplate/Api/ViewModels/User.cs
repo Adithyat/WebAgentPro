@@ -11,6 +11,5 @@ namespace WebAgentPro.ViewModels
         public string Token { get; set; }
         public bool IsActive { get; set; }
 
-        public string UserId { get; set; }
     }
 }

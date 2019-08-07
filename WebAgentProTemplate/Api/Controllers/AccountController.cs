@@ -139,8 +139,6 @@ namespace WebAgentPro.Controllers
                 var userViewModel = Mapper.Map<UserViewModel>(user);
                 userViewModel.Roles = await _userManager.GetRolesAsync(user); 
                 userViewModel.Token = CreateToken(user, userViewModel.Roles);
-                userViewModel.UserId = user.Id;
-
                 return Ok(userViewModel);
             }
             catch (WapException e)

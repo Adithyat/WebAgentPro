@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WebAgentPro.Data;
 using WebAgentProTemplate.Api.CostCalculators;
 using WebAgentProTemplate.Api.Models;
@@ -27,7 +30,18 @@ namespace WebAgentProTemplate.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
         {
-            return await _context.Quotes.ToListAsync();
+            var claims = HttpContext.User.Claims;
+            //string UserID = claims.SingleOrDefault(p => p.Type == "strID")?.Value;
+            var manager = claims.SingleOrDefault(p => p.Type == "Manager")?.Value;
+
+            if (manager == "Manager")
+            {
+                return await _context.Quotes.ToListAsync();
+            }
+
+            var strID = claims.SingleOrDefault(p => p.Type == "strID")?.Value;
+
+            return await _context.Quotes.Where(q => q.UserId == strID).ToListAsync();
         }
 
         // GET: api/Quotes/5
@@ -52,7 +66,7 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return NotFound();
             }
-            /**
+         
             Console.WriteLine(quote.UserId);
             Console.WriteLine(s.SingleOrDefault(p => p.Type == "strID")?.Value);
 
@@ -60,9 +74,9 @@ namespace WebAgentProTemplate.Api.Controllers
             if (quote.UserId != s.SingleOrDefault(p => p.Type == "strID")?.Value &&
                 s.SingleOrDefault(p => p.Type == "Manager")?.Value != "Manager")
             {
-                return Forbid("Only managers and the agent who issued the quote can see this");
+                return Forbid();
             }
-            */
+
 
             return quote;
         }
@@ -182,6 +196,11 @@ namespace WebAgentProTemplate.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Quote>> PostQuote(Quote quote)
         {
+            var claims = HttpContext.User.Claims;
+            string UserID = claims.SingleOrDefault(p => p.Type == "strID")?.Value;
+
+            quote.UserId = UserID;
+
             _context.Quotes.Add(quote);
             await _context.SaveChangesAsync();
 
@@ -276,5 +295,74 @@ namespace WebAgentProTemplate.Api.Controllers
         {
             return _context.Quotes.Any(e => e.QuoteId == id);
         }
+
+        public async Task<decimal> InvokeRequestResponseService(string make, string model, string mileage, string year)
+        {
+            // string make, string model, string mileage, string year
+            decimal ret = 0.00m;
+            using (var client = new HttpClient())
+            {
+                var scoreRequest = new
+                {
+                    Inputs = new Dictionary<string, List<Dictionary<string, string>>>() {
+                        {
+                            "input1",
+                            new List<Dictionary<string, string>>(){new Dictionary<string, string>(){
+                                    {
+                                        "Make",  make//"Buick"
+                                    },
+                                    {
+                                        "Model",  model //"EncoreConvenience"
+                                    },
+                                    {
+                                        "Mileage",  mileage //"18681" // numeric
+                                    },
+                                    {
+                                        "Year", year //"2015"  // numeric
+                                    },
+                                    {
+                                        "Price", "0" // numeric
+                                    }
+                                }
+                            }
+                        },
+                    },
+                    GlobalParameters = new Dictionary<string, string>() { }
+                };
+                const string apiKey = "nU/4Jd3fH6lawVKAFtSnSfCbFtbIN9am+nhS7MLjXkg9ZCMLshTHFdN7YE2GUfeB1Xyv01w5Rag0ZBUak+5fdQ==";
+                const string apiUri = "https://ussouthcentral.services.azureml.net/workspaces/e8bf025c24d54f24bb407af48ae3e0fe/services/6027edeee8ae4a9d801c4fc19044d8d5/execute?api-version=2.0&format=swagger";
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+                client.BaseAddress = new Uri(apiUri);
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("", scoreRequest);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Result: {0}", result);
+
+                    var detailed = JObject.Parse(result);
+                    var final = detailed["Results"]["output1"][0]["Scored Labels"];
+                    ret = (decimal)final;
+                    Console.WriteLine(final);
+
+                }
+                else
+                {
+                    Console.WriteLine(string.Format("The request failed with status code: {0}", response.StatusCode));
+
+                    // Print the headers - they include the request ID and the timestamp,
+                    // which are useful for debugging the failure
+                    Console.WriteLine(response.Headers.ToString());
+
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(responseContent);
+                }
+            }
+            return ret;
+        }
+
+
     }
 }
