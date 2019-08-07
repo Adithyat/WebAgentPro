@@ -46,11 +46,19 @@ export class QuoteService {
 
     putQuote(put: Quote, id: number) {
         //console.log(put);
-        return this.http.put(`${this.apiUrl}/Quotes/${id}`, put);
+        return this.http.put<Quote>(`${this.apiUrl}/Quotes/${id}`, put);
     }
 
     deleteQuote(id: number) {
       return this.http.delete(`${this.apiUrl}/Quotes/${id}`);
+    }
+
+    deleteDriver(id: number) {
+        return this.http.delete(`${this.apiUrl}/Quotes/RemoveDriver/${id}`);
+    }
+
+    deleteVehicle(id: number) {
+        return this.http.delete(`${this.apiUrl}/Quotes/RemoveVehicle/${id}`);
     }
 
     getCalculatedQuote(id: number) {
