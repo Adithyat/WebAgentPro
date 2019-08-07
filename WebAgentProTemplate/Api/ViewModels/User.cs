@@ -10,5 +10,7 @@ namespace WebAgentPro.ViewModels
         public IList<string> Roles { get; set; } = new List<string>();
         public string Token { get; set; }
         public bool IsActive { get; set; }
+
+        public string UserId { get; set; }
     }
 }

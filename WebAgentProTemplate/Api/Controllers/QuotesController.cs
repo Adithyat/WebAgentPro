@@ -52,6 +52,7 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return NotFound();
             }
+            /**
             Console.WriteLine(quote.UserId);
             Console.WriteLine(s.SingleOrDefault(p => p.Type == "strID")?.Value);
 
@@ -61,6 +62,7 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return Forbid("Only managers and the agent who issued the quote can see this");
             }
+            */
 
             return quote;
         }
