@@ -10,13 +10,13 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
+import { ManagerDiscountFormComponent } from './manager-discount-form/manager-discount-form.component';
 import { NgModule } from '@angular/core';
 
 
 
 const appRoutes: Routes = [
     { path: '',         component: HomeComponent,   canActivate: [AuthGuard] },
-    { path: 'home',         component: HomeComponent,   canActivate: [AuthGuard] },
     { path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard] },
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'all-quotes', component: ListQuotesComponent, canActivate: [AuthGuard] },
@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     { path: 'users',    component: UsersComponent,  canActivate: [AuthGuard], data: { roles: [Role.Manager] }},
     { path: 'login',    component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-
+    { path: 'manage-discounts', component: ManagerDiscountFormComponent }
     // otherwise redirect to home
     //{ path: '**', redirectTo: '' }
 ];
