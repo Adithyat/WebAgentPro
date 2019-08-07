@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '@app/_services';
 import { QuoteService } from '@app/_services/quote.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { QuoteReceipt } from '@app/_models/quotereceipt';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -11,11 +13,21 @@ import { Pipe, PipeTransform } from '@angular/core';
     styleUrls: ['./form-summary.component.css']
 })
 export class FormSummaryComponent implements OnInit {
-    CQ: QuoteReceipt = new QuoteReceipt;
+    quoteId: number;
+    calculatedQuote: QuoteReceipt = new QuoteReceipt;
+    private quoteIdSubscription: Subscription;
+    prevCarrier: String[] = [
+        'N/A',
+        'Lizard Insurance',
+        'Pervasive Insurance'
+    ];
     constructor(
-        private quoteService: QuoteService
+        private quoteService: QuoteService,
+        private alertService: AlertService,
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
-
+    /*
     previousCarrier: string;
     lastFour: string;
     month: string;
@@ -24,64 +36,98 @@ export class FormSummaryComponent implements OnInit {
     birthday: string;
     totalQuoteDiscount: number;
     totalDiscount: number;
+    */
 
     ngOnInit() {
-        //console.log(this.formService.getCalculatedQuote());
+        // console.log(this.formService.getCalculatedQuote());
         /*
         this.quoteService.getQuote(this.formService.getQid())
         .subscribe(
-          returnedQuote => { 
+          returnedQuote => {
             console.log(returnedQuote)
           });
         */
-        this.quoteService.getCalculatedQuote(1)
-            .subscribe(QuoteReceipt => {
-                console.log(QuoteReceipt)
-                this.CQ = QuoteReceipt;
-                console.log(this.CQ);
 
-                this.lastFour = this.CQ.quote.q_SSN.substring(5);
+    }
+    stepInit() {
+        //console.log(this.calculatedQuote);
+        this.quoteIdSubscription = this.route.queryParams.subscribe(
+            params => {
+                // this.widgetID = +params['id'];
+                this.quoteId = +params['id'] || null;
+                console.log(this.quoteId);
+                if (this.quoteId) {
+                  // this.editQuote();
+                  this.getCalculatedQuote();
 
-                // 2019-08-13T00:00:00
-                this.month = this.CQ.quote.q_DateOfBirth.substring(5, 7);
-                this.day = this.CQ.quote.q_DateOfBirth.substring(8, 10);
-                this.year = this.CQ.quote.q_DateOfBirth.substring(0, 4);
-
-                this.totalQuoteDiscount = this.CQ.baseCost - this.CQ.finalCost;
-                    
-
-                this.birthday = this.month + "/" + this.day + "/" + this.year;
-
-                console.log(this.CQ.quote.previousCarrier);
-                switch (this.CQ.quote.previousCarrier) {
-                    case 0:
-                        this.previousCarrier = 'N/A';
-                        break;
-                    case 1:
-                        this.previousCarrier = 'Lizard Insurance';
-                        break;
-                    case 2:
-                        this.previousCarrier = 'Pervasive Insurance';
-                        break;
-                    default:
-                        this.previousCarrier = 'test';
-                        break;
+                } else {
+                  // this.newQuote();
+                  this.router.navigate(['/quotes']);
                 }
+            });
+    }
 
-            })
+    getCalculatedQuote(){
+        this.quoteService.getCalculatedQuote(this.quoteId)
+        .subscribe(returnedQuoteReceipt => {
+            console.log(returnedQuoteReceipt);
+            this.calculatedQuote = returnedQuoteReceipt;
+            // this.totalQuoteDiscount = this.CQ.baseCost - this.CQ.finalCost
+            //console.log(this.calculatedQuote);
+
+            /*
+            this.lastFour = this.CQ.quote.q_SSN.substring(5);
+
+            // 2019-08-13T00:00:00
+            this.month = this.CQ.quote.q_DateOfBirth.substring(5, 7);
+            this.day = this.CQ.quote.q_DateOfBirth.substring(8, 10);
+            this.year = this.CQ.quote.q_DateOfBirth.substring(0, 4);
+
+            this.totalQuoteDiscount = this.CQ.baseCost - this.CQ.finalCost;
+
+
+            this.birthday = this.month + '/' + this.day + '/' + this.year;
+
+            console.log(this.CQ.quote.previousCarrier);
+            switch (this.CQ.quote.previousCarrier) {
+                case 0:
+                    this.previousCarrier = 'N/A';
+                    break;
+                case 1:
+                    this.previousCarrier = 'Lizard Insurance';
+                    break;
+                case 2:
+                    this.previousCarrier = 'Pervasive Insurance';
+                    break;
+                default:
+                    this.previousCarrier = 'test';
+                    break;
+            }
+            */
+
+        });
 
     }
 
     getDiscountValue(discount) {
-        if (discount < 0)
+        if (discount < 0) {
             return `+$${Math.abs(discount).toFixed(2)}`;
+        }
         return `-$${Math.abs(discount).toFixed(2)}`;
     }
 
     getTotalDiscountValue(total) {
-        this.totalDiscount = total.baseCost - total.finalCost;
-        if (this.totalDiscount < 0)
-            return `+$${Math.abs(this.totalDiscount).toFixed(2)}`;
-        return `-$${Math.abs(this.totalDiscount).toFixed(2)}`;
+        const totalDiscount = total.baseCost - total.finalCost;
+        if (totalDiscount < 0) {
+            return `+$${Math.abs(totalDiscount).toFixed(2)}`;
+        }
+        return `-$${Math.abs(totalDiscount).toFixed(2)}`;
+    }
+
+    saveForLater(){
+        this.router.navigate(['/']);
+    }
+    submitQuote(){
+
     }
 }
