@@ -78,9 +78,10 @@
                   <div class="form-group col-xs-12 col-lg-6">
                       <label for="previousCarrier">Previous Carrier</label>
                       <select id="previousCarrier" name="previousCarrier" #previousCarrier="ngModel" [(ngModel)]="quote.previousCarrier" class="form-control" required>
-                          <option value="0" selected>N/A</option>
+                          <option value="0" selected>None</option>
                           <option value="1">Lizard Insurance</option>
                           <option value="2">Pervasive Insurance</option>
+                          <option value="3">Other Carrier</option>
                       </select>
                       <div [hidden]="previousCarrier.valid || previousCarrier.untouched" class="alert alert-danger">Previous Carrier is required.</div>
                   </div>

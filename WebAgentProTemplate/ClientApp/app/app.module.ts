@@ -37,7 +37,6 @@ import { FormDriverComponent } from './quote-form/form-driver/form-driver.compon
 import { FormVehicleComponent } from './quote-form/form-vehicle/form-vehicle.component';
 import { FormNavbarComponent } from './quote-form/form-navbar/form-navbar.component';
 
-import { DynamicFormDriverCardComponent } from './dynamic-form-driver-card/dynamic-form-driver-card.component';
 import { SectionComponent } from './section.component';
 import { FormSummaryComponent } from './quote-form/form-summary/form-summary.component';
 
@@ -71,7 +70,6 @@ import { FormSummaryComponent } from './quote-form/form-summary/form-summary.com
         ListQuotesComponent,
         FormCustomerComponent,
         FormDriverComponent,
-        DynamicFormDriverCardComponent,
         SectionComponent,
         FormVehicleComponent,
         FormSummaryComponent,
@@ -86,8 +84,7 @@ import { FormSummaryComponent } from './quote-form/form-summary/form-summary.com
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [DynamicFormDriverCardComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }
