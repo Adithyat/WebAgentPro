@@ -35,7 +35,15 @@ export class QuoteFormComponent implements OnInit {
   goToSummary(){
     this.vehicle.saveVehicles();
     this.summary.stepInit();
-  }
+    }
 
-
+    goBackToVehicle() {
+        this.vehicle.stepInit();
+    }
+    goBackToDriver() {
+        this.driver.stepInit();
+    }
+    goBackToCustomer() {
+        this.customer.ngOnInit();
+    }
 }

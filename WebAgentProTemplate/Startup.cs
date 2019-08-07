@@ -55,7 +55,7 @@ namespace WebAgentPro
             #endregion
 
             #region DATABASE               Register and seed your database
-            var connectionString = Configuration.GetConnectionString("WebAgentPro");
+            var connectionString = Configuration.GetConnectionString("WebAgentProAzure");
             services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));
 
             services.AddTransient<WapDbSeeder>();

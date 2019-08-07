@@ -65,8 +65,17 @@ export class FormVehicleComponent implements OnInit {
         this.quote.quoteVehicles.push(vehicle);
     }
 
-    removeVehicle(i) {
+    removeVehicle(vehicle, i) {
         this.quote.quoteVehicles.splice(i, 1);
+        if (vehicle.vehicleId != null) {
+            this.quoteService.deleteVehicle(vehicle.vehicleId).subscribe(
+                response => {
+                    this.alertService.success('Vehicle Removed.', false);
+                },
+                error => {
+                    this.alertService.error('Vehicle Remove Failed.', false);
+                });
+        }
     }
 
     saveVehicles() {
@@ -75,7 +84,9 @@ export class FormVehicleComponent implements OnInit {
             response => {
               console.log(response);
               // this.newQuote();
-              this.alertService.success('Vehicle saved.', false);
+                this.alertService.success('Vehicle saved.', false);
+                this.quote = response;
+                console.log(this.quote.quoteVehicles);
             },
             error => {
               this.alertService.error('Vehicle save failed.', false);

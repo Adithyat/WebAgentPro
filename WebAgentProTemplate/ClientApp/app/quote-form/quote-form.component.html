@@ -8,7 +8,7 @@
     </mat-step>
     <mat-step label="Drivers">
         <div>
-            <button matStepperPrevious class="btn btn-outline-primary">Back</button>
+            <button matStepperPrevious (click)="goBackToCustomer()" class="btn btn-outline-primary">Back</button>
             <button matStepperNext (click)="goToVehicle()" class="btn btn-primary">Next</button>
         </div>
         <br />
@@ -16,7 +16,7 @@
     </mat-step>
     <mat-step label="Vehicles">
         <div>
-            <button matStepperPrevious class="btn btn-outline-primary">Back</button>
+            <button matStepperPrevious (click)="goBackToDriver()" class="btn btn-outline-primary">Back</button>
             <button matStepperNext (click)="goToSummary()" class="btn btn-primary">Next</button>
         </div>
         <br />
@@ -24,7 +24,7 @@
     </mat-step>
     <mat-step label="Quote Summary">
         <div>
-            <button matStepperPrevious class="btn btn-outline-primary">Back</button>
+            <button matStepperPrevious (click)="goBackToVehicle" class="btn btn-outline-primary">Back</button>
         </div>
         <br />
         <app-form-summary></app-form-summary>

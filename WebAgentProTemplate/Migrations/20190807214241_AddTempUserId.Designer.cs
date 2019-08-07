@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAgentPro.Data;
 
 namespace WebAgentProTemplate.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    partial class WapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190807214241_AddTempUserId")]
+    partial class AddTempUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
