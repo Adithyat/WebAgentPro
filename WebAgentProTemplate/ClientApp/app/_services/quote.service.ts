@@ -45,7 +45,7 @@ export class QuoteService {
     }
 
     putQuote(put: Quote, id: number) {
-        console.log(put);
+        //console.log(put);
         return this.http.put(`${this.apiUrl}/Quotes/${id}`, put);
     }
 

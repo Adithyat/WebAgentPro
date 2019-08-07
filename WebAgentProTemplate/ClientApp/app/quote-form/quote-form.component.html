@@ -13,18 +13,17 @@
         <app-form-driver></app-form-driver>
     </mat-step>
     <mat-step>
-        
         <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperNext (click)="goToSummary()">Next</button>
         </div>
+        <app-form-vehicle></app-form-vehicle>
     </mat-step>
     <mat-step>
-        
         <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
         </div>
+        <app-form-summary></app-form-summary>
     </mat-step>
           
 </mat-horizontal-stepper>

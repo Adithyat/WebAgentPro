@@ -39,8 +39,8 @@ export class ListQuotesComponent implements OnInit {
 
   getQuotes() {
     this.quoteService.getQuotes().subscribe(
-      returnedQuotes => { 
-        this.quotes = returnedQuotes;
+      returnedQuote => { 
+        this.quotes = returnedQuote;
         this.filteredQuotes = this.quotes; 
       });
     //console.log(this.filteredQuotes);

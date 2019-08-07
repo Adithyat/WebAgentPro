@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlertService } from '@app/_services';
 import { QuoteService } from '@app/_services/quote.service';
-import { VehicleService } from '@app/_services/vehicle.service';
+import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Vehicle } from '@app/_models/vehicle';
 import { Quote } from '@app/_models/quote';
-import { Driver } from '@app/_models/driver';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-vehicle',
@@ -13,19 +12,77 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./form-vehicle.component.css']
 })
 export class FormVehicleComponent implements OnInit {
-    vehicleEdit: Vehicle;
-    Did: number[]= new Array();
+    quote: Quote = new Quote;
+    private quoteIdSubscription: Subscription;
+
+
     constructor(
-        private quoteService: QuoteService, 
-        private vehicleService: VehicleService, 
-        private alertService: AlertService) { }
+        private quoteService: QuoteService,  
+        private alertService: AlertService,
+        private router: Router,
+        private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.createVehicle();
+        //this.createVehicle();
         //this.Did = this.quoteService.getDid();
-        console.log(this.Did);
+        //console.log(this.Did);
+    }
+    stepInit(){
+        this.quoteIdSubscription = this.route.queryParams.subscribe(
+            params => {
+                // this.widgetID = +params['id'];
+                this.quote.quoteId = +params['id'] || null;
+                console.log(this.quote.quoteId);
+                if (this.quote.quoteId) {
+                  // this.editQuote();
+                  this.getVehicles();
+
+                } else {
+                  // this.newQuote();
+                  this.router.navigate(['/quotes']);
+                }
+            });
+    }
+    
+    getVehicles(){
+        this.quoteService.getQuote(this.quote.quoteId)
+        .subscribe(
+          returnedQuote => {
+            this.quote = returnedQuote;
+            if (returnedQuote.quoteVehicles.length !== 0) {
+                //console.log(returnedQuote.quoteVehicles.length);
+                // this.quote.quoteDrivers.push.apply(returnedQuote.quoteDrivers);
+            } else {
+                this.addVehicle();
+            }
+
+            // console.log(returnedQuote.q_DateOfBirth);
+          });
     }
 
+    addVehicle() {
+        const vehicle = new Vehicle;
+        this.quote.quoteVehicles.push(vehicle);
+    }
+
+    removeVehicle(i) {
+        this.quote.quoteVehicles.splice(i, 1);
+    }
+
+    saveVehicles() {
+        console.log(this.quote.quoteVehicles);
+        this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
+            response => {
+              console.log(response);
+              // this.newQuote();
+              this.alertService.success('Vehicle saved.', false);
+            },
+            error => {
+              this.alertService.error('Vehicle save failed.', false);
+            });
+    }
+
+    /*
     createVehicle() {
         this.vehicleEdit = new Vehicle();
     }
@@ -34,7 +91,6 @@ export class FormVehicleComponent implements OnInit {
         this.alertService.success('Vehicle creation cancelled.');
         this.resetEdit();
     }
-    /*
     onSubmit() {
         console.log(this.createdQuoteId);
         this.vehicleEdit.quoteId = this.createdQuoteId;
@@ -47,7 +103,7 @@ export class FormVehicleComponent implements OnInit {
 
             this.saveCreate();
         }
-    }*/
+    }
 
     saveCreate() {
         //this.vehicleEdit.quoteId = this.quoteService.getQid();
@@ -76,6 +132,6 @@ export class FormVehicleComponent implements OnInit {
     cancelEdit() {
         this.alertService.success('Vehicle update cancelled.');
         this.resetEdit();
-    }
+    }*/
 
 }

@@ -24,8 +24,8 @@ export class HomeComponent {
 
     getQuotes() {
         this.quoteService.getQuotes().subscribe(
-            returnedQuotes => {
-                this.quotes = returnedQuotes;
+            returnedQuote => {
+                this.quotes = returnedQuote;
             });
     }
 }

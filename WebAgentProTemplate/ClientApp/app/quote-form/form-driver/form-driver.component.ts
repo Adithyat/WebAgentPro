@@ -68,7 +68,7 @@ export class FormDriverComponent {
           returnedQuote => {
             this.quote = returnedQuote;
             if (returnedQuote.quoteDrivers.length !== 0) {
-                console.log(returnedQuote.quoteDrivers.length);
+                //console.log(returnedQuote.quoteDrivers.length);
                 // this.quote.quoteDrivers.push.apply(returnedQuote.quoteDrivers);
             } else {
                 this.addDriver();
@@ -87,15 +87,16 @@ export class FormDriverComponent {
     }
 
     saveDrivers() {
-        console.log(this.quote.quoteDrivers);
+
+        console.log('saveDrivers');
         this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
             response => {
               console.log(response);
               // this.newQuote();
-              this.alertService.success('Driver updated.', false);
+              this.alertService.success('Driver saved.', false);
             },
             error => {
-              this.alertService.error('Driver update failed.', false);
+              this.alertService.error('Driver save failed.', false);
             });
     }
 

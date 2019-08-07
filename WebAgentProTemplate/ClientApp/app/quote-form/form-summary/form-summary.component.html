@@ -1,37 +1,37 @@
-
+<div class="col-12" *ngIf="(calculatedQuote | json) != '{}'">
 <div class="row col-12">
     <h4 class="col-12 text-center">AIA Quote is:</h4>
 </div>
 
 <div class="row col-12">
-    <h3 class="col-12 text-center">${{ CQ.finalCost.toFixed(2) }}</h3>
+    <h3 class="col-12 text-center">${{ (calculatedQuote.finalCost) | number: '1.2-2'}}</h3>
 </div>
 
 <div class="row col-12">
     <h4 class="col-lg-6 col-xs-12">CUSTOMER</h4>
-    <h4 class="col-lg-6 col-xs-12 right">TOTAL ${{ (100 + (CQ.finalCost - CQ.baseCost)).toFixed(2)   }}</h4>
+    <h4 class="col-lg-6 col-xs-12 right">TOTAL ${{ (100 + calculatedQuote.finalCost - calculatedQuote.baseCost) | number: '1.2-2'}}</h4>
 </div>
 
 <hr />
 
 <div class="row col-12">
     <div class="col-lg-6 col-xs-12">
-        <p>Name: {{ CQ.quote.q_FirstName }} {{ CQ.quote.q_LastName }}</p>
-        <p>Address: {{ CQ.quote.address }}</p>
-        <p>City, State, Zip: {{ CQ.quote.city }}, {{ CQ.quote.q_StateCode }} {{ CQ.quote.postalCode }}</p>
-        <p>SSN: XXX-XX-{{ lastFour }}</p>
-        <p>DOB: {{ birthday }}</p>
-        <p>E-Mail: {{ CQ.quote.q_Email }}</p>
-        <p>Previous Carrier: {{ previousCarrier }}</p>  
+        <p>Name: {{ calculatedQuote.quote.q_FirstName }} {{ calculatedQuote.quote.q_LastName }}</p>
+        <p>Address: {{ calculatedQuote.quote.address }}</p>
+        <p>City, State, Zip: {{ calculatedQuote.quote.city }}, {{ calculatedQuote.quote.q_StateCode }} {{ calculatedQuote.quote.postalCode }}</p>
+        <p>SSN: XXX-XX-{{ calculatedQuote.quote.q_SSN | slice:5:9 }}</p>
+        <p>DOB: {{ calculatedQuote.quote.q_DateOfBirth | date }}</p>
+        <p>E-Mail: {{ calculatedQuote.quote.q_Email }}</p>
+        <p>Previous Carrier: {{ prevCarrier[calculatedQuote.quote.previousCarrier] }}</p>  
     </div>
 
     <div class="col-lg-6 col-xs-12">
-        <p style="font-weight: bold">Customer Discounts&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(totalQuoteDiscount) }}</p>
-        <p [hidden]="CQ.quoteAppliedDiscounts.ClaimInLastFiveYears == null" style="font-weight: bold">Claim in Last Five Years&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.ClaimInLastFiveYears) }}</p>
-        <p [hidden]="CQ.quoteAppliedDiscounts.LessThanThreeYearsDriving == null" style="font-weight: bold">Less Than Three Years Driving&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.LessThanThreeYearsDriving) }}</p>
-        <p [hidden]="CQ.quoteAppliedDiscounts.MulticarDiscount == null" style="font-weight: bold">Multicar Discount&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.MulticarDiscount) }}</p>
-        <p [hidden]="CQ.quoteAppliedDiscounts.MovingViolationsInLast5Years == null" style="font-weight: bold">Moving Violations in Last Five Years&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.MovingViolationsInLast5Years) }}</p>
-        <p [hidden]="CQ.quoteAppliedDiscounts.PreviousCarrier == null" style="font-weight: bold">Previous Carrier Discount&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(CQ.quoteAppliedDiscounts.PreviousCarrier) }}</p>
+        <p style="font-weight: bold">Customer Discounts&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(calculatedQuote.baseCost-calculatedQuote.finalCost) }}</p>
+        <p [hidden]="calculatedQuote.quoteAppliedDiscounts.ClaimInLastFiveYears == null" style="font-weight: bold">Claim in Last Five Years&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(calculatedQuote.quoteAppliedDiscounts.ClaimInLastFiveYears) }}</p>
+        <p [hidden]="calculatedQuote.quoteAppliedDiscounts.LessThanThreeYearsDriving == null" style="font-weight: bold">Less Than Three Years Driving&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(calculatedQuote.quoteAppliedDiscounts.LessThanThreeYearsDriving) }}</p>
+        <p [hidden]="calculatedQuote.quoteAppliedDiscounts.MulticarDiscount == null" style="font-weight: bold">Multicar Discount&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(calculatedQuote.quoteAppliedDiscounts.MulticarDiscount) }}</p>
+        <p [hidden]="calculatedQuote.quoteAppliedDiscounts.MovingViolationsInLast5Years == null" style="font-weight: bold">Moving Violations in Last Five Years&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(calculatedQuote.quoteAppliedDiscounts.MovingViolationsInLast5Years) }}</p>
+        <p [hidden]="calculatedQuote.quoteAppliedDiscounts.PreviousCarrier == null" style="font-weight: bold">Previous Carrier Discount&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(calculatedQuote.quoteAppliedDiscounts.PreviousCarrier) }}</p>
     </div>
 </div>
 
@@ -39,51 +39,53 @@
 
 <div class="row col-12">
     <h4 class="col-lg-6 col-xs-12">DRIVERS</h4>
-    <h4 class="col-lg-6 col-xs-12 right">TOTAL ${{ CQ.sumDriverCost.toFixed(2) }}</h4>
+    <h4 class="col-lg-6 col-xs-12 right">TOTAL ${{ (calculatedQuote.sumDriverCost)  | number: '1.2-2' }}</h4>
 </div>
 
 <hr />
 
-<div *ngFor="let d of CQ.driverReceipts; let i = index" [attr.data-index]="i" class="row col-12">
-    <div class="col-lg-4 col-xs-12">
-        <p style="font-weight: bold">Driver {{ i+1 }}</p>
-        <p>Name: {{ d.driver.d_FirstName }} {{ d.driver.d_LastName }}</p>
-        <p>SSN: XXX-XX-{{ d.driver.d_SSN.substring(5) }}</p>
-        <p>DOB: {{ d.driver.d_DateOfBirth.substring(5, 7) }}/{{ d.driver.d_DateOfBirth.substring(8, 10) }}/{{ d.driver.d_DateOfBirth.substring(0, 4) }}<!-- driver *number* dob --></p>
+
+    <div  *ngFor="let d of calculatedQuote.driverReceipts; let i = index" class="row col-12">
+        <div class="col-lg-4 col-xs-12">
+            <p style="font-weight: bold">Driver {{ i+1 }}</p>
+            <p>Name: {{ d.driver.d_FirstName }} {{ d.driver.d_LastName }}</p>
+            <p>SSN: XXX-XX-{{ d.driver.d_SSN | slice: 5:8 }}</p>
+            <p>DOB: {{ d.driver.d_DateOfBirth }}<!-- driver *number* dob --></p>
+        </div>
+        <div class="col-lg-2 col-xs-12">
+            <p style="font-weight: bold">${{ d.finalCost }}</p>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+            <p style="font-weight: bold">Driver {{ i+1 }} Discounts&nbsp;&nbsp;&nbsp;&nbsp; {{ getTotalDiscountValue(d) }}</p>
+            <p [hidden]="d.driverAppliedDiscounts.SafeDrivingSchool == null" style="font-weight: bold">Safe Driving School Attended&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(d.driverAppliedDiscounts.SafeDrivingSchool) }}</p>
+            <p [hidden]="d.driverAppliedDiscounts.DriverUnderAgeOf23 == null" style="font-weight: bold">Driver Under Age of 23&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(d.driverAppliedDiscounts.DriverUnderAgeOf23) }}</p>
+        </div>
     </div>
-    <div class="col-lg-2 col-xs-12">
-        <p style="font-weight: bold">${{ d.finalCost }}</p>
-    </div>
-    <div class="col-lg-6 col-xs-12">
-        <p style="font-weight: bold">Driver {{ i+1 }} Discounts&nbsp;&nbsp;&nbsp;&nbsp; {{ getTotalDiscountValue(d) }}</p>
-        <p [hidden]="d.driverAppliedDiscounts.SafeDrivingSchool == null" style="font-weight: bold">Safe Driving School Attended&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(d.driverAppliedDiscounts.SafeDrivingSchool) }}</p>
-        <p [hidden]="d.driverAppliedDiscounts.DriverUnderAgeOf23 == null" style="font-weight: bold">Driver Under Age of 23&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(d.driverAppliedDiscounts.DriverUnderAgeOf23) }}</p>
-    </div>
-</div>
+
 
 <br />
 
 <div class="row col-12">
     <h4 class="col-lg-6 col-xs-12">VEHICLES</h4>
-    <h4 class="col-lg-6 col-xs-12 right">TOTAL ${{ CQ.sumVehicleCost.toFixed(2) }}</h4>
+    <h4 class="col-lg-6 col-xs-12 right">TOTAL ${{ (calculatedQuote.sumVehicleCost) | number: '1.2-2' }}</h4>
 </div>
 
 <hr />
-
-<div *ngFor="let v of CQ.vehicleReceipts; let i=index" [attr.data-index]="i" class="row col-12">
+<!--
+<div *ngFor="let v of calculatedQuote.vehicleReceipts; let i=index" class="row col-12">
     <div class="col-lg-4 col-xs-12">
         <p style="font-weight: bold">Vehicle {{ i+1 }}</p>
-        <p>Primary Driver: {{ v.primaryDriver.d_FirstName }} {{ v.primaryDriver.d_FirstName }}</p> <!-- change to name not number -->
+        <p>Primary Driver: {{ v.primaryDriver.d_FirstName }} {{ v.primaryDriver.d_LastName }}</p>
         <p>VIN: {{ v.vehicle.vin }}</p>
         <p>Make/Model: {{ v.vehicle.make }} {{ v.vehicle.model }}</p>
         <p>Year: {{ v.vehicle.year }}</p>
         <p>Miles Driven to Work: {{ v.vehicle.milesDrivenToWork }}</p>
         <p>Days Driven per Week: {{ v.vehicle.daysDrivenPerWeek }}</p>
-        <p>Current Value: ${{ v.vehicle.currentValue.toFixed(2) }}</p> <!-- format????? -->
+        <p>Current Value: ${{ v.vehicle.currentValue  | number: 2  }}</p>
         <p>Annual Mileage: {{ v.vehicle.annualMileage }}</p>
     </div>
     <div class="col-lg-2 col-xs-12">
-        <p style="font-weight: bold">${{ v.finalCost.toFixed(2) }}</p>
+        <p style="font-weight: bold">${{ v.finalCost  | number: 2  }}</p>
     </div>
     <div class="col-lg-6 col-xs-12">
         <p style="font-weight: bold">Vehicle {{ i+1 }} Discounts:&nbsp;&nbsp;&nbsp;&nbsp;{{ getTotalDiscountValue(v) }}</p>
@@ -99,7 +101,7 @@
         <p [hidden]="v.vehicleAppliedDiscounts.PrimaryOperator == null" style="font-weight: bold">Primary Driver Discount:&nbsp;&nbsp;&nbsp;&nbsp;{{ getDiscountValue(v.vehicleAppliedDiscounts.PrimaryOperator) }}</p>
 
     </div>
-</div>
+</div>-->
 
 <br />
 
@@ -125,12 +127,13 @@
 
 <div class="row col-12">
     <div class="col-lg-1 col-xs-12"></div>
-    <button class="btn col-lg-4 col-xs-12">
+    <button class="btn col-lg-4 col-xs-12" (click)="saveForLater()">
         Save for Later
     </button>
     <div class="col-lg-2 col-xs-12"></div>
-    <button class="btn col-lg-4 col-xs-12">
+    <button class="btn col-lg-4 col-xs-12" (click)="submitQuote()">
         Submit Quote
     </button>
     <div class="col-lg-1 col-xs-12"></div>
+</div>
 </div>

@@ -44,14 +44,14 @@ export class FormCustomerComponent implements OnInit {
   }
 
   newQuote() {
-    console.log('new');
+    //console.log('new');
     this.quote = new Quote;
   }
 
   editQuote() {
     // console.log(this.route.params);
     // this.router.navigate([`/quotes/${this.quote.quoteId}`]);
-    console.log('edit');
+    //console.log('edit');
     this.quoteService.getQuote(this.quote.quoteId)
     .subscribe(
       returnedQuote => {
@@ -63,10 +63,10 @@ export class FormCustomerComponent implements OnInit {
   save() {
     console.log(this.quote.quoteId);
     if (this.quote.quoteId) {
-      console.log('savechange');
+      //console.log('savechange');
       this.saveChange();
     } else {
-      console.log('savecreate');
+      //console.log('savecreate');
       this.saveCreate();
     }
   }
@@ -76,11 +76,11 @@ export class FormCustomerComponent implements OnInit {
     console.log('savecreate');
     this.quoteService.postQuote(this.quote).subscribe(
         returnedQuote => {
-
+            console.log(returnedQuote);
             // this.quoteService.setQId(returnedQuote.quoteId);
             // this.newQuote();
             this.alertService.success('Quote created.', false);
-            // const url = this.router.createUrlTree([returnedQuote.quoteId], {relativeTo: this.route}).toString();
+            // const url = this.router.createUrlTree([returnedQ`uote.quoteId], {relativeTo: this.route}).toString();
             // console.log(url);
             // tslint:disable-next-line: no-unused-expression
             // this.location.replaceState[url];
@@ -97,13 +97,13 @@ export class FormCustomerComponent implements OnInit {
     console.log('savechange');
     this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
           response => {
-            // console.log(response);
+            console.log(response);
             // this.newQuote();
-            this.alertService.success('Quote updated.', false);
+            this.alertService.success('Quote saved.', false);
           },
           error => {
             this.newQuote();
-            this.alertService.error('Quote update failed.', false);
+            this.alertService.error('Quote save failed.', false);
           });
   }
 
