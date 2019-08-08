@@ -76,6 +76,7 @@ export class FormCustomerComponent implements OnInit {
                 this.router.navigate(['/']);
             }
             this.quote = returnedQuote;
+            this.updateDates();
             console.log(returnedQuote);
         },
         error => {
@@ -86,6 +87,12 @@ export class FormCustomerComponent implements OnInit {
         ;
   }
 
+    updateDates() {
+        this.quote.q_DateOfBirth = this.quote.q_DateOfBirth.substring(0, 10);
+        for (let driver of this.quote.quoteDrivers) {
+            driver.d_DateOfBirth = driver.d_DateOfBirth.substring(0, 10)
+        }
+    }
   save() {
     console.log(this.quote.quoteId);
     if (this.quote.quoteId) {

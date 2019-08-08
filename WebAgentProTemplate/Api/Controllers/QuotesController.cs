@@ -182,7 +182,26 @@ namespace WebAgentProTemplate.Api.Controllers
                     }
                 }
             }
-
+            if(quote.QuoteStatus.Value == QuoteStatus.Submitted)
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!QuoteExists(id))
+                    {
+                        return NotFound("Quote does not exist");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            
 
             return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
         }
