@@ -66,6 +66,7 @@ export class FormCustomerComponent implements OnInit {
       //console.log('savechange');
       this.saveChange();
     } else {
+      
       //console.log('savecreate');
       this.saveCreate();
     }
@@ -74,6 +75,7 @@ export class FormCustomerComponent implements OnInit {
 
   saveCreate() {
     console.log('savecreate');
+   
     this.quoteService.postQuote(this.quote).subscribe(
         returnedQuote => {
             console.log(returnedQuote);

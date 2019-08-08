@@ -36,7 +36,13 @@ export class ListQuotesComponent implements OnInit {
     filterBy = filterBy.toLocaleLowerCase();
     return this.quotes.filter((quote: Quote) =>
     (quote.q_FirstName !== null && quote.q_FirstName.toLocaleLowerCase().indexOf(filterBy) !== -1
-      || quote.q_LastName !== null && quote.q_LastName.toLocaleLowerCase().indexOf(filterBy) !== -1));
+      || quote.q_LastName !== null && quote.q_LastName.toLocaleLowerCase().indexOf(filterBy) !== -1
+      || (quote.q_FirstName + ' ' + quote.q_LastName) !== null && (quote.q_FirstName + ' ' + quote.q_LastName).toLocaleLowerCase().indexOf(filterBy) !== -1
+      || quote.quoteId !== null && quote.quoteId.toString().indexOf(filterBy) !== -1
+      || quote.city !== null && quote.city.indexOf(filterBy) !== -1
+      || quote.q_StateCode !== null && quote.q_StateCode.indexOf(filterBy) !== -1
+      || quote.postalCode !== null && quote.postalCode.indexOf(filterBy) !== -1
+      ));
     // || (quote.q_LastName !== null && quote.q_LastName.toLocaleLowerCase().indexOf(filterBy) !== -1))
 
   }
@@ -56,6 +62,32 @@ export class ListQuotesComponent implements OnInit {
 
   editQuote(id: number) {
     this.router.navigate(['quotes'], { queryParams: { id: id } });
+  }
+
+  copyQuote(id: number) {
+    const copyQuote: Quote = this.quotes.find((quote: Quote) => quote.quoteId === id);
+    const copiedQuote: Quote = new Quote;
+    copiedQuote.address = copyQuote.address;
+    copiedQuote.city = copyQuote.city;
+    copiedQuote.q_StateCode = copyQuote.q_StateCode;
+    copiedQuote.postalCode = copyQuote.postalCode;
+    copiedQuote.previousCarrier = copyQuote.previousCarrier;
+    copiedQuote.lessThanThreeYearsDriving = copyQuote.lessThanThreeYearsDriving;
+    copiedQuote.claimInLastFiveYears = copyQuote.claimInLastFiveYears;
+    copiedQuote.movingViolationInLastFiveYears = copyQuote.movingViolationInLastFiveYears;
+    copiedQuote.forceMultiCarDiscount = copyQuote.forceMultiCarDiscount;
+    copiedQuote.quoteDrivers = copyQuote.quoteDrivers;
+    copiedQuote.quoteVehicles = copyQuote.quoteVehicles;
+    console.log(copyQuote);
+    this.quoteService.postQuote(copyQuote).subscribe(
+      returnedQuote => {
+          console.log(returnedQuote);
+          this.alertService.success('Quote copied.', false);
+          this.router.navigate(['quotes'], { queryParams: { id: returnedQuote.quoteId } });
+      },
+      error => {
+        this.alertService.error('Quote copy failed.', false);
+      });
   }
 
   deleteQuote(id: number) {

@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     { path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard] },
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'all-quotes', component: ListQuotesComponent, canActivate: [AuthGuard] },
-    {path: 'quotes', component: QuoteFormComponent, canActivate: [AuthGuard]},
+    { path: 'quotes', component: QuoteFormComponent, canActivate: [AuthGuard]},
     //{path: 'quotes/:id', component: QuoteFormComponent, canActivate: [AuthGuard]},
     // { path: 'add-drivers', component: FormDriverComponent, canActivate: [AuthGuard] },
     { path: 'users',    component: UsersComponent,  canActivate: [AuthGuard], data: { roles: [Role.Manager] }},

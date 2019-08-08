@@ -1,156 +1,53 @@
 <div class='card'>
-    <div class='card-body'>
-        <div class="row">
-            <div class="col-4 offset-4">
-                <button class="btn btn-success col-12">Advanced Search</button>
-            </div>
-        </div>
-        <br />
-        <div class="card col-8 center-block">
-            <div class='card-body col-12'>
-                <h4>Advanced Search</h4>
-                <hr />
-                <div class="row">
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Customer First Name</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Customer Last Name</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Quote Number</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Quote Amount</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Phone Number</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Email</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Date Created</label>
-                        <input type="date" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>Date Submitted</label>
-                        <input type="date" class="form-control" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 col-xs-12">
-                        <label>City</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-3 col-xs-12">
-                        <label>State</label>
-                        <select class="form-control">
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IN">Indiana</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NV">Nevada</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="OH">Ohio</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="OR">Oregon</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="TX">Texas</option>
-                            <option value="UT">Utah</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WA">Washington</option>
-                            <option value="WV">West Virginia</option>
-                            <option value="WI">Wisconsin</option>
-                            <option value="WY">Wyoming</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3 col-xs-12">
-                        <label>Zip Code</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <!--
-            <div class='col-md-2'>Filter by:</div>
-            <div class='col-md-4'>
+  <div class='card-header'>
+    <h1>Quotes</h1>
+  </div>
+  <div class='card-body'>
+      <div class="container">
+          <div class='row'>
+              <div class='col-md-2'>Quick Search:</div>
+              <div class='col-md-4'>
                 <input type='text'
-                       [(ngModel)]='listFilter' />
-            </div>
-            -->
-            </div>
-        </div>
-        <div class="container" style="text-align: center">
-            <div style="display: inline-block"><h3>Open ({{quotes.length}})</h3></div>
-            <div style="display: inline-block"><h3>Submitted ({{quotes.length}})</h3></div>
-        </div>
-        <div class='table-responsive'>
-            <table class='table'
-                   *ngIf='quotes && quotes.length'>
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Creation Date</th>
-                        <th>Quote Number</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor='let quote of filteredQuotes'>
-                        <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
-                        <td></td>
-                        <td>{{ quote.quoteId }}</td>
-                        <td>
-                            <button (click)="editQuote(quote.quoteId)" class="btn btn-secondary">Edit</button>
-                            <button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                [(ngModel)]='listFilter'/>
+              </div>
+          </div>
+      </div>
+
+
+      
+      <div class="container" style="text-align: center">
+          <div style="display: inline-block"><h3 >Open ({{quotes.length}})</h3></div>
+          <div style="display: inline-block"><h3 >Submitted ({{quotes.length}})</h3></div>
+      </div>
+    <div class='table-responsive'>
+      <table class='table'
+             *ngIf='quotes && quotes.length'>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Creation Date</th>
+            <th>Quote Number</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let quote of filteredQuotes'>
+              <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
+              <td></td>
+            <td>{{ quote.quoteId }}</td>
+            <td>
+              <button (click)="editQuote(quote.quoteId)" class="btn btn-secondary">Edit</button>
+              <button (click)="copyQuote(quote.quoteId)" class="btn btn-secondary">Copy</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
+
+
+
+
+
+

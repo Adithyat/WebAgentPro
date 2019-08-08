@@ -23,6 +23,7 @@ export class QuoteFormComponent implements OnInit {
 
   ngOnInit() {
     //this.form = this.FormDataService.getFormData();
+    this.customer.ngOnInit();
   }
   goToDriver(){
     this.customer.save();
