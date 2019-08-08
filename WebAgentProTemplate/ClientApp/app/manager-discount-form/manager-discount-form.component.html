@@ -1,148 +1,151 @@
-<div class="col-12">
-    <!-- Search state -->
-    <div class="row col-12">
-        <div class="form-group col-lg-3">
-            <h4>Select a State</h4>
-            <select class="form-control">
-                <option value="CT">Connecticut</option>
-                <option value="ME">Maine</option>
-                <option value="MA">Massachusetts</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NY">New York</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="SC">South Carolina</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WV">West Virginia</option>
-            </select>
+
+<div class="col-12" >
+    <form #discountForm="ngForm" >
+        <div class="row col-12">
+            <div class="form-group col-lg-3">
+                <label for="stateCode">Select a State</label>
+                <select id="stateCode"  #stateCode="ngModel"  [(ngModel)]="discount.stateCode" name="stateCode" (change)="changeDropDown(discount.stateCode)">
+                    <option value="CT">Connecticut</option>
+                    <option value="ME">Maine</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NY">New York</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WV">West Virginia</option>
+                </select>
+            </div>
         </div>
-    </div>
-
-
-    <br />
-
-    <div class="col-12">
-        <form>
-            <div class="card">
-                <div class="card-header">
-                    <h4>Customer Discounts</h4>
-                </div>
-                <div class="card-body col-12">
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Claim in Last Five Years</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Multicar Discount</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Less than Three Years Driving</label>
-                            <input type="text" class="form-control" />
-                        </div>
+    
+    
+        <br />
+        <div >
+        <div class="col-12" >
+            
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Customer Discounts</h4>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Moving Violations in Last 5 Years</label>
-                            <input type="text" class="form-control" />
+                    <div class="card-body col-12">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="claimInLastFiveYears">Claim in Last Five Years</label>
+                                <input id="claimInLastFiveYears" name="claimInLastFiveYears" #claimInLastFiveYears="ngModel" type="text" class="form-control"  [(ngModel)]="discount.claimInLastFiveYears"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="multiCarDiscount">Multicar Discount</label>
+                                <input id="multiCarDiscount" name="multiCarDiscount" #multiCarDiscount="ngModel" type="text" class="form-control" [(ngModel)]="discount.multiCarDiscount"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="customerLessThanThreeYearsDriving">Less than Three Years Driving</label>
+                                <input id="customerLessThanThreeYearsDriving" name="customerLessThanThreeYearsDriving" #customerLessThanThreeYearsDriving="ngModel" type="text" class="form-control" [(ngModel)]="discount.customerLessThanThreeYearsDriving"/>
+                            </div>
                         </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Previous Carrier: Lizard Insurance</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Previous Carrier: Pervasive Insurance</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="col-12">
-        <form>
-            <div class="card">
-                <div class="card-header">
-                    <h4>Driver Discounts</h4>
-                </div>
-                <div class="card-body col-12">
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Safe Driving School</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Driver Under Age of 23</label>
-                            <input type="text" class="form-control" />
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="movingViolationInLastFiveYears">Moving Violations in Last 5 Years</label>
+                                <input id="movingViolationInLastFiveYears" name="movingViolationInLastFiveYears" #movingViolationInLastFiveYears="ngModel" type="text" class="form-control" [(ngModel)]="discount.movingViolationInLastFiveYears"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="previousCarrierLizardIns">Previous Carrier: Lizard Insurance</label>
+                                <input id="previousCarrierLizardIns" name="previousCarrierLizardIns" #previousCarrierLizardIns="ngModel" type="text" class="form-control" [(ngModel)]="discount.previousCarrierLizardIns"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="previousCarrierPervasiveStateIns">Previous Carrier: Pervasive Insurance</label>
+                                <input id="previousCarrierPervasiveStateIns" name="previousCarrierPervasiveStateIns" #previousCarrierPervasiveStateIns="ngModel" type="text" class="form-control" [(ngModel)]="discount.previousCarrierPervasiveStateIns"/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="col-12">
-        <form>
-            <div class="card">
-                <div class="card-header">
-                    <h4>Vehicle Discounts</h4>
-                </div>
-                <div class="card-body col-12">
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Antilock Brakes</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Antitheft</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Daytime Running Lights</label>
-                            <input type="text" class="form-control" />
-                        </div>
+            
+        </div>
+    
+        <div class="col-12">
+            
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Driver Discounts</h4>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Garage Address Different than Residence</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Passive Restraints</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Reduced Use Discount</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Vehicle Annual Mileage Less than 4000</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Days Driven per Week Greater than 4</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-4">
-                            <label>Miles Driven to Work Less than 25</label>
-                            <input type="text" class="form-control" />
+                    <div class="card-body col-12">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="safeDrivingSchoolAttended">Safe Driving School</label>
+                                <input  id="safeDrivingSchoolAttended" name="safeDrivingSchoolAttended" #safeDrivingSchoolAttended="ngModel" type="text" class="form-control" [(ngModel)]="discount.safeDrivingSchoolAttended"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="driverLessThanTwentyThree">Driver Under Age of 23</label>
+                                <input  id="driverLessThanTwentyThree" name="driverLessThanTwentyThree" #driverLessThanTwentyThree="ngModel" type="text" class="form-control" [(ngModel)]="discount.driverLessThanTwentyThree"/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-
-    <br />
-
-    <div class="col-12">
-        <button class="btn btn-success pull-right">
-            Save
-        </button>
-    </div>
-
+            
+        </div>
+    
+        <div class="col-12">
+            
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Vehicle Discounts</h4>
+                    </div>
+                    <div class="card-body col-12">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="antiLockBrakes">Antilock Brakes</label>
+                                <input  id="antiLockBrakes" name="antiLockBrakes" #antiLockBrakes="ngModel" type="text" class="form-control" [(ngModel)]="discount.antiLockBrakes"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="antiTheftInstalled">Antitheft</label>
+                                <input  id="antiTheftInstalled" name="antiTheftInstalled" #antiTheftInstalled="ngModel" type="text" class="form-control" [(ngModel)]="discount.antiTheftInstalled"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="dayTimeRunningLights">Daytime Running Lights</label>
+                                <input  id="dayTimeRunningLights" name="dayTimeRunningLights" #dayTimeRunningLights="ngModel" type="text" class="form-control" [(ngModel)]="discount.dayTimeRunningLights"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="garageAddressDifferentFromResidence">Garage Address Different than Residence</label>
+                                <input  id="garageAddressDifferentFromResidence" name="garageAddressDifferentFromResidence" #garageAddressDifferentFromResidence="ngModel" type="text" class="form-control" [(ngModel)]="discount.garageAddressDifferentFromResidence"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="passiveRestraints">Passive Restraints</label>
+                                <input  id="passiveRestraints" name="passiveRestraints" #passiveRestraints="ngModel" type="text" class="form-control" [(ngModel)]="discount.passiveRestraints"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="reduceUseDiscount">Reduced Use Discount</label>
+                                <input  id="reduceUseDiscount" name="reduceUseDiscount" #reduceUseDiscount="ngModel" type="text" class="form-control" [(ngModel)]="discount.reduceUseDiscount"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="annualMileage">Vehicle Annual Mileage Less than 4000</label>
+                                <input  id="annualMileage" name="annualMileage" #annualMileage="ngModel" type="text" class="form-control" [(ngModel)]="discount.annualMileage"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="daysDrivenPerWeek">Days Driven per Week Greater than 4</label>
+                                <input  id="daysDrivenPerWeek" name="daysDrivenPerWeek" #daysDrivenPerWeek="ngModel" type="text" class="form-control" [(ngModel)]="discount.daysDrivenPerWeek"/>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-4">
+                                <label for="milesDrivenToWork">Miles Driven to Work Less than 25</label>
+                                <input  id="milesDrivenToWork" name="milesDrivenToWork" #milesDrivenToWork="ngModel" type="text" class="form-control" [(ngModel)]="discount.milesDrivenToWork"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    
+        <br />
+    
+        <div class="col-12">
+            <button class="btn btn-success pull-right" (click)="saveDiscount(discount.stateCode)">
+                Save
+            </button>
+        </div>
+        </div>
+        
+    </form>
 </div>
