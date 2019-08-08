@@ -1,11 +1,13 @@
 <div class="col-12" *ngIf="(calculatedQuote | json) != '{}'">
 <div class="row col-12">
-    <h4 class="col-12 text-center">AIA Quote is:</h4>
+    <h4 class="col-12 text-center">{{ calculatedQuote.quote.q_FirstName }}'s AIA Quote is:</h4>
 </div>
 
 <div class="row col-12">
-    <h3 class="col-12 text-center">${{ (calculatedQuote.finalCost) | number: '1.2-2'}}</h3>
+    <h2 class="col-12 text-center">${{ (calculatedQuote.finalCost) | number: '1.2-2'}}/month</h2>
 </div>
+
+<br />
 
 <div class="row col-12">
     <h4 class="col-lg-6 col-xs-12">CUSTOMER</h4>
@@ -127,11 +129,11 @@
 
 <div class="row col-12">
     <div class="col-lg-1 col-xs-12"></div>
-    <button class="btn col-lg-4 col-xs-12" (click)="saveForLater()">
+    <button class="btn btn-primary col-lg-4 col-xs-12" (click)="saveForLater()">
         Save for Later
     </button>
     <div class="col-lg-2 col-xs-12"></div>
-    <button class="btn col-lg-4 col-xs-12" (click)="submitQuote()">
+    <button class="btn btn-success col-lg-4 col-xs-12" (click)="submitQuote()">
         Submit Quote
     </button>
     <div class="col-lg-1 col-xs-12"></div>

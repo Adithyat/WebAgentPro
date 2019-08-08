@@ -3,6 +3,7 @@
     <div class="navbar-nav">
         <img src="assets/Logo.png" class="img-responsive" />
         <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item nav-link" routerLink="/">Home</a>
+        <a routerLinkActive="active" class="nav-item nav-link" routerLink="/dashboards">Dashboards</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Manage Agents</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/all-quotes">All Quotes</a>
         <a routerLinkActive="active" class="nav-item nav-link" routerLink="/quotes">New Quote</a>

@@ -39,13 +39,14 @@ import { FormNavbarComponent } from './quote-form/form-navbar/form-navbar.compon
 
 import { SectionComponent } from './section.component';
 import { FormSummaryComponent } from './quote-form/form-summary/form-summary.component';
+import { DashboardsComponent } from './dashboards/dashboards.component';
 import { UserComponent } from './user/user.component';
 
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
-
-
-
+ 
 @NgModule({
     imports: [
         BrowserModule,
@@ -58,7 +59,9 @@ import { UserComponent } from './user/user.component';
         HttpClientModule,
         NgxPaginationModule,
         AngularFontAwesomeModule,
-        AppRoutingModule
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule
     ],
     declarations: [
         AppComponent,
@@ -81,7 +84,7 @@ import { UserComponent } from './user/user.component';
         QuoteFormComponent,
         ManagerDiscountFormComponent,
         UserComponent,
-
+        DashboardsComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

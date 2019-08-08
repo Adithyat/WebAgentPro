@@ -19,6 +19,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\app\NewFolder\**" />
+    <Content Remove="ClientApp\app\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\app\NewFolder\**" />
+    <None Remove="ClientApp\app\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\material.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -34,6 +45,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\material.module.ts" />
   </ItemGroup>
 
   <ItemGroup>

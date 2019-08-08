@@ -10,6 +10,7 @@ namespace WebAgentPro.Api.Models
 {
     public class User : IdentityUser
     {
+        public string TempUserId { get; set; }
         [MaxLength(50)]
         public string U_Email { get; set; }
         public string U_FirstName { get; set; }
