@@ -4,7 +4,6 @@ import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ManagerDiscountFormComponent } from '@app/manager-discount-form/manager-discount-form.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule, MatStepperIntl} from '@angular/material/stepper';

@@ -22,6 +22,12 @@
     </div>
 </div>
  
+<button *ngIf="show" class="btn btn-primary btn-lg float-right position-absolute" id="open" type="button" (click)="openDialog()"><fa name="comments"></fa></button>
+<div *ngIf="!show" class="float-right position-absolute" id="frame">
+    <button class="float-right position-absolute mat-button" id="x" (click)="onNoClick()"><fa name="times"></fa></button>
+    <iframe src="https://webchat.botframework.com/embed/aiachatbot2019-bot?s=TFc4Bc5wsZw.s-OelJidYtMCWccM174TdmjRiBjceujZdpmxDBEBwDI" style="min-width: 375px; width: 100%; min-height: 300px;"></iframe>
+</div>
+
 <!-- footer -->
 <div style="height: 35px">
 </div>
