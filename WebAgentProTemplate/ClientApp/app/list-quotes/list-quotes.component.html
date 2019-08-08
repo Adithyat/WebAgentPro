@@ -5,7 +5,7 @@
   <div class='card-body'>
       <div class="container">
           <div class='row'>
-              <div class='col-md-2'>Quick Search:</div>
+              <div class='col-md-2'><fa name="info-circle" data-toggle="tooltip" title="Searchable fields: Customer First Name, &#10;Customer Last Name, Quote ID, Customer &#10;City, and Customer Postal Code."></fa> Quick Search:</div>
               <div class='col-md-4'>
                 <input type='text'
                 [(ngModel)]='listFilter'/>
@@ -25,21 +25,22 @@
         <thead>
           <tr>
             <th>Customer</th>
-            <th>Creation Date</th>
             <th>Quote Number</th>
+            <th>Quote Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let quote of filteredQuotes'>
-              <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
-              <td></td>
-            <td>{{ quote.quoteId }}</td>
-            <td>
-              <button (click)="editQuote(quote.quoteId)" class="btn btn-success">Edit</button>
-              <button (click)="copyQuote(quote.quoteId)" class="btn btn-primary">Copy</button>
-            </td>
-          </tr>
+            <tr *ngFor='let quote of filteredQuotes'>
+                <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
+                <td>{{ quote.quoteId }}</td>
+                <td *ngIf="quote.quoteStatus === 0">Open</td>
+                <td *ngIf="quote.quoteStatus === 1">Submitted</td>
+                <td>
+                    <button (click)="editQuote(quote.quoteId)" class="btn btn-success">Edit</button>
+                    <button (click)="copyQuote(quote.quoteId)" class="btn btn-primary">Copy</button>
+                </td>
+            </tr>
         </tbody>
       </table>
     </div>

@@ -1,3 +1,7 @@
-<p>
-  dashboards works!
-</p>
+<div class="embed-responsive embed-responsive-16by9" *ngIf="isManager">
+    <iframe class="center-block" width="680" height="510" *ngIf="isManager" src="https://app.powerbi.com/reportEmbed?reportId=f9c4f131-f1c0-49dd-a040-7098a419c4ad&autoAuth=true&ctid=cf36141c-ddd7-45a7-b073-111f66d0b30c&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXdlc3QtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+</div>
+
+<div class="embed-responsive embed-responsive-16by9" *ngIf="isAgent">
+    <iframe class="center-block" width="680" height="510" *ngIf="isAgent" src="https://app.powerbi.com/reportEmbed?reportId=f48fc0e6-dc95-4a40-97e9-87ad60382e3d&autoAuth=true&ctid=cf36141c-ddd7-45a7-b073-111f66d0b30c&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXdlc3QtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+</div>

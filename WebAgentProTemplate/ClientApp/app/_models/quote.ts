@@ -18,5 +18,6 @@ export class Quote {
     forceMultiCarDiscount: Boolean;
     quoteDrivers: Driver[];
     quoteVehicles: Vehicle[];
+    quoteStatus: number;
 }
     
