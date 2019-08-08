@@ -26,6 +26,7 @@ import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FilterQuotesComponent } from './filter-quotes/filter-quotes.component';
