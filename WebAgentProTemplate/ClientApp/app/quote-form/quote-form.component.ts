@@ -23,7 +23,6 @@ export class QuoteFormComponent implements OnInit {
 
   ngOnInit() {
     //this.form = this.FormDataService.getFormData();
-    this.customer.ngOnInit();
   }
   goToDriver(){
     this.customer.save();
@@ -35,7 +34,8 @@ export class QuoteFormComponent implements OnInit {
   }
   goToSummary(){
     this.vehicle.saveVehicles();
-    this.summary.stepInit();
+      this.summary.stepInit();
+      
     }
 
     goBackToVehicle() {

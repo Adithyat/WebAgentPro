@@ -3,7 +3,7 @@
 <div class="col-12">
     <!-- Sets up template variable #widgetForm, submission method onSubmit(),
         and only displays if there is a widget to add/edit.-->
-    <form #vehicleForm="ngForm">
+    <form #vehicleForm="ngForm" >
         <button (click)="addVehicle()" class="btn btn-success">Add</button>
         <div class="col-12"  *ngFor="let vehicle of quote.quoteVehicles; let i = index">
             <div class="card">
