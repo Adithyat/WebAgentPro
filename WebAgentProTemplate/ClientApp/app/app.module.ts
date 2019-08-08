@@ -42,6 +42,7 @@ import { DashboardsComponent } from './dashboards/dashboards.component';
 import { UserComponent } from './user/user.component';
 
 import { MaterialModule } from './material.module';
+import { ViewQuoteComponent } from './view-quote/view-quote.component';
 
  
 @NgModule({
@@ -80,7 +81,8 @@ import { MaterialModule } from './material.module';
         QuoteFormComponent,
         ManagerDiscountFormComponent,
         UserComponent,
-        DashboardsComponent
+        DashboardsComponent,
+        ViewQuoteComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

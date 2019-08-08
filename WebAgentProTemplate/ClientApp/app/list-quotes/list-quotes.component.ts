@@ -62,7 +62,11 @@ export class ListQuotesComponent implements OnInit {
 
   editQuote(id: number) {
     this.router.navigate(['quotes'], { queryParams: { id: id } });
-  }
+    }
+
+    viewQuote(id: number) {
+        this.router.navigate(['view-quote'], { queryParams: { id: id } });
+    }
 
   copyQuote(id: number) {
     const copyQuote: Quote = this.quotes.find((quote: Quote) => quote.quoteId === id);

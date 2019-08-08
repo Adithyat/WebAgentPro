@@ -13,12 +13,8 @@
           </div>
       </div>
 
+      <br />
 
-      
-      <div class="container" style="text-align: center">
-          <div style="display: inline-block"><h3 >Open ({{quotes.length}})</h3></div>
-          <div style="display: inline-block"><h3 >Submitted ({{quotes.length}})</h3></div>
-      </div>
     <div class='table-responsive'>
       <table class='table'
              *ngIf='quotes && quotes.length'>
@@ -37,8 +33,9 @@
                 <td *ngIf="quote.quoteStatus === 0">Open</td>
                 <td *ngIf="quote.quoteStatus === 1">Submitted</td>
                 <td>
-                    <button (click)="editQuote(quote.quoteId)" class="btn btn-success" [disabled]="quote.quoteStatus == 1">Edit</button>
-                    <button (click)="copyQuote(quote.quoteId)" class="btn btn-primary">Copy</button>
+                    <button (click)="viewQuote(quote.quoteId)" class="btn btn-success col-3" *ngIf="quote.quoteStatus === 1">View</button>
+                    <button (click)="editQuote(quote.quoteId)" class="btn btn-success col-3" *ngIf="quote.quoteStatus === 0">Edit</button>
+                    <button (click)="copyQuote(quote.quoteId)" class="btn btn-primary col-3">Copy</button>
                 </td>
             </tr>
         </tbody>
