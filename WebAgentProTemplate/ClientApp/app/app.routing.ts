@@ -12,6 +12,7 @@ import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { ManagerDiscountFormComponent } from './manager-discount-form/manager-discount-form.component';
 import { DashboardsComponent } from './dashboards/dashboards.component';
+import { ViewQuoteComponent } from './view-quote/view-quote.component';
 import { NgModule } from '@angular/core';
 
 
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     { path: 'users',    component: UsersComponent,  canActivate: [AuthGuard], data: { roles: [Role.Manager] }},
     { path: 'login',    component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'manage-discounts', component: ManagerDiscountFormComponent }
+    { path: 'manage-discounts', component: ManagerDiscountFormComponent },
+    { path: 'view-quote', component: ViewQuoteComponent }
     // otherwise redirect to home
     //{ path: '**', redirectTo: '' }
 ];

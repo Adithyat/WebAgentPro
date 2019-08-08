@@ -16,6 +16,9 @@ export class Quote {
     claimInLastFiveYears: Boolean;
     movingViolationInLastFiveYears: Boolean;
     forceMultiCarDiscount: Boolean;
+    createdOnMobile: boolean;
+    submittedOnMobile: boolean;
+    quoteStatus: number;
     quoteDrivers: Driver[];
     quoteVehicles: Vehicle[];
 }

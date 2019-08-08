@@ -24,7 +24,6 @@ import { RegisterComponent } from './register';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 
-
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -42,8 +41,8 @@ import { FormSummaryComponent } from './quote-form/form-summary/form-summary.com
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { UserComponent } from './user/user.component';
 
-
 import { MaterialModule } from './material.module';
+import { ViewQuoteComponent } from './view-quote/view-quote.component';
 
  
 @NgModule({
@@ -81,8 +80,9 @@ import { MaterialModule } from './material.module';
         FilterQuotesComponent,
         QuoteFormComponent,
         ManagerDiscountFormComponent,
-        UsersComponent,
-        DashboardsComponent
+        UserComponent,
+        DashboardsComponent,
+        ViewQuoteComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

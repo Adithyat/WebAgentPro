@@ -137,7 +137,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     current.PreviousCarrierValue = discount.PreviousCarrierPervasiveStateIns;
                 }
 
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
 
 
@@ -155,51 +155,55 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return BadRequest("Bad QuoteId");
             }
-
-            foreach (var vehicle in quote.QuoteVehicles)
+            if (quote.QuoteStatus.Value == QuoteStatus.Created)
             {
-                Console.WriteLine("Old value");
-                Console.WriteLine(vehicle.CurrentValue);
-                vehicle.CurrentValue = await InvokeRequestResponseService(vehicle.Make, vehicle.Model,
-                    vehicle.AnnualMileage.ToString(), vehicle.Year);
-                Console.WriteLine(vehicle.CurrentValue);
-            }
-
-            _context.Quotes.Update(quote);
-            /*
-            _context.Entry(quote).State = EntityState.Modified;
-
-            if(quote.QuoteDrivers.Count > 0)
-            {
-                foreach (var driver in quote.QuoteDrivers)
+                foreach (var vehicle in quote.QuoteVehicles)
                 {
-                    _context.Entry(driver).State = EntityState.Modified;
+                    Console.WriteLine("Old value");
+                    Console.WriteLine(vehicle.CurrentValue);
+                    vehicle.CurrentValue = await InvokeRequestResponseService(vehicle.Make, vehicle.Model,
+                        vehicle.AnnualMileage.ToString(), vehicle.Year);
+                    Console.WriteLine(vehicle.CurrentValue);
+                }
+
+                _context.Quotes.Update(quote);
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!QuoteExists(id))
+                    {
+                        return NotFound("Quote does not exist");
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-
-            if (quote.QuoteVehicles.Count > 0)
+            if(quote.QuoteStatus.Value == QuoteStatus.Submitted)
             {
-                foreach (var driver in quote.QuoteDrivers)
+                try
                 {
-                    _context.Entry(driver).State = EntityState.Modified;
+                    _context.Quotes.Update(quote);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!QuoteExists(id))
+                    {
+                        return NotFound("Quote does not exist");
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-            */
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuoteExists(id))
-                {
-                    return NotFound("Quote does not exist");
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            
 
             return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
         }
@@ -376,7 +380,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     Console.WriteLine(responseContent);
                 }
             }
-            return ret;
+            return Math.Max(ret, 0.00m);
         }
 
 

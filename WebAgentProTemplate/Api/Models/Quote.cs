@@ -66,7 +66,8 @@ namespace WebAgentProTemplate.Api.Models
     {
         None = 0,
         Lizard = 1,
-        Pervasive = 2
+        Pervasive = 2,
+        Other = 3
     }
 
     public enum QuoteStatus
