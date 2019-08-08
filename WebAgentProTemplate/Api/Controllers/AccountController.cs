@@ -47,7 +47,7 @@ namespace WebAgentPro.Controllers
             _logger = logger;
         }
 
-        [Authorize(Policy = "ManagerOnly")]
+        //[Authorize(Policy = "ManagerOnly")]
         [HttpGet("pending")]
         public async Task<ActionResult<IEnumerable<User>>> GetPendingUsers()
         {
@@ -136,7 +136,6 @@ namespace WebAgentPro.Controllers
                 if (user.UserStatus == UserStatus.Pending)
                 {
                     throw new WapException("User not approved by a manager yet!");
-
                 }
 
                 var signInResult = await _signInManager.CheckPasswordSignInAsync(user, credentials.Password, false);

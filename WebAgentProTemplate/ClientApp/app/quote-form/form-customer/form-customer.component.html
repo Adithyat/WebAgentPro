@@ -60,7 +60,7 @@
                   </div>
                   <div class="form-group col-xs-12 col-lg-3">
                       <label for="q_SSN">SSN</label>
-                      <input id="q_SSN" name="q_SSN" #q_SSN="ngModel" [(ngModel)]="quote.q_SSN" onfocus="this.type ='text'" onblur="this.type = 'password'" maxlength="9" pattern="[0-9]{9}" class="form-control" required />
+                      <input id="q_SSN" name="q_SSN" type="password" #q_SSN="ngModel" [(ngModel)]="quote.q_SSN" onfocus="this.type ='text'" onblur="this.type = 'password'" maxlength="9" pattern="[0-9]{9}" class="form-control" required />
                       <div [hidden]="q_SSN.valid || q_SSN.untouched" class="alert alert-danger">Please enter a valid SSN.</div>
                   </div>
                   <div class="form-group col-xs-12 col-lg-3">
