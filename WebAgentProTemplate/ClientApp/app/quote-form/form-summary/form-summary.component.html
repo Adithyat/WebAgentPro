@@ -83,11 +83,11 @@
         <p>Year: {{ v.vehicle.year }}</p>
         <p>Miles Driven to Work: {{ v.vehicle.milesDrivenToWork }}</p>
         <p>Days Driven per Week: {{ v.vehicle.daysDrivenPerWeek }}</p>
-        <p>Current Value: ${{ v.vehicle.currentValue  | number: 2  }}</p>
+        <p>Current Value: ${{ v.vehicle.currentValue  | number: '1.2-2'  }}</p>
         <p>Annual Mileage: {{ v.vehicle.annualMileage }}</p>
     </div>
     <div class="col-lg-2 col-xs-12">
-        <p style="font-weight: bold">${{ v.finalCost  | number: 2  }}</p>
+        <p style="font-weight: bold">${{ v.finalCost  | number: '1.2-2'  }}</p>
     </div>
     <div class="col-lg-6 col-xs-12">
         <p style="font-weight: bold">Vehicle {{ i+1 }} Discounts:&nbsp;&nbsp;&nbsp;&nbsp;{{ getTotalDiscountValue(v) }}</p>
