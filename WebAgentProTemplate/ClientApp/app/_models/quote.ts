@@ -21,5 +21,6 @@ export class Quote {
     quoteStatus: number;
     quoteDrivers: Driver[];
     quoteVehicles: Vehicle[];
+    quoteStatus: number;
 }
     

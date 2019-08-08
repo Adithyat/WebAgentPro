@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AccountService } from '../_services';
+import { User, Role } from '../_models';
+
 @Component({
   selector: 'app-dashboards',
   templateUrl: './dashboards.component.html',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardsComponent implements OnInit {
 
-  constructor() { }
+    currentUser: User;
+
+    constructor(private accountService: AccountService) {
+        this.accountService.currentUser.subscribe(x => this.currentUser = x);
+    }
 
   ngOnInit() {
   }
+
+    get isManager() {
+        return this.currentUser && this.currentUser.roles.includes(Role.Manager);
+    }
+
+    get isAgent() {
+        return this.currentUser && this.currentUser.roles.includes(Role.Agent);
+    }
 
 }

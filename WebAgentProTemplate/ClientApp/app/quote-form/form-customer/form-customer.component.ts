@@ -79,9 +79,11 @@ export class FormCustomerComponent implements OnInit {
             console.log(returnedQuote);
         },
         error => {
-            this.newQuote();
-            this.alertService.error('You are not allowed to access this quote.', false);
-        });
+              this.newQuote();
+              this.alertService.error('Error: cannot access quotes of other agents.', false);
+              this.router.navigate(['/']);
+          })
+        ;
   }
 
   save() {
