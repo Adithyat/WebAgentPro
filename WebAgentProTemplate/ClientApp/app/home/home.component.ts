@@ -28,4 +28,13 @@ export class HomeComponent {
                 this.quotes = returnedQuote;
             });
     }
+
+    getStatus(status) {
+        if (status == 0) {
+            return "Open";
+        }
+        else {
+            return "Submitted";
+        }
+    }
 }

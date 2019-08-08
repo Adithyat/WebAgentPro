@@ -13,15 +13,15 @@
                    *ngIf='quotes && quotes.length'>
                 <thead>
                     <tr>
-                        <th>Recent Quotes (Open)</th>
-                        <th></th>
+                        <th>Recent Quotes</th>
+                        <th>Quote Status</th>
                         <th routerLink="/all-quotes" class="viewAll"><a>View All <fa name="chevron-right"></fa></a></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let quote of quotes.reverse()' class="tableRow">
                         <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
-                        <td>Created mm/dd/yyyy</td>
+                        <td>{{ getStatus(quote.quoteStatus) }}</td>
                         <td>Quote Number: {{ quote.quoteId }}</td>
                     </tr>
                 </tbody>
