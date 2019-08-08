@@ -85,18 +85,19 @@ export class FormVehicleComponent implements OnInit {
         }
     }
 
-    saveVehicles() {
+    async saveVehicles() {
         console.log(this.quote.quoteVehicles);
-        this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
-            response => {
-              console.log(response);
-                this.alertService.success('Vehicle saved.', false);
-                this.quote = response;
-                console.log(this.quote.quoteVehicles);
-            },
-            error => {
-              this.alertService.error('Vehicle save failed.', false);
-            });
+        this.quote = await this.quoteService.putQuote(this.quote, this.quote.quoteId).toPromise();
+        //this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
+        //    response => {
+        //      console.log(response);
+        //        this.alertService.success('Vehicle saved.', false);
+        //        this.quote = response;
+        //        console.log(this.quote.quoteVehicles);
+        //    },
+        //    error => {
+        //      this.alertService.error('Vehicle save failed.', false);
+        //    });
     }
 
     /*

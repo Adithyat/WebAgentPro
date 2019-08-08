@@ -137,7 +137,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     current.PreviousCarrierValue = discount.PreviousCarrierPervasiveStateIns;
                 }
 
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
 
 

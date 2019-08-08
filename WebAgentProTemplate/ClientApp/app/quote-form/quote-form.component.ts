@@ -32,10 +32,9 @@ export class QuoteFormComponent implements OnInit {
     this.driver.saveDrivers();
     this.vehicle.stepInit();
   }
-  goToSummary(){
-    this.vehicle.saveVehicles();
+  async goToSummary(){
+      await this.vehicle.saveVehicles();
       this.summary.stepInit();
-      
     }
 
     goBackToVehicle() {
