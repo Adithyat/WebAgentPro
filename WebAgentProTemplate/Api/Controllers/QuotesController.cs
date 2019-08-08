@@ -186,8 +186,8 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 try
                 {
+                    _context.Quotes.Update(quote);
                     await _context.SaveChangesAsync();
-                    return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
