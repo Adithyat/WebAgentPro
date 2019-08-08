@@ -17,11 +17,12 @@ using WebAgentPro.Data;
 using WebAgentPro.Models;
 using WebAgentPro.ViewModels;
 using WebAgentPro.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAgentPro.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    //[AllowAnonymous]
     [Route("api/account")]
     [Produces("application/json")]
     [Consumes("application/json")]
@@ -46,6 +47,23 @@ namespace WebAgentPro.Controllers
             _logger = logger;
         }
 
+        [Authorize(Policy = "ManagerOnly")]
+        [HttpGet("pending")]
+        public async Task<ActionResult<IEnumerable<User>>> GetPendingUsers()
+        {
+            return await _context.Users.Where(u => u.UserStatus == UserStatus.Pending).ToListAsync();
+        }
+
+        [Authorize(Policy = "ManagerOnly")]
+        [HttpPut("approve/{id}")]
+        public async Task<IActionResult> ApproveAgent(string id)
+        {
+            var agent = _context.Users.Where(u => u.Id == id).FirstOrDefault();
+            agent.UserStatus = UserStatus.Active;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
         /// <summary>
         /// Registers a new user with Web Agent Pro.
@@ -58,7 +76,23 @@ namespace WebAgentPro.Controllers
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
+            Console.WriteLine("Entering registration flow");
+            Console.WriteLine(userRegistration.ToString());
             User newUser = Mapper.Map<User>(userRegistration);
+            if (userRegistration.isManager)
+            {
+                newUser.Role = 1;
+            } else
+            {
+                newUser.Role = 0;
+            }
+            if (newUser.Role == 0)
+            {
+                newUser.UserStatus = UserStatus.Pending;
+            } else
+            {
+                newUser.UserStatus = UserStatus.Active;
+            }
 
             try
             {
@@ -99,6 +133,12 @@ namespace WebAgentPro.Controllers
                     throw new WapException("No user found with that username.");
                 }
 
+                if (user.UserStatus == UserStatus.Pending)
+                {
+                    throw new WapException("User not approved by a manager yet!");
+
+                }
+
                 var signInResult = await _signInManager.CheckPasswordSignInAsync(user, credentials.Password, false);
                 if (!signInResult.Succeeded)
                 {
@@ -106,9 +146,16 @@ namespace WebAgentPro.Controllers
                 }
 
                 var userViewModel = Mapper.Map<UserViewModel>(user);
-                userViewModel.Roles = await _userManager.GetRolesAsync(user); 
-                userViewModel.Token = CreateToken(user, userViewModel.Roles); ;
-
+                //userViewModel.Roles = await _userManager.GetRolesAsync(user);
+                //userViewModel.Roles.
+                if (user.Role == 0) {
+                    userViewModel.Roles.Add("Agent");
+                }
+                if (user.Role == 1)
+                {
+                    userViewModel.Roles.Add("Manager");
+                }
+                userViewModel.Token = CreateToken(user, userViewModel.Roles);
                 return Ok(userViewModel);
             }
             catch (WapException e)
@@ -124,17 +171,19 @@ namespace WebAgentPro.Controllers
 
             var subjectClaims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, authenticatedUser.UserName)
+                new Claim(ClaimTypes.Name, authenticatedUser.UserName),
             };
 
             if (authenticatedUser.Role == 1) //manager
             {
-                subjectClaims.Add(new Claim("Manager", ""));
-            } else if (authenticatedUser.Role == 2) // agent
+                subjectClaims.Add(new Claim("Manager", "Manager"));            }
+            else if (authenticatedUser.Role == 0) // agent
             {
-                subjectClaims.Add(new Claim("Agent", "")); 
+                subjectClaims.Add(new Claim("Agent", "Agent")); 
 
             }
+
+            subjectClaims.Add(new Claim("strID", authenticatedUser.Id));
 
             subjectClaims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 

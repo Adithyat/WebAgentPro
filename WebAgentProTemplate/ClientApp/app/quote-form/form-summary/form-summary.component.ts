@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { QuoteReceipt } from '@app/_models/quotereceipt';
 import { Pipe, PipeTransform } from '@angular/core';
-
+import { Quote } from '@app/_models/quote'
 
 @Component({
     selector: 'app-form-summary',
@@ -16,6 +16,7 @@ export class FormSummaryComponent implements OnInit {
     quoteId: number;
     calculatedQuote: QuoteReceipt = new QuoteReceipt;
     private quoteIdSubscription: Subscription;
+
     prevCarrier: String[] = [
         'N/A',
         'Lizard Insurance',
@@ -27,16 +28,7 @@ export class FormSummaryComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute
     ) { }
-    /*
-    previousCarrier: string;
-    lastFour: string;
-    month: string;
-    day: string;
-    year: string;
-    birthday: string;
-    totalQuoteDiscount: number;
-    totalDiscount: number;
-    */
+
 
     ngOnInit() {
         // console.log(this.formService.getCalculatedQuote());
@@ -127,7 +119,13 @@ export class FormSummaryComponent implements OnInit {
     saveForLater(){
         this.router.navigate(['/']);
     }
-    submitQuote(){
-
+    submitQuote() {
+        this.calculatedQuote.quote.quoteStatus = 1;
+        this.quoteService.putQuote(this.calculatedQuote.quote, this.calculatedQuote.quote.quoteId)
+            .subscribe(
+                response => {
+                    this.alertService.success('Quote Submitted', false);
+                    this.router.navigate(['/']);
+                });
     }
 }

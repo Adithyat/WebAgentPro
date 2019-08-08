@@ -15,7 +15,7 @@ export class FormCustomerComponent implements OnInit {
     private quoteIdSubscription: Subscription;
     quote: Quote = new Quote;
 
-
+    validCustomer: boolean;
 
   constructor(
     private quoteService: QuoteService,
@@ -39,13 +39,16 @@ export class FormCustomerComponent implements OnInit {
           } else {
             this.newQuote();
           }
-      });
+        });
+
+      this.validCustomer = false;
 
   }
 
   newQuote() {
     //console.log('new');
-    this.quote = new Quote;
+      this.quote = new Quote;
+      this.quote.quoteStatus = 0;
   }
 
   editQuote() {
@@ -54,10 +57,17 @@ export class FormCustomerComponent implements OnInit {
     //console.log('edit');
     this.quoteService.getQuote(this.quote.quoteId)
     .subscribe(
-      returnedQuote => {
-        this.quote = returnedQuote;
-        console.log(returnedQuote);
-      });
+        returnedQuote => {
+            if (returnedQuote.quoteStatus) {
+                this.router.navigate(['/']);
+            }
+            this.quote = returnedQuote;
+            console.log(returnedQuote);
+        },
+        error => {
+            this.newQuote();
+            this.alertService.error('You are not allowed to access this quote.', false);
+        });
   }
 
   save() {
@@ -104,7 +114,7 @@ export class FormCustomerComponent implements OnInit {
             this.alertService.success('Quote saved.', false);
           },
           error => {
-            this.newQuote();
+            this.router.navigate(['quotes']);
             this.alertService.error('Quote save failed.', false);
           });
   }

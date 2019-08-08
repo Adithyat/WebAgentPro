@@ -28,7 +28,10 @@ export class RegisterComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            email: ['', Validators.required],
+            DateOfBirth: ['', Validators.required],
+            isManager: ['']
         });
     }
 
@@ -37,12 +40,17 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        if (this.registerForm.value.isManager === "") {
+            this.registerForm.value.isManager = false;
+        }
 
         // stop here if form is invalid
         if (this.registerForm.invalid) {
+            console.log("Invalid registration form");
+            console.log(this.registerForm);
             return;
         }
-
+        console.log(this.registerForm);
         this.loading = true;
 
         this.accountService.register(this.registerForm.value)
