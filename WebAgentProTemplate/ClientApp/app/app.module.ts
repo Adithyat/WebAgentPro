@@ -39,6 +39,8 @@ import { FormNavbarComponent } from './quote-form/form-navbar/form-navbar.compon
 
 import { SectionComponent } from './section.component';
 import { FormSummaryComponent } from './quote-form/form-summary/form-summary.component';
+import { UserComponent } from './user/user.component';
+
 
 
 
@@ -77,7 +79,9 @@ import { FormSummaryComponent } from './quote-form/form-summary/form-summary.com
         FormNavbarComponent,
         FilterQuotesComponent,
         QuoteFormComponent,
-        ManagerDiscountFormComponent
+        ManagerDiscountFormComponent,
+        UserComponent,
+
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

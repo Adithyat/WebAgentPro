@@ -36,7 +36,10 @@ export class ListQuotesComponent implements OnInit {
     filterBy = filterBy.toLocaleLowerCase();
     return this.quotes.filter((quote: Quote) =>
     (quote.q_FirstName !== null && quote.q_FirstName.toLocaleLowerCase().indexOf(filterBy) !== -1
-      || quote.q_LastName !== null && quote.q_LastName.toLocaleLowerCase().indexOf(filterBy) !== -1));
+      || quote.q_LastName !== null && quote.q_LastName.toLocaleLowerCase().indexOf(filterBy) !== -1
+      || (quote.q_FirstName + ' ' + quote.q_LastName) !== null && (quote.q_FirstName + ' ' + quote.q_LastName).toLocaleLowerCase().indexOf(filterBy) !== -1
+      || quote.quoteId !== null && quote.quoteId.toString().indexOf(filterBy) !== -1
+      ));
     // || (quote.q_LastName !== null && quote.q_LastName.toLocaleLowerCase().indexOf(filterBy) !== -1))
 
   }
@@ -56,6 +59,25 @@ export class ListQuotesComponent implements OnInit {
 
   editQuote(id: number) {
     this.router.navigate(['quotes'], { queryParams: { id: id } });
+  }
+
+  copyQuote(id: number) {
+    const copyQuote: Quote = this.quotes.find((quote: Quote) => quote.quoteId === id);
+    copyQuote.q_FirstName = '';
+    copyQuote.q_LastName = '';
+    copyQuote.q_SSN = '';
+    copyQuote.quoteId = null;
+    
+    console.log(copyQuote);
+    this.quoteService.postQuote(copyQuote).subscribe(
+      returnedQuote => {
+          console.log(returnedQuote);
+          this.alertService.success('Quote copied.', false);
+          this.router.navigate(['quotes'], { queryParams: { id: returnedQuote.quoteId } });
+      },
+      error => {
+        this.alertService.error('Quote copy failed.', false);
+      });
   }
 
   deleteQuote(id: number) {

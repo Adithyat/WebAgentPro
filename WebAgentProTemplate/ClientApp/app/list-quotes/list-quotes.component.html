@@ -5,7 +5,7 @@
   <div class='card-body'>
       <div class="container">
           <div class='row'>
-              <div class='col-md-2'>Filter by:</div>
+              <div class='col-md-2'>Quick Search:</div>
               <div class='col-md-4'>
                 <input type='text'
                 [(ngModel)]='listFilter'/>
@@ -34,7 +34,7 @@
             <td>{{ quote.quoteId }}</td>
             <td>
               <button (click)="editQuote(quote.quoteId)" class="btn btn-secondary">Edit</button>
-              <button (click)="deleteQuote(quote.quoteId)" class="btn btn-secondary">Delete</button>
+              <button (click)="copyQuote(quote.quoteId)" class="btn btn-secondary">Copy</button>
             </td>
           </tr>
         </tbody>
