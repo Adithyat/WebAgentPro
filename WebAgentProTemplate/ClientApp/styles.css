@@ -3,6 +3,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* You can add global styles to this file, and also import other style files */
+
 a {
     cursor: pointer;
     font-family: 'Source Sans Pro';
@@ -344,3 +345,8 @@ body {
         background-color: #801E1C;
         color: white;
     }
+
+
+.tableRow:nth-child(n+11) {
+    display: none;
+}
