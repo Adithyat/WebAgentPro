@@ -24,7 +24,6 @@ import { RegisterComponent } from './register';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';

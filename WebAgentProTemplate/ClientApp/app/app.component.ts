@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class AppComponent {
     currentUser: User;
     show: Boolean = true;
+    navbarOpen: Boolean = false;
 
     constructor(
         public dialog: MatDialog,
@@ -28,6 +29,9 @@ export class AppComponent {
     openDialog(): void {
         this.show = !this.show;
 
+    }
+    toggleNavbar() {
+        this.navbarOpen = !this.navbarOpen;
     }
     onNoClick(): void {
         this.show = !this.show;
