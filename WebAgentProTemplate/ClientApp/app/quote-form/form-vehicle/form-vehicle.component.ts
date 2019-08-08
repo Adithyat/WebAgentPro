@@ -15,6 +15,8 @@ export class FormVehicleComponent implements OnInit {
     quote: Quote = new Quote;
     private quoteIdSubscription: Subscription;
 
+    validVehicle: boolean;
+
 
     constructor(
         private quoteService: QuoteService,  
@@ -27,7 +29,8 @@ export class FormVehicleComponent implements OnInit {
         //this.Did = this.quoteService.getDid();
         //console.log(this.Did);
     }
-    stepInit(){
+    stepInit() {
+        this.validVehicle = false;
         this.quoteIdSubscription = this.route.queryParams.subscribe(
             params => {
                 // this.widgetID = +params['id'];
@@ -43,7 +46,11 @@ export class FormVehicleComponent implements OnInit {
                 }
             });
     }
-    
+
+    enableVehicleNext() {
+        this.validVehicle = true;
+    }
+
     getVehicles(){
         this.quoteService.getQuote(this.quote.quoteId)
         .subscribe(
@@ -83,7 +90,6 @@ export class FormVehicleComponent implements OnInit {
         this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
             response => {
               console.log(response);
-              // this.newQuote();
                 this.alertService.success('Vehicle saved.', false);
                 this.quote = response;
                 console.log(this.quote.quoteVehicles);

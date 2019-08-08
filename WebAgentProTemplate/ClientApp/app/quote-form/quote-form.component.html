@@ -16,8 +16,8 @@
     </mat-step>
     <mat-step label="Vehicles">
         <div>
-            <button matStepperPrevious (click)="goBackToDriver()" class="btn btn-outline-primary col-3">Back</button>
-            <button matStepperNext (click)="goToSummary()" class="btn btn-primary col-3 offset-6">Next</button>
+            <button matStepperPrevious (click)="goBackToDriver()" class="btn btn-outline-primary">Back</button>
+            <button matStepperNext (click)="goToSummary()" class="btn btn-primary" [disabled]="this.vehicle.validVehicle">Next</button>
         </div>
         <br />
         <app-form-vehicle></app-form-vehicle>
