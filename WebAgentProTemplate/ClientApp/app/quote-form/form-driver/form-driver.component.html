@@ -111,10 +111,10 @@
                                                 <label>Safe Driving School Attended?</label>
                                                 <br />
 
-                                                <input class="col-1" type="radio" name="safeDriving" id="always" value="true" [(ngModel)]="driver.safeDrivingSchoolAttended" required />
+                                                <input class="col-1" type="radio" [name]="'safeDriving' + i" id="always" value="true" [(ngModel)]="driver.safeDrivingSchoolAttended" required />
                                                 <label for="always" class="col-5">Yes</label>
 
-                                                <input class="col-1" type="radio" name="safeDriving" id="never" value="false" [(ngModel)]="driver.safeDrivingSchoolAttended" required />
+                                                <input class="col-1" type="radio" [name]="'safeDriving' + i" id="never" value="false" [(ngModel)]="driver.safeDrivingSchoolAttended" required />
                                                 <label for="never" class="col-5">No</label>
                                             </div>
                                         </div>

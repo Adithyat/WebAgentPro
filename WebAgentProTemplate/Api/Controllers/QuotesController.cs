@@ -149,6 +149,8 @@ namespace WebAgentProTemplate.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuote(long id, Quote quote)
         {
+            Console.WriteLine(id);
+            Console.WriteLine(quote);
             if (id != quote.QuoteId)
             {
                 return BadRequest("Bad QuoteId");

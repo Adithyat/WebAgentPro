@@ -47,11 +47,11 @@ namespace WebAgentPro.Controllers
             _logger = logger;
         }
 
-        [Authorize(Policy = "ManagerOnly")]
-        [HttpGet("pending")]
-        public async Task<ActionResult<IEnumerable<User>>> GetPendingUsers()
+        //[Authorize(Policy = "ManagerOnly")]
+        [HttpGet("users")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Where(u => u.UserStatus == UserStatus.Pending).ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         [Authorize(Policy = "ManagerOnly")]
@@ -63,6 +63,36 @@ namespace WebAgentPro.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("approve/pending")]
+        public async Task<IActionResult> ApproveAllPending()
+        {
+            var pending_users = _context.Users.Where(u => u.UserStatus == UserStatus.Pending).ToList();
+            foreach (var user in pending_users)
+            {
+                user.UserStatus = UserStatus.Active;
+            }
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPut("users/{id}")]
+        public async Task<IActionResult> ChangeUserStatus(string id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest("Incorrect ID");
+            }
+
+
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+
+
+            return Ok();
         }
 
         /// <summary>

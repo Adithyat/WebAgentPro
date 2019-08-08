@@ -57,6 +57,7 @@ export class FormCustomerComponent implements OnInit {
       returnedQuote => {
         this.quote = returnedQuote;
         console.log(returnedQuote);
+        console.log(this.quote);
       });
   }
 

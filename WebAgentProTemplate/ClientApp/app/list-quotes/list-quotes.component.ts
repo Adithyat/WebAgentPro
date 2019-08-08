@@ -66,6 +66,7 @@ export class ListQuotesComponent implements OnInit {
 
   copyQuote(id: number) {
     const copyQuote: Quote = this.quotes.find((quote: Quote) => quote.quoteId === id);
+    console.log(this.quotes.find((quote: Quote) => quote.quoteId === id));
     const copiedQuote: Quote = new Quote;
     copiedQuote.address = copyQuote.address;
     copiedQuote.city = copyQuote.city;
@@ -76,6 +77,8 @@ export class ListQuotesComponent implements OnInit {
     copiedQuote.claimInLastFiveYears = copyQuote.claimInLastFiveYears;
     copiedQuote.movingViolationInLastFiveYears = copyQuote.movingViolationInLastFiveYears;
     copiedQuote.forceMultiCarDiscount = copyQuote.forceMultiCarDiscount;
+    console.log('cqd');
+    console.log(copyQuote.quoteDrivers);
     copiedQuote.quoteDrivers = copyQuote.quoteDrivers;
     copiedQuote.quoteVehicles = copyQuote.quoteVehicles;
     console.log(copiedQuote);
