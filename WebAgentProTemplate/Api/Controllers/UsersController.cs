@@ -35,6 +35,22 @@ namespace WebAgentPro.Controllers
             _logger = logger;
         }
 
+        
+        [HttpGet("pending", Name = "Get All Pending Users")]
+        [ProducesResponseType(typeof(IList<UserViewModel>), 200)]
+        public async Task<IActionResult> GetPendingUsers()
+        {
+            var userViews = new List<UserViewModel>();
+            await _userManager.Users.ForEachAsync(wapUser =>
+            {
+                var user = Mapper.Map<UserViewModel>(wapUser);
+                user.Roles = _userManager.GetRolesAsync(wapUser).Result;
+                userViews.Add(user);
+            });
+            return Ok(userViews);
+        }
+        
+
         /// <summary>
         /// Retrieves a list of all registered WAP users.
         /// </summary>

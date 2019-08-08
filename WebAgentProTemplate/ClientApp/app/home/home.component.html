@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let quote of quotes' class="tableRow">
+                    <tr *ngFor='let quote of quotes.reverse()' class="tableRow">
                         <td>{{ quote.q_FirstName }} {{ quote.q_LastName }}</td>
                         <td>Created mm/dd/yyyy</td>
                         <td>Quote Number: {{ quote.quoteId }}</td>

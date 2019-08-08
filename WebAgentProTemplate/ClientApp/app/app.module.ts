@@ -25,6 +25,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListQuotesComponent } from './list-quotes/list-quotes.component';
 import { FilterQuotesComponent } from './filter-quotes/filter-quotes.component';
@@ -40,7 +41,6 @@ import { FormSummaryComponent } from './quote-form/form-summary/form-summary.com
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { UserComponent } from './user/user.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
  

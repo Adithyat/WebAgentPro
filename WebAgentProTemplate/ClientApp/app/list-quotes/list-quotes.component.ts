@@ -78,8 +78,8 @@ export class ListQuotesComponent implements OnInit {
     copiedQuote.forceMultiCarDiscount = copyQuote.forceMultiCarDiscount;
     copiedQuote.quoteDrivers = copyQuote.quoteDrivers;
     copiedQuote.quoteVehicles = copyQuote.quoteVehicles;
-    console.log(copyQuote);
-    this.quoteService.postQuote(copyQuote).subscribe(
+    console.log(copiedQuote);
+    this.quoteService.postQuote(copiedQuote).subscribe(
       returnedQuote => {
           console.log(returnedQuote);
           this.alertService.success('Quote copied.', false);
