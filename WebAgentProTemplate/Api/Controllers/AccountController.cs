@@ -76,7 +76,16 @@ namespace WebAgentPro.Controllers
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
+            Console.WriteLine("Entering registration flow");
+            Console.WriteLine(userRegistration.ToString());
             User newUser = Mapper.Map<User>(userRegistration);
+            if (userRegistration.isManager)
+            {
+                newUser.Role = 1;
+            } else
+            {
+                newUser.Role = 0;
+            }
             if (newUser.Role == 0)
             {
                 newUser.UserStatus = UserStatus.Pending;
@@ -137,7 +146,15 @@ namespace WebAgentPro.Controllers
                 }
 
                 var userViewModel = Mapper.Map<UserViewModel>(user);
-                userViewModel.Roles = await _userManager.GetRolesAsync(user); 
+                //userViewModel.Roles = await _userManager.GetRolesAsync(user);
+                //userViewModel.Roles.
+                if (user.Role == 0) {
+                    userViewModel.Roles.Add("Agent");
+                }
+                if (user.Role == 1)
+                {
+                    userViewModel.Roles.Add("Manager");
+                }
                 userViewModel.Token = CreateToken(user, userViewModel.Roles);
                 return Ok(userViewModel);
             }
@@ -160,7 +177,7 @@ namespace WebAgentPro.Controllers
             if (authenticatedUser.Role == 1) //manager
             {
                 subjectClaims.Add(new Claim("Manager", "Manager"));            }
-            else if (authenticatedUser.Role == 2) // agent
+            else if (authenticatedUser.Role == 0) // agent
             {
                 subjectClaims.Add(new Claim("Agent", "Agent")); 
 

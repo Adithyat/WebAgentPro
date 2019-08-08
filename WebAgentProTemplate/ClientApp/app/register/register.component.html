@@ -38,10 +38,16 @@
         </div>
     </div>
 
+
     <div class="form-group">
         <label for="DateOfBirth">Birthdate mm/dd/yyyy</label>
-        <input id="DateOfBirth" name="DateOfBirth" type="date" class="form-control" required />
-        <div [hidden]="DateOfBirth.valid || DateOfBirth.untouched" class="alert alert-danger">Date of birth is required.</div>
+        <input id="DateOfBirth" name="DateOfBirth" type="date" formControlName="DateOfBirth" class="form-control" required [ngClass]="{ 'is-invalid': submitted && f.DateOfBirth.errors }" />
+        <div [hidden]="f.DateOfBirth.valid || f.DateOfBirth.untouched" class="alert alert-danger">Date of birth is required.</div>
+    </div>
+
+    <div class="form-group">
+        <label for="isManager"> Check to sign up as a manager</label>
+        <input id="isManager" name="isManager "type="checkbox" formControlName="isManager" value="f.isManager" />
     </div>
 
     <div class="form-group">

@@ -153,6 +153,16 @@ namespace WebAgentProTemplate.Api.Controllers
             {
                 return BadRequest("Bad QuoteId");
             }
+
+            foreach (var vehicle in quote.QuoteVehicles)
+            {
+                Console.WriteLine("Old value");
+                Console.WriteLine(vehicle.CurrentValue);
+                vehicle.CurrentValue = await InvokeRequestResponseService(vehicle.Make, vehicle.Model,
+                    vehicle.AnnualMileage.ToString(), vehicle.Year);
+                Console.WriteLine(vehicle.CurrentValue);
+            }
+
             _context.Quotes.Update(quote);
             /*
             _context.Entry(quote).State = EntityState.Modified;

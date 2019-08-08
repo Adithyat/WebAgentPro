@@ -24,5 +24,6 @@ namespace WebAgentPro.ViewModels
 
     [Required]
     public int Role { get; set; }
+    public bool isManager { get; set; }
   }
 }
