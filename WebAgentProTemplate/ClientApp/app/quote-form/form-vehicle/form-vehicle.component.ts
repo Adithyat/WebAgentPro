@@ -88,6 +88,7 @@ export class FormVehicleComponent implements OnInit {
     async saveVehicles() {
         console.log(this.quote.quoteVehicles);
         this.quote = await this.quoteService.putQuote(this.quote, this.quote.quoteId).toPromise();
+        this.alertService.success('Vehicle saved', false);
         //this.quoteService.putQuote(this.quote, this.quote.quoteId).subscribe(
         //    response => {
         //      console.log(response);

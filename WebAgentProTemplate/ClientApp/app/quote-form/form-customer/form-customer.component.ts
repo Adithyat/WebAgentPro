@@ -47,7 +47,8 @@ export class FormCustomerComponent implements OnInit {
 
   newQuote() {
     //console.log('new');
-    this.quote = new Quote;
+      this.quote = new Quote;
+      this.quote.quoteStatus = 0;
   }
 
   editQuote() {
@@ -56,9 +57,12 @@ export class FormCustomerComponent implements OnInit {
     //console.log('edit');
     this.quoteService.getQuote(this.quote.quoteId)
     .subscribe(
-      returnedQuote => {
-        this.quote = returnedQuote;
-        console.log(returnedQuote);
+        returnedQuote => {
+            if (returnedQuote.quoteStatus) {
+                this.router.navigate(['/']);
+            }
+            this.quote = returnedQuote;
+            console.log(returnedQuote);
         },
         error => {
             this.newQuote();

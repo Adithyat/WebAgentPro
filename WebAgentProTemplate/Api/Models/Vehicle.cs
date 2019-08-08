@@ -41,7 +41,6 @@ namespace WebAgentProTemplate.Api.Models
         public decimal PassiveRestraintsValue { get; set; }
         public bool ReducedUsedDiscount { get; set; }
         public decimal ReducedUsedDiscountValue { get; set; }
-        [Range(0, int.MaxValue)]
         public decimal CurrentValue { get; set; }
         public decimal VehicleSubmittedCost { get; set; }
 

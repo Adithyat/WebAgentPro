@@ -374,7 +374,7 @@ namespace WebAgentProTemplate.Api.Controllers
                     Console.WriteLine(responseContent);
                 }
             }
-            return ret;
+            return Math.Max(ret, 0.00m);
         }
 
 
