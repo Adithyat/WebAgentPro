@@ -96,7 +96,7 @@ namespace WebAgentPro
             #region SPA STATIC FILES        Configure location of Angular runtime files
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "wwwroot/clientapp/dist";
+                configuration.RootPath = "dist/web-agent-pro-client";
             });
             #endregion
 
