@@ -24,15 +24,12 @@ const appRoutes: Routes = [
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'all-quotes', component: ListQuotesComponent, canActivate: [AuthGuard] },
     { path: 'quotes', component: QuoteFormComponent, canActivate: [AuthGuard]},
-    //{path: 'quotes/:id', component: QuoteFormComponent, canActivate: [AuthGuard]},
-    // { path: 'add-drivers', component: FormDriverComponent, canActivate: [AuthGuard] },
-    { path: 'users',    component: UsersComponent,  canActivate: [AuthGuard], data: { roles: [Role.Manager] }},
+    { path: 'users',    component: UsersComponent, canActivate: [AuthGuard], data: { roles: [Role.Manager] }},
     { path: 'login',    component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'manage-discounts', component: ManagerDiscountFormComponent },
     { path: 'view-quote', component: ViewQuoteComponent }
-    // otherwise redirect to home
-    //{ path: '**', redirectTo: '' }
+
 ];
 
 

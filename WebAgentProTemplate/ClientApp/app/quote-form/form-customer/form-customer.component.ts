@@ -88,10 +88,15 @@ export class FormCustomerComponent implements OnInit {
   }
 
     updateDates() {
+      this.quote.quoteStatus = 0;
+      if(this.quote.q_DateOfBirth !== null){
         this.quote.q_DateOfBirth = this.quote.q_DateOfBirth.substring(0, 10);
         for (let driver of this.quote.quoteDrivers) {
             driver.d_DateOfBirth = driver.d_DateOfBirth.substring(0, 10)
         }
+      }
+      else{
+      }
     }
   save() {
     console.log(this.quote.quoteId);

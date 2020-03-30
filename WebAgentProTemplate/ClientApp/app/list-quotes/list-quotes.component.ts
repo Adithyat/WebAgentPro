@@ -15,7 +15,8 @@ export class ListQuotesComponent implements OnInit {
   quotes: Quote[] = [];
   filteredQuotes: Quote[] = [];
   _listFilter = '';
-
+  
+ 
 
   constructor(
     private quoteService: QuoteService,
@@ -68,9 +69,57 @@ export class ListQuotesComponent implements OnInit {
         this.router.navigate(['view-quote'], { queryParams: { id: id } });
     }
 
+
+    updateDates(quote) {
+      quote.quoteStatus = 0;
+      if(quote.q_DateOfBirth !== null){
+        quote.q_DateOfBirth = quote.q_DateOfBirth.substring(0, 10);
+        for (let driver of quote.quoteDrivers) {
+            driver.d_DateOfBirth = driver.d_DateOfBirth.substring(0, 10)
+        }
+      }
+      else{
+      }
+    }
+  cQuote: Quote = new Quote;
   copyQuote(id: number) {
-    const copyQuote: Quote = this.quotes.find((quote: Quote) => quote.quoteId === id);
-    console.log(this.quotes.find((quote: Quote) => quote.quoteId === id));
+    console.log(id);
+    this.quoteService.getQuote(id).subscribe(
+        returnedQuote => {
+
+
+          this.cQuote.address = returnedQuote.address;
+          this.cQuote.city = returnedQuote.city;
+          this.cQuote.q_StateCode = returnedQuote.q_StateCode;
+          this.cQuote.postalCode = returnedQuote.postalCode;
+          this.cQuote.previousCarrier = returnedQuote.previousCarrier;
+          this.cQuote.lessThanThreeYearsDriving = returnedQuote.lessThanThreeYearsDriving;
+          this.cQuote.claimInLastFiveYears = returnedQuote.claimInLastFiveYears;
+          this.cQuote.movingViolationInLastFiveYears = returnedQuote.movingViolationInLastFiveYears;
+          this.cQuote.forceMultiCarDiscount = returnedQuote.forceMultiCarDiscount;
+
+            this.quoteService.postQuote(this.cQuote).subscribe(
+              returnedQuote => {
+                  const copQuote = Object.assign([], this.cQuote);
+                  console.log(returnedQuote);
+                  this.quoteService.putQuote( returnedQuote, returnedQuote.quoteId).subscribe(
+                    returnedQuote => {
+                        console.log(returnedQuote);
+                        this.alertService.success('Quote copied.', false);
+                        this.router.navigate(['quotes'], { queryParams: { id: returnedQuote.quoteId } });
+                    });
+              });
+            //this.updateDates(this.cQuote);
+            console.log(this.cQuote);
+        },
+        error => {
+              this.alertService.error('Error: cannot access quotes of other agents.', false);
+              this.router.navigate(['/']);
+        });
+    //this.cQuote.quoteId = null;
+    //console.log(this.cQuote);
+    //console.log(this.quotes.find((quote: Quote) => quote.quoteId === id));
+    /*
     const copiedQuote: Quote = new Quote;
     copiedQuote.address = copyQuote.address;
     copiedQuote.city = copyQuote.city;
@@ -86,15 +135,9 @@ export class ListQuotesComponent implements OnInit {
     copiedQuote.quoteDrivers = copyQuote.quoteDrivers;
     copiedQuote.quoteVehicles = copyQuote.quoteVehicles;
     console.log(copiedQuote);
-    this.quoteService.postQuote(copiedQuote).subscribe(
-      returnedQuote => {
-          console.log(returnedQuote);
-          this.alertService.success('Quote copied.', false);
-          this.router.navigate(['quotes'], { queryParams: { id: returnedQuote.quoteId } });
-      },
-      error => {
-        this.alertService.error('Quote copy failed.', false);
-      });
+          */
+
+
   }
 
   deleteQuote(id: number) {
